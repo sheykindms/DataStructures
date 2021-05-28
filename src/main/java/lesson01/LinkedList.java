@@ -1,6 +1,6 @@
 package lesson01;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class LinkedList {
     public Node head;
