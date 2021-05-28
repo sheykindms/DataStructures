@@ -143,9 +143,15 @@ class LinkedListTest {
   }
 
   @Test
-  void count() {
+  void countWhenSixElements() {
     fillListWithManyElements();
     assertEquals(6, list.count());
+  }
+
+  @Test
+  void countWhenOneElement() {
+    fillListWithOneElement();
+    assertEquals(1, list.count());
   }
 
   @Test
@@ -188,5 +194,24 @@ class LinkedListTest {
     assertEquals(2, list.findAll(17).size());
     assertEquals(1, list.findAll(41).size());
     assertEquals(0, list.findAll(67).size());
+  }
+
+  @Test
+  void insertAfterFourElementsAndCount() {
+    fillListWithOneElement();
+    Node one = new Node(1);
+    Node two = new Node(2);
+    Node three = new Node(3);
+    Node four = new Node(4);
+    list.insertAfter(list.find(1729), one);
+    assertEquals(list.find(1729), list.head);
+    assertEquals(one, list.tail);
+    list.insertAfter(one, two);
+    assertEquals(two, list.tail);
+    list.insertAfter(one, three);
+    list.insertAfter(two, four);
+    assertEquals(list.find(1729), list.head);
+    assertEquals(four, list.tail);
+    assertEquals(5, list.count());
   }
 }
