@@ -96,6 +96,18 @@ class LinkedList2Test {
   }
 
   @Test
+  void removeAllOneByOneWhenManyElements() {
+    fillWithManyElements();
+    assertTrue(list.remove(2));
+    assertTrue(list.remove(41));
+    assertTrue(list.remove(11));
+    assertTrue(list.remove(29));
+    assertTrue(list.remove(17));
+    assertTrue(list.remove(17));
+
+  }
+
+  @Test
   void removeWhenManyElements() {
     fillWithManyElements();
     assertTrue(list.remove(2));
@@ -238,7 +250,7 @@ class LinkedList2Test {
   }
 
   @Test
-  void insertAfterFourElementRemoveFirstAndSecondsAndCount() {
+  void insertAfterFourElementRemoveFirstAndLastAndCount() {
     fillWithOneElement();
     Node one = new Node(1);
     Node two = new Node(2);

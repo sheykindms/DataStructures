@@ -50,7 +50,7 @@ public class LinkedList2 {
   public boolean remove(int _value) {
     Node foundNode = find(_value);
     if (foundNode != null) {
-      if (this.tail.value == this.head.value && this.head.value == _value) {
+      if (this.tail.value == this.head.value && this.head.value == _value && count() == 1) {
         clear();
       } else if (this.tail.value == _value) {
         this.tail = this.tail.prev;
