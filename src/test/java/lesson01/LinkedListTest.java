@@ -14,11 +14,11 @@ class LinkedListTest {
     list = new LinkedList();
   }
 
-  void fillListWithOneElement() {
+  private void fillListWithOneElement() {
     list.addInTail(new Node(1729));
   }
 
-  void fillListWithManyElements() {
+  private void fillListWithManyElements() {
     list.addInTail(new Node(2));
     list.addInTail(new Node(11));
     list.addInTail(new Node(17));

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListMergerTest {
 
-  LinkedList firstList;
-  LinkedList secondList;
+  private LinkedList firstList;
+  private LinkedList secondList;
 
   @BeforeEach
   void setup() {
@@ -16,7 +16,7 @@ class LinkedListMergerTest {
     secondList = new LinkedList();
   }
 
-  void fillTheLists() {
+  private void fillTheLists() {
     firstList.addInTail(new Node(1));
     firstList.addInTail(new Node(2));
     firstList.addInTail(new Node(3));
@@ -27,7 +27,7 @@ class LinkedListMergerTest {
     secondList.addInTail(new Node(8));
   }
 
-  void fillWithIncorrectLengths() {
+  private void fillWithIncorrectLengths() {
     firstList.addInTail(new Node(1));
     firstList.addInTail(new Node(2));
     firstList.addInTail(new Node(3));
