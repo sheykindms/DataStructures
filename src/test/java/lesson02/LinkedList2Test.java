@@ -102,9 +102,12 @@ class LinkedList2Test {
     assertTrue(list.remove(41));
     assertTrue(list.remove(11));
     assertTrue(list.remove(29));
+    assertEquals(list.head.value, list.tail.value);
+    assertEquals(2, list.count());
     assertTrue(list.remove(17));
     assertTrue(list.remove(17));
-
+    assertNull(list.head);
+    assertNull(list.tail);
   }
 
   @Test
