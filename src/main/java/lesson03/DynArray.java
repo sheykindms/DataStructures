@@ -28,11 +28,10 @@ public class DynArray<T> {
   }
 
   public T getItem(int index) {
-    try {
-      return array[index];
-    } catch (ArrayIndexOutOfBoundsException e) {
+    if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException();
     }
+    return array[index];
   }
 
   public void append(T itm) {
@@ -61,7 +60,7 @@ public class DynArray<T> {
   }
 
   public void remove(int index) {
-    if (index < 0 || index > count) {
+    if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException();
     } else if (count - 1 < capacity / 2) {
       capacity /= 1.5;
@@ -69,8 +68,8 @@ public class DynArray<T> {
         capacity = 16;
       }
       T[] newArray = (T[]) Array.newInstance(this.clazz, capacity);
-      System.arraycopy(array, 0, newArray, 0, count - index - 1);
-      System.arraycopy(array, index + 1, newArray, 0, count - index + 1);
+      System.arraycopy(array, 0, newArray, 0, index);
+      System.arraycopy(array, index + 1, newArray, index, count - index + 1);
       array = newArray;
       count--;
     } else {

@@ -35,7 +35,6 @@ class DynArrayTest {
     assertEquals(0, array.count);
     assertEquals(16, array.capacity);
     assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getItem(16));
-    assertNull(array.getItem(0));
   }
 
   @Test
@@ -126,8 +125,10 @@ class DynArrayTest {
   @Test
   void removeWhenManyElementsInArray() {
     fillDynArrayWithManyElements();
+    System.out.println(array);
     assertEquals(6, array.count);
     array.remove(array.count - 1);
+    System.out.println(array);
     array.remove(array.count - 1);
     array.remove(array.count - 1);
     array.remove(array.count - 1);
@@ -203,6 +204,23 @@ class DynArrayTest {
     array.remove(array.count - 1);
     array.remove(array.count - 1);
     array.remove(array.count - 1);
+    System.out.println(array);
     assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(array.count - 1));
+  }
+
+  @Test
+  void insertAndAppend100ElementsThenRemoveThemAll() {
+    int a = 100;
+    while (a != 0) {
+      array.insert(a--, 0);
+      array.append(a--);
+    }
+    assertEquals(100, array.count);
+    assertEquals(128, array.capacity);
+    while (array.count != 0) {
+      array.remove(array.count - 1);
+    }
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getItem(0));
+    assertEquals(16, array.capacity);
   }
 }
