@@ -31,7 +31,7 @@ class DynArrayTest {
   void getItemWhenOneElement() {
     fillDynArrayWithOneElement();
     assertEquals(100, array.getItem(0));
-    assertThrows(IndexOutOfBoundsException.class, () -> array.getItem(1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getItem(1));
   }
 
   @Test
@@ -66,7 +66,7 @@ class DynArrayTest {
     assertEquals(2, array.getItem(0));
     array.insert(2, 1);
     assertEquals(2, array.getItem(1));
-    assertThrows(IndexOutOfBoundsException.class, () -> array.insert(3, 3));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.insert(3, 3));
   }
 
   @Test
@@ -79,22 +79,25 @@ class DynArrayTest {
   }
 
   @Test
-  void insertSeventeenElements() {
-    int seventeen = 17;
-    while (seventeen != 0) {
-      array.insert(seventeen--, 0);
+  void insertSixteenElementsAndThenOneMoreThenRemoveOne() {
+    int sixteen = 16;
+    while (sixteen != 0) {
+      array.insert(sixteen--, 0);
     }
+    assertEquals(16, array.capacity);
+    array.insert(17, 16);
     assertEquals(32, array.capacity);
     array.remove(0);
     array.remove(0);
     while (array.count != 0) {
       array.remove(0);
     }
+    assertEquals(0, array.count);
     assertEquals(16, array.capacity);
   }
 
   @Test
-  void insertSixtyFourElementsThenRemoveOne() {
+  void insertSixtyFourElementsAndThenOneMoreThenRemoveOne() {
     int sixtyFour = 64;
     while (sixtyFour != 0) {
       array.insert(sixtyFour--, 0);
@@ -111,14 +114,14 @@ class DynArrayTest {
 
   @Test
   void removeWhenEmptyArray() {
-    assertThrows(IndexOutOfBoundsException.class, () -> array.remove(0));
-    assertThrows(IndexOutOfBoundsException.class, () -> array.remove(1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(0));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(1));
   }
 
   @Test
   void removeWhenOneElementInArray() {
     fillDynArrayWithOneElement();
-    assertThrows(IndexOutOfBoundsException.class, () -> array.remove(1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(1));
     array.remove(0);
     assertEquals(0, array.count);
     assertEquals(16, array.capacity);
@@ -127,12 +130,15 @@ class DynArrayTest {
   @Test
   void removeWhenManyElementsInArray() {
     fillDynArrayWithManyElements();
-    array.remove(0);
-    array.remove(0);
-    array.remove(0);
-    array.remove(0);
-    array.remove(0);
-    array.remove(0);
+    assertEquals(6, array.count);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    assertEquals(0, array.count);
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(array.count - 1));
     assertEquals(0, array.count);
     assertEquals(16, array.capacity);
   }
@@ -182,10 +188,23 @@ class DynArrayTest {
     array.insert(0, 0);
     assertEquals(65, array.count);
     assertEquals(128, array.capacity);
-    assertThrows(IndexOutOfBoundsException.class, () -> array.remove(65));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(65));
     array.remove(64);
     array.remove(63);
     assertEquals(63, array.count);
     assertEquals(85, array.capacity);
+  }
+
+  @Test
+  void makeArrayFillWithManyElementsAndRemoveThem() {
+    fillDynArrayWithManyElements();
+    array.makeArray(5);
+    array.remove(array.count-1);
+    array.remove(array.count-1);
+    array.remove(array.count-1);
+    array.remove(array.count-1);
+    array.remove(array.count-1);
+    array.remove(array.count-1);
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(array.count-1));
   }
 }
