@@ -31,7 +31,11 @@ class DynArrayTest {
   void getItemWhenOneElement() {
     fillDynArrayWithOneElement();
     assertEquals(100, array.getItem(0));
-    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getItem(1));
+    array.remove(array.count - 1);
+    assertEquals(0, array.count);
+    assertEquals(16, array.capacity);
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getItem(16));
+    assertNull(array.getItem(0));
   }
 
   @Test
@@ -70,15 +74,6 @@ class DynArrayTest {
   }
 
   @Test
-  void insertWhenOneElementInArray() {
-    fillDynArrayWithOneElement();
-    array.insert(1, 0);
-    assertEquals(1, array.getItem(0));
-    array.insert(2, 2);
-    assertEquals(2, array.getItem(2));
-  }
-
-  @Test
   void insertSixteenElementsAndThenOneMoreThenRemoveOne() {
     int sixteen = 16;
     while (sixteen != 0) {
@@ -108,6 +103,7 @@ class DynArrayTest {
     assertEquals(65, array.count);
     assertEquals(128, array.capacity);
     array.remove(0);
+    assertEquals(128, array.capacity);
     array.remove(22);
     assertEquals(85, array.capacity);
   }
@@ -178,7 +174,7 @@ class DynArrayTest {
   }
 
   @Test
-  void appendSixtyFourElementsThenRemoveOne() {
+  void appendSixtyFourElementsThenInsertOneThenRemoveTwo() {
     int sixtyFour = 64;
     while (sixtyFour != 0) {
       array.append(sixtyFour--);
@@ -199,12 +195,14 @@ class DynArrayTest {
   void makeArrayFillWithManyElementsAndRemoveThem() {
     fillDynArrayWithManyElements();
     array.makeArray(5);
-    array.remove(array.count-1);
-    array.remove(array.count-1);
-    array.remove(array.count-1);
-    array.remove(array.count-1);
-    array.remove(array.count-1);
-    array.remove(array.count-1);
-    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(array.count-1));
+    assertEquals(6, array.count);
+    assertEquals(16, array.capacity);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    array.remove(array.count - 1);
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.remove(array.count - 1));
   }
 }

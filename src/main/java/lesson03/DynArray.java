@@ -28,10 +28,11 @@ public class DynArray<T> {
   }
 
   public T getItem(int index) {
-    if (index < 0 || index >= count) {
+    try {
+      return array[index];
+    } catch (ArrayIndexOutOfBoundsException e) {
       throw new ArrayIndexOutOfBoundsException();
     }
-    return array[index];
   }
 
   public void append(T itm) {
