@@ -79,6 +79,37 @@ class DynArrayTest {
   }
 
   @Test
+  void insertSeventeenElements() {
+    int seventeen = 17;
+    while (seventeen != 0) {
+      array.insert(seventeen--, 0);
+    }
+    assertEquals(32, array.capacity);
+    array.remove(0);
+    array.remove(0);
+    while (array.count != 0) {
+      array.remove(0);
+    }
+    assertEquals(16, array.capacity);
+  }
+
+  @Test
+  void insertSixtyFourElementsThenRemoveOne() {
+    int sixtyFour = 64;
+    while (sixtyFour != 0) {
+      array.insert(sixtyFour--, 0);
+    }
+    assertEquals(64, array.capacity);
+    assertEquals(64, array.count);
+    array.insert(100, 64);
+    assertEquals(65, array.count);
+    assertEquals(128, array.capacity);
+    array.remove(0);
+    array.remove(22);
+    assertEquals(85, array.capacity);
+  }
+
+  @Test
   void removeWhenEmptyArray() {
     assertThrows(IndexOutOfBoundsException.class, () -> array.remove(0));
     assertThrows(IndexOutOfBoundsException.class, () -> array.remove(1));

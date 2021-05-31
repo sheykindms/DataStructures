@@ -43,11 +43,15 @@ public class DynArray<T> {
     if (index < 0 || index > count) {
       throw new IndexOutOfBoundsException();
     } else if (count == capacity) {
-      append(itm);
+      capacity *= 2;
+      T[] newArray = (T[]) Array.newInstance(this.clazz, capacity);
+      System.arraycopy(array, 0, newArray, 0, index);
+      System.arraycopy(array, index, newArray, index + 1, count++ - index);
+      newArray[index] = itm;
+      array = newArray;
     } else {
-      System.arraycopy(array, index, array, index + 1, count - index + 1);
+      System.arraycopy(array, index, array, index + 1, count++ - index);
       array[index] = itm;
-      count++;
     }
   }
 
