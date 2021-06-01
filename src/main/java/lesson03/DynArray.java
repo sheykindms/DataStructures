@@ -1,6 +1,7 @@
 package lesson03;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class DynArray<T> {
 
@@ -73,9 +74,9 @@ public class DynArray<T> {
       array = newArray;
       count--;
     } else {
-      System.arraycopy(array, 0, array, 0, count - index - 1);
-      System.arraycopy(array, index + 1, array, 0, count - index + 1);
-      count--;
+      System.arraycopy(array, 0, array, 0, index);
+      System.arraycopy(array, index + 1, array, index, count - index - 1);
+      array[--count] = null;
     }
   }
 }
