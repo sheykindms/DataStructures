@@ -11,27 +11,25 @@ public class PostfixCalculator {
    */
   public int calculate(String expression) {
     String numPattern = "[0-9]";
-    var expr = new Stack<String>();
-    var operands = new Stack<Integer>();
-
+    var data = new Stack<String>();
     for (var i = expression.length() - 1; i >= 0; i--) {
       String c = expression.charAt(i) + "";
-        String num = c;
-        if (c.matches(numPattern)) {
+      String num = c;
+      if (c.matches(numPattern)) {
         while(i - 1 >= 0 && (expression.charAt(i - 1)+"").matches(numPattern)) {
-          i--;
-          String temp = expression.charAt(i) + "";
+          String temp = expression.charAt(--i) + "";
           num = temp + num;
         }
-        expr.push(num);
-        }
+        data.push(num);
+      }
       else if(c.equals("+") || c.equals("-") || c.equals("/") || c.equals("*")) {
-      expr.push(c);
+        data.push(c);
       }
     }
 
-    while (expr.size() > 0) {
-      String c = expr.pop();
+    var operands = new Stack<Integer>();
+    while (data.size() > 0) {
+      String c = data.pop();
       if(c.equals("+") || c.equals("-") || c.equals("/") || c.equals("*")) {
         operands.push(processResult(c.charAt(0), operands.pop(), operands.pop()));
       } else {
