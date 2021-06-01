@@ -2,113 +2,118 @@ package lesson02;
 
 import java.util.*;
 
-public class LinkedList2WithDummyNode {
-  public Node head;
-  public Node tail;
+public class LinkedList2WithDummyNode<E> {
+  private final DNode<E> dummyHead;
+  private final DNode<E> dummyTail;
 
   public LinkedList2WithDummyNode() {
-    head = null;
-    tail = null;
+    dummyHead = new DNode<>(null);
+    dummyTail = new DNode<>(null);
+    dummyHead.next = dummyTail;
+    dummyTail.prev = dummyHead;
   }
 
-  public void addInTail(Node _item) {
-    if (head == null) {
-      this.head = _item;
-      this.head.next = null;
-      this.head.prev = null;
-    } else {
-      this.tail.next = _item;
-      _item.prev = tail;
-    }
-    this.tail = _item;
+  public void addInTail(DNode<E> _item) {
+    dummyTail.prev.next = _item;
+    _item.prev = dummyTail.prev;
+    dummyTail.prev = _item;
+    _item.next = dummyTail;
   }
 
-  public Node find(int _value) {
-    if (this.head != null) {
-      Node node = this.head;
-      while (node != null) {
-        if (node.value == _value) return node;
-        node = node.next;
+  public DNode<E> find(E _value) {
+    DNode<E> node = dummyHead.next;
+    while (node != dummyTail) {
+      if (node.value.equals(_value)) {
+        return node;
       }
+      node = node.next;
     }
     return null;
   }
 
-  public ArrayList<Node> findAll(int _value) {
-    if (this.head != null) {
-      ArrayList<Node> nodes = new ArrayList<>();
-      Node node = this.head;
-      while (node != null) {
-        if (node.value == _value) nodes.add(node);
-        node = node.next;
+  public List<DNode<E>> findAll(E _value) {
+    ArrayList<DNode<E>> dNodes = new ArrayList<>();
+    DNode<E> node = dummyHead.next;
+    while (node != dummyTail) {
+      if (node.value.equals(_value)) {
+        dNodes.add(node);
       }
-      return nodes;
+      node = node.next;
     }
-    return new ArrayList<>();
+    return dNodes;
   }
 
-  public boolean remove(int _value) {
-    Node foundNode = find(_value);
-    if (foundNode != null) {
-      if (this.tail.value == this.head.value && this.head.value == _value && count() == 1) {
-        clear();
-      } else if (this.tail.value == _value) {
-        this.tail = this.tail.prev;
-        this.tail.next = null;
-      } else if (this.head.value == _value) {
-        this.head = this.head.next;
-        this.head.prev = null;
-      } else {
-        foundNode.prev.next = foundNode.next;
-        foundNode.next.prev = foundNode.prev;
+  public boolean remove(E _value) {
+    DNode<E> node = dummyHead.next;
+    while (node != dummyTail) {
+      if (node.value.equals(_value)) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        return true;
       }
-      return true;
+      node = node.next;
     }
     return false;
   }
 
-  public void removeAll(int _value) {
-    while (this.find(_value) != null) {
-      this.remove(_value);
+  public void removeAll(E _value) {
+    while (find(_value) != null) {
+      remove(_value);
     }
   }
 
   public void clear() {
-    this.head = null;
-    this.tail = null;
+    dummyHead.next = dummyTail;
+    dummyTail.prev = dummyHead;
   }
 
   public int count() {
-    Node node = this.head;
-    int counter = 0;
-    while (node != null) {
-      counter++;
+    DNode<E> node = dummyHead.next;
+    int count = 0;
+    while (node != dummyTail) {
+      count++;
       node = node.next;
     }
-    return counter;
+    return count;
   }
 
-  public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
+  public void insertAfter(DNode<E> _nodeAfter, DNode<E> _nodeToInsert) {
     if (_nodeAfter == null) {
-      _nodeToInsert.next = this.head;
-      _nodeToInsert.prev = null;
-      this.head = _nodeToInsert;
-      if (this.tail == null) {
-        this.tail = _nodeToInsert;
-      }
-    } else {
-      if (_nodeAfter != this.tail) {
-        _nodeToInsert.next = _nodeAfter.next;
-        _nodeAfter.next.prev = _nodeToInsert;
-        _nodeAfter.next = _nodeToInsert;
-        _nodeToInsert.prev = _nodeAfter;
+      dummyHead.next.prev = _nodeToInsert;
+      _nodeToInsert.next = dummyHead.next;
+      _nodeToInsert.prev = dummyHead;
+      dummyHead.next = _nodeToInsert;
 
-      } else {
-        _nodeAfter.next = _nodeToInsert;
-        _nodeToInsert.next = null;
-        this.tail = _nodeToInsert;
-      }
+    } else {
+      _nodeAfter.next.prev = _nodeToInsert;
+      _nodeToInsert.next = _nodeAfter.next;
+      _nodeAfter.next = _nodeToInsert;
       _nodeToInsert.prev = _nodeAfter;
     }
+  }
+
+  @Override
+  public String toString() {
+    return "LinkedList2WithDummyNode{"
+        + "dummyHead="
+        + dummyHead
+        + ", dummyTail="
+        + dummyTail
+        + '}';
+  }
+}
+
+class DNode<E> {
+  E value;
+  DNode<E> next;
+  DNode<E> prev;
+
+  public DNode(E value) {
+    this.value = value;
+  }
+
+  @Override
+  public String toString() {
+    return "DNode{" + "value=" + value + '}';
   }
 }
