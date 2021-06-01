@@ -3,26 +3,29 @@ package lesson04;
 import java.util.*;
 
 public class Stack<T> {
+
+  private final List<T> stack;
+
   public Stack() {
-    new ArrayList<>();
+    stack = new ArrayList<>();
   }
 
   public int size() {
-    // размер текущего стека
-    return 0;
+    return stack.size();
   }
 
   public T pop() {
-    // ваш код
-    return null; // если стек пустой
+    if (stack.isEmpty()) return null;
+    T element = stack.get(0);
+    stack.remove(0);
+    return element;
   }
 
   public void push(T val) {
-    // ваш код
+    stack.add(0, val);
   }
 
   public T peek() {
-    // ваш код
-    return null; // если стек пустой
+    return stack.isEmpty() ? null : stack.get(0);
   }
 }
