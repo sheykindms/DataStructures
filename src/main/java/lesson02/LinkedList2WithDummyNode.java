@@ -91,16 +91,6 @@ public class LinkedList2WithDummyNode<E> {
       _nodeToInsert.prev = _nodeAfter;
     }
   }
-
-  @Override
-  public String toString() {
-    return "LinkedList2WithDummyNode{"
-        + "dummyHead="
-        + dummyHead
-        + ", dummyTail="
-        + dummyTail
-        + '}';
-  }
 }
 
 class DNode<E> {
@@ -110,10 +100,5 @@ class DNode<E> {
 
   public DNode(E value) {
     this.value = value;
-  }
-
-  @Override
-  public String toString() {
-    return "DNode{" + "value=" + value + '}';
   }
 }
