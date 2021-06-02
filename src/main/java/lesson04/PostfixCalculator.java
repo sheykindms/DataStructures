@@ -25,6 +25,12 @@ public class PostfixCalculator {
       else if(c.equals("+") || c.equals("-") || c.equals("/") || c.equals("*")) {
         data.push(c);
       }
+      else if (c.equals(" ")) {
+        continue;
+      }
+      else {
+        throw new IllegalArgumentException("Expression is invalid");
+      }
     }
 
     var operands = new Stack<Integer>();
