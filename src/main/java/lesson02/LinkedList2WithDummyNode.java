@@ -98,7 +98,7 @@ public class LinkedList2WithDummyNode<E> {
   }
 
   /**
-   * Counts number of the elements inn List
+   * Counts number of the elements in the List
    * @return int value
    */
   public int count() {
