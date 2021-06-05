@@ -13,8 +13,10 @@ class NativeDictionaryTest {
 
   @BeforeEach
   void setUp() {
-    int size = new Random().nextInt(100);
-    dict = new NativeDictionary<>(size, Integer.class);
+    int size = new Random().nextInt(95);
+    int min = 5;
+    dict = new NativeDictionary<>(size + min, Integer.class);
+    System.out.println(size);
   }
 
   @Test
@@ -32,14 +34,21 @@ class NativeDictionaryTest {
 
   @Test
   void isKey() {
-      dict.put("test1", 1);
-      dict.put("test2", 2);
-      dict.put("test3", 3);
-      assertTrue(dict.isKey("test1"));
-      assertTrue(dict.isKey("test2"));
-      assertTrue(dict.isKey("test3"));
-      assertFalse(dict.isKey("test6"));
-      assertFalse(dict.isKey(""));
+    dict.put("test1", 1);
+    dict.put("test2", 2);
+    dict.put("test3", 3);
+    assertTrue(dict.isKey("test1"));
+    assertTrue(dict.isKey("test2"));
+    assertTrue(dict.isKey("test3"));
+    assertFalse(dict.isKey("test6"));
+    assertFalse(dict.isKey(""));
+  }
+
+  @Test
+  void putTwoWithSameKeyAndVerify() {
+    dict.put("key", 2);
+    dict.put("key", 3);
+    assertEquals(3, dict.get("key"));
   }
 
   @Test
@@ -52,6 +61,19 @@ class NativeDictionaryTest {
     assertEquals(5, dict.get("test5"));
     assertEquals(1, dict.get("test1"));
     assertNull(dict.get("test6"));
+  }
+
+  @Test
+  void putFiveAsStringsThenTryToPutOneMore() {
+    NativeDictionary<String> nd = new NativeDictionary<>(5, String.class);
+    nd.put("test1", "val1");
+    nd.put("test2", "val2");
+    nd.put("test3", "val3");
+    nd.put("test4", "val4");
+    nd.put("test5", "val5");
+
+    nd.put("test6", "val6");
+    assertNull(nd.get("test6"));
   }
 
   private String generateRandomString() {
