@@ -1,8 +1,10 @@
 package lesson08;
 
 public class HashTable {
-  public int size; // число бакетов (слотов)
-  public int step; // длина шага для поиска свободного слота
+  /** Number of buckets */
+  public int size;
+
+  public int step;
   public String[] slots;
 
   public HashTable(int sz, int stp) {
@@ -13,18 +15,20 @@ public class HashTable {
   }
 
   /**
-   * Hash-function
+   * Hash function
    *
    * @param value
    * @return index in array
    */
   public int hashFun(String value) {
-    byte[] arr = value.getBytes();
-    var sumOfBytes = 0;
-    for (byte b : arr) {
-      sumOfBytes += b;
+    if (value.isEmpty()) {
+      return 0;
     }
-    return sumOfBytes % size;
+    int hash = 1;
+    for (char c : value.toCharArray()) {
+      hash = hash * 31 + c;
+    }
+    return Math.abs(hash) % size;
   }
 
   /**
@@ -35,14 +39,13 @@ public class HashTable {
    */
   public int seekSlot(String value) {
     int index = hashFun(value);
-    int iterations = 0;
+    var iterations = 0;
     while (slots[index] != null) {
-      if (slots[index].equals(value)) {
-        return index;
-      }
+      if (slots[index].equals(value)) return index;
       index += step;
       if (index >= size && iterations < step) {
-        index = iterations++;
+        index = iterations;
+        iterations++;
       }
       if (index >= size && iterations >= step) {
         return -1;
@@ -58,12 +61,9 @@ public class HashTable {
    * @return index of element in array or -1
    */
   public int put(String value) {
-    int slot = seekSlot(value);
-    if (slot != -1) {
-      slots[slot] = value;
-      return slot;
-    }
-    return -1;
+    int index = seekSlot(value);
+    if (index != -1) slots[index] = value;
+    return index;
   }
 
   /**
@@ -74,9 +74,9 @@ public class HashTable {
    */
   public int find(String value) {
     int index = seekSlot(value);
-    if (slots[index] != null) {
-      return index;
+    if (index == -1 || slots[index] == null) {
+      return -1;
     }
-    return -1;
+    return index;
   }
 }
