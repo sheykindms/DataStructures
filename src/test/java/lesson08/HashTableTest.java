@@ -82,6 +82,9 @@ class HashTableTest {
 
     assertEquals(-1, ht.put("test6"));
     assertEquals(-1, ht.put("test7"));
+
+    assertEquals(-1, ht.find("test6"));
+    assertEquals(-1, ht.find("test7"));
   }
 
   @Test
