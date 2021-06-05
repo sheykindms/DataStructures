@@ -11,7 +11,7 @@ public class HashTable {
     size = sz;
     step = stp;
     slots = new String[size];
-    for (int i = 0; i < size; i++) slots[i] = null;
+    for (var i = 0; i < size; i++) slots[i] = null;
   }
 
   /**
@@ -24,7 +24,7 @@ public class HashTable {
     if (value.isEmpty()) {
       return 0;
     }
-    int hash = 1;
+    var hash = 1;
     for (char c : value.toCharArray()) {
       hash = hash * 31 + c;
     }
@@ -41,7 +41,9 @@ public class HashTable {
     int index = hashFun(value);
     var iterations = 0;
     while (slots[index] != null) {
-      if (slots[index].equals(value)) return index;
+      if (slots[index].equals(value)) {
+        return index;
+      }
       index += step;
       if (index >= size && iterations < step) {
         index = iterations;
@@ -62,7 +64,9 @@ public class HashTable {
    */
   public int put(String value) {
     int index = seekSlot(value);
-    if (index != -1) slots[index] = value;
+    if (index != -1) {
+      slots[index] = value;
+    }
     return index;
   }
 
