@@ -21,14 +21,14 @@ class NativeDictionaryTest {
   @Test
   void hashFun() {
     String test1 = generateRandomString();
-    assertEquals(dict.hashFun(test1), dict.hashFun(test1));
+    assertEquals(dict.getIndexAsHashFun(test1), dict.getIndexAsHashFun(test1));
 
     String test2 = generateRandomString();
-    assertEquals(dict.hashFun(test2), dict.hashFun(test2));
+    assertEquals(dict.getIndexAsHashFun(test2), dict.getIndexAsHashFun(test2));
 
     // Classic
-    assertEquals(dict.hashFun("AaAa"), dict.hashFun("BBBB"));
-    assertEquals(dict.hashFun("AaBB"), dict.hashFun("BBAa"));
+    assertEquals(dict.getIndexAsHashFun("AaAa"), dict.getIndexAsHashFun("BBBB"));
+    assertEquals(dict.getIndexAsHashFun("AaBB"), dict.getIndexAsHashFun("BBAa"));
   }
 
   @Test
@@ -47,7 +47,7 @@ class NativeDictionaryTest {
   void putTwoWithSameKeyAndVerify() {
     dict.put("key", 2);
     dict.put("key", 3);
-    assertEquals(3, dict.get("key"));
+    assertEquals(3, dict.getValueByKey("key"));
   }
 
   @Test
@@ -57,9 +57,9 @@ class NativeDictionaryTest {
     dict.put("test3", 3);
     dict.put("test4", 4);
     dict.put("test5", 5);
-    assertEquals(5, dict.get("test5"));
-    assertEquals(1, dict.get("test1"));
-    assertNull(dict.get("test6"));
+    assertEquals(5, dict.getValueByKey("test5"));
+    assertEquals(1, dict.getValueByKey("test1"));
+    assertNull(dict.getValueByKey("test6"));
   }
 
   @Test
@@ -72,7 +72,7 @@ class NativeDictionaryTest {
     nd.put("test5", "val5");
 
     nd.put("test6", "val6");
-    assertNull(nd.get("test6"));
+    assertNull(nd.getValueByKey("test6"));
   }
 
   private String generateRandomString() {

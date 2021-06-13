@@ -1,0 +1,46 @@
+1)
+addInTail - addNodeInTail
+//Указываем, что необходимо передать именно ноду для добавления в листт.
+//Класс UnidirectionalLinkedList, BidirectionalLinkedList, BidirectionalLinkedListWithDummyNode.
+2)
+get - getNodeByValue
+//Более описательный метод получения элемента по индексу класса UnidirectionalLinkedList,
+//BidirectionalLinkedList, BidirectionalLinkedListWithDummyNode.
+3)
+getAll - getAllNodesByValue
+//Получение списка всех нод по переданному значению. Класс UnidirectionalLinkedList, BidirectionalLinkedList,
+//BidirectionalLinkedListWithDummyNode.
+4)
+remove - removeNodeByValue
+//Удаление элемента с переданным значением. Класс UnidirectionalLinkedList, BidirectionalLinkedList,
+//BidirectionalLinkedListWithDummyNode.
+5)
+removeAll - removeAllNodesByValue
+//Удаление всех элементов с переданным значением. Класс UnidirectionalLinkedList, BidirectionalLinkedList,
+//BidirectionalLinkedListWithDummyNode.
+6)
+clear - clearList
+//Удаление всех элементов из листа. Класс UnidirectionalLinkedList, BidirectionalLinkedList, BidirectionalLinkedListWithDummyNode.
+7)
+count - countNodes
+//Подсчёт количества элементов в листте. Класс UnidirectionalLinkedList, BidirectionalLinkedList, BidirectionalLinkedListWithDummyNode.
+8)
+add - addValue
+//Указываем, что передаём в лист объект (значение), а не ноду. Класс OrderedBidirectionalLinkedList.
+9)
+hashFun - getIndexAsHashFun
+//Метод вычисляет индекс в массиве на основе результаат хэш-функции, куда будет добавляться элемент или где его будем искать,
+//при вызове get метода необходимо. Класс HashTable.
+10)
+find - findIndexByValue
+//Поиск индекса в массиве, по которому лежит переданное в метод значение. Класс HashTable.
+11)
+get - getValueByKey
+// Указываем, что для получения элемента необходимо передать именно ключ. Класс NativeDictionary.
+12)
+insert - insertValueByIndex
+//Добавление элемента по индексу в классе DynArray.
+13)
+makeArray - instantiateArrayWithNewCapacity
+//Указываем, что создаётся новый инстанс массива с передаваемой capacity. Класс DynArray.
+

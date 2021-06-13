@@ -12,10 +12,10 @@ public class DynArray<T> {
   public DynArray(Class clz) {
     clazz = clz;
     count = 0;
-    makeArray(16);
+    instantiateArrayWithNewCapacity(16);
   }
 
-  public void makeArray(int new_capacity) {
+  public void instantiateArrayWithNewCapacity(int new_capacity) {
     if (capacity != 0) {
       new_capacity = Math.max(new_capacity, 16);
       T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, new_capacity);
@@ -27,7 +27,7 @@ public class DynArray<T> {
     capacity = new_capacity;
   }
 
-  public T get(int index) {
+  public T getValueByIndex(int index) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException();
     }
@@ -38,12 +38,12 @@ public class DynArray<T> {
     if (capacity > count) {
       array[count++] = itm;
     } else if (capacity == count) {
-      makeArray(capacity * 2);
+      instantiateArrayWithNewCapacity(capacity * 2);
       array[count++] = itm;
     }
   }
 
-  public void insert(T itm, int index) {
+  public void insertValueByIndex(T itm, int index) {
     if (index < 0 || index > count) {
       throw new ArrayIndexOutOfBoundsException();
     } else if (count == capacity) {
@@ -59,7 +59,7 @@ public class DynArray<T> {
     }
   }
 
-  public void remove(int index) {
+  public void removeByIndex(int index) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException();
     } else if (count - 1 < capacity / 2) {

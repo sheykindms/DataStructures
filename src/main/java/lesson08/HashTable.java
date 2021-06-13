@@ -20,7 +20,7 @@ public class HashTable {
    * @param value
    * @return index in array
    */
-  public int hashFun(String value) {
+  public int getIndexAsHashFun(String value) {
     final var multiplier = 31;
     if (value.isEmpty()) {
       return 0;
@@ -39,7 +39,7 @@ public class HashTable {
    * @return index in array or -1
    */
   public int seekSlot(String value) {
-    int foundIndex = hashFun(value);
+    int foundIndex = getIndexAsHashFun(value);
     var iterations = 0;
     while (slots[foundIndex] != null) {
       if (slots[foundIndex].equals(value)) {
@@ -78,7 +78,7 @@ public class HashTable {
    * @param value
    * @return index of element or -1
    */
-  public int find(String value) {
+  public int findIndexByValue(String value) {
     int foundIndex = seekSlot(value);
     boolean found = foundIndex != -1 && slots[foundIndex] != null;
     if (!found) {

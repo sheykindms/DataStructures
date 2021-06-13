@@ -13,7 +13,7 @@ class NativeDictionary<T> {
     values = (T[]) Array.newInstance(clazz, this.size);
   }
 
-  public int hashFun(String key) {
+  public int getIndexAsHashFun(String key) {
     final var multiplier = 31;
     if (key.isEmpty()) {
       return 0;
@@ -44,7 +44,7 @@ class NativeDictionary<T> {
     values[foundIndex] = value;
   }
 
-  public T get(String key) {
+  public T getValueByKey(String key) {
     var foundIndex = seekSlot(key);
     boolean found = foundIndex != -1 && slots[foundIndex] != null;
     if (!found) {
@@ -54,7 +54,7 @@ class NativeDictionary<T> {
   }
 
   private int seekSlot(String value) {
-    var index = hashFun(value);
+    var index = getIndexAsHashFun(value);
     var step = 1;
     var iterations = 0;
     while (slots[index] != null) {

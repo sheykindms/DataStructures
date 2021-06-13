@@ -21,7 +21,7 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * Adds given item in the end of List
    * @param _item to be added
    */
-  public void addInTail(DNode<E> _item) {
+  public void addNodeInTail(DNode<E> _item) {
     dummyTail.prev.next = _item;
     _item.prev = dummyTail.prev;
     dummyTail.prev = _item;
@@ -33,7 +33,7 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @param _value to be found
    * @return DNode or null if object has not been found
    */
-  public DNode<E> get(E _value) {
+  public DNode<E> getNodeByValue(E _value) {
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
       if (currentNode.value.equals(_value)) {
@@ -49,7 +49,7 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @param _value to be founnd
    * @return instance of List containing founded objects or empty List otherwise
    */
-  public List<DNode<E>> getAll(E _value) {
+  public List<DNode<E>> getAllNodeByValue(E _value) {
     ArrayList<DNode<E>> foundNodes = new ArrayList<>();
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
@@ -66,7 +66,7 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @param _value to be found and deleted
    * @return true if element has been found, otherwise returns false
    */
-  public boolean remove(E _value) {
+  public boolean removeNodeByValue(E _value) {
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
       if (currentNode.value.equals(_value)) {
@@ -83,16 +83,16 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * Removes all occurrences of DNones with given value
    * @param _value to be found and deleted
    */
-  public void removeAll(E _value) {
-    while (get(_value) != null) {
-      remove(_value);
+  public void removeAllNodesByValue(E _value) {
+    while (getNodeByValue(_value) != null) {
+      removeNodeByValue(_value);
     }
   }
 
   /**
    * Clears the List
    */
-  public void clear() {
+  public void clearList() {
     dummyHead.next = dummyTail;
     dummyTail.prev = dummyHead;
   }
@@ -101,7 +101,7 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * Counts number of the elements in the List
    * @return int value
    */
-  public int count() {
+  public int countNodes() {
     DNode<E> currentNode = dummyHead.next;
     var numberOfNodes = 0;
     while (currentNode != dummyTail) {

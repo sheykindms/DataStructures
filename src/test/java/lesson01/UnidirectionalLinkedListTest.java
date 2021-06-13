@@ -15,22 +15,22 @@ class UnidirectionalLinkedListTest {
   }
 
   private void fillListWithOneElement() {
-    list.addInTail(new Node(1729));
+    list.addNodeInTail(new Node(1729));
   }
 
   private void fillListWithManyElements() {
-    list.addInTail(new Node(2));
-    list.addInTail(new Node(11));
-    list.addInTail(new Node(17));
-    list.addInTail(new Node(17));
-    list.addInTail(new Node(29));
-    list.addInTail(new Node(41));
+    list.addNodeInTail(new Node(2));
+    list.addNodeInTail(new Node(11));
+    list.addNodeInTail(new Node(17));
+    list.addNodeInTail(new Node(17));
+    list.addNodeInTail(new Node(29));
+    list.addNodeInTail(new Node(41));
   }
 
   @Test
   void removeFromListWithOneNode() {
     fillListWithOneElement();
-    list.remove(1729);
+    list.removeNodeByValue(1729);
     assertNull(list.head);
     assertNull(list.tail);
   }
@@ -38,26 +38,26 @@ class UnidirectionalLinkedListTest {
   @Test
   void removeFromListWithOneNodeIfNotExists() {
     fillListWithOneElement();
-    assertFalse(list.remove(1));
-    assertEquals(list.head, list.get(1729));
-    assertEquals(list.tail, list.get(1729));
+    assertFalse(list.removeNodeByValue(1));
+    assertEquals(list.head, list.getNodeByValue(1729));
+    assertEquals(list.tail, list.getNodeByValue(1729));
   }
 
   @Test
   void removeFromListWithManyNodes() {
     fillListWithManyElements();
-    list.remove(2);
-    list.remove(41);
-    list.remove(17);
-    assertEquals(list.get(11), list.head);
-    assertEquals(list.get(29), list.tail);
+    list.removeNodeByValue(2);
+    list.removeNodeByValue(41);
+    list.removeNodeByValue(17);
+    assertEquals(list.getNodeByValue(11), list.head);
+    assertEquals(list.getNodeByValue(29), list.tail);
   }
 
   @Test
   void removeAllFromListWithOneNode() {
     fillListWithOneElement();
-    list.removeAll(1729);
-    assertNull(list.get(1729));
+    list.removeAllNodesByValue(1729);
+    assertNull(list.getNodeByValue(1729));
     assertNull(list.head);
     assertNull(list.tail);
   }
@@ -65,79 +65,79 @@ class UnidirectionalLinkedListTest {
   @Test
   void removeAllFromListWithManyNodes() {
     fillListWithManyElements();
-    list.removeAll(17);
-    list.removeAll(41);
-    assertEquals(list.get(2), list.head);
-    assertEquals(list.get(29), list.tail);
-    assertNull(list.get(17));
+    list.removeAllNodesByValue(17);
+    list.removeAllNodesByValue(41);
+    assertEquals(list.getNodeByValue(2), list.head);
+    assertEquals(list.getNodeByValue(29), list.tail);
+    assertNull(list.getNodeByValue(17));
   }
 
   @Test
   void removeFromListIfListEmpty() {
-    assertFalse(list.remove(10));
+    assertFalse(list.removeNodeByValue(10));
   }
 
   @Test
   void removeFromList() {
     fillListWithManyElements();
-    assertTrue(list.remove(17));
-    assertTrue(list.remove(2));
-    assertTrue(list.remove(29));
+    assertTrue(list.removeNodeByValue(17));
+    assertTrue(list.removeNodeByValue(2));
+    assertTrue(list.removeNodeByValue(29));
   }
 
   @Test
   void removeFromListIfElementNotExists() {
     fillListWithManyElements();
-    list.remove(67);
-    assertEquals(list.get(2), list.head);
-    assertEquals(list.get(41), list.tail);
-    assertEquals(6, list.count());
+    list.removeNodeByValue(67);
+    assertEquals(list.getNodeByValue(2), list.head);
+    assertEquals(list.getNodeByValue(41), list.tail);
+    assertEquals(6, list.countNodes());
   }
 
   @Test
   void removeAllFromListIfElementNotExists() {
     fillListWithManyElements();
-    list.removeAll(67);
-    assertEquals(list.get(2), list.head);
-    assertEquals(list.get(41), list.tail);
-    assertEquals(6, list.count());
+    list.removeAllNodesByValue(67);
+    assertEquals(list.getNodeByValue(2), list.head);
+    assertEquals(list.getNodeByValue(41), list.tail);
+    assertEquals(6, list.countNodes());
   }
 
   @Test
   void removeAllFromListFromHeadAndTail() {
     fillListWithManyElements();
-    list.addInTail(new Node(2));
-    list.removeAll(2);
-    assertEquals(list.get(11), list.head);
-    assertEquals(list.get(41), list.tail);
+    list.addNodeInTail(new Node(2));
+    list.removeAllNodesByValue(2);
+    assertEquals(list.getNodeByValue(11), list.head);
+    assertEquals(list.getNodeByValue(41), list.tail);
   }
 
   @Test
   void removeAllFromListWithTwoElements() {
-    list.addInTail(new Node(2));
-    list.addInTail(new Node(2));
-    list.removeAll(2);
+    list.addNodeInTail(new Node(2));
+    list.addNodeInTail(new Node(2));
+    list.removeAllNodesByValue(2);
     assertNull(list.head);
     assertNull(list.tail);
   }
 
   @Test
   void removeAllFromListIfListEmpty() {
-    assertFalse(list.remove(10));
+    assertFalse(list.removeNodeByValue(10));
   }
 
   @Test
   void clear() {
     fillListWithManyElements();
-    list.clear();
+    list.clearList();
     assertNull(list.head);
     assertNull(list.tail);
-    assertEquals(0, list.count());
+    assertEquals(0, list.countNodes());
   }
 
   @Test
   void clearEmptyList() {
-    list.clear();
+    list.clearList();
     assertNull(list.head);
     assertNull(list.tail);
   }
@@ -145,18 +145,18 @@ class UnidirectionalLinkedListTest {
   @Test
   void countWhenSixElements() {
     fillListWithManyElements();
-    assertEquals(6, list.count());
+    assertEquals(6, list.countNodes());
   }
 
   @Test
   void countWhenOneElement() {
     fillListWithOneElement();
-    assertEquals(1, list.count());
+    assertEquals(1, list.countNodes());
   }
 
   @Test
   void countWhenListEmpty() {
-    assertEquals(0, list.count());
+    assertEquals(0, list.countNodes());
   }
 
   @Test
@@ -164,18 +164,18 @@ class UnidirectionalLinkedListTest {
     fillListWithOneElement();
     Node toInsertInTail = new Node(17);
     Node toInsertAfter = new Node(29);
-    list.addInTail(toInsertInTail);
+    list.addNodeInTail(toInsertInTail);
     list.insertAfter(toInsertInTail, toInsertAfter);
-    assertEquals(list.get(1729), list.head);
-    assertEquals(list.get(29), list.tail);
-    assertEquals(3, list.count());
+    assertEquals(list.getNodeByValue(1729), list.head);
+    assertEquals(list.getNodeByValue(29), list.tail);
+    assertEquals(3, list.countNodes());
   }
 
   @Test
   void insertAfterLast() {
     fillListWithManyElements();
     Node toInsert = new Node(59);
-    Node after = list.get(41);
+    Node after = list.getNodeByValue(41);
     list.insertAfter(after, toInsert);
     assertEquals(toInsert, list.tail);
   }
@@ -191,9 +191,9 @@ class UnidirectionalLinkedListTest {
   @Test
   void findAll() {
     fillListWithManyElements();
-    assertEquals(2, list.getAll(17).size());
-    assertEquals(1, list.getAll(41).size());
-    assertEquals(0, list.getAll(67).size());
+    assertEquals(2, list.getAllNodesByValue(17).size());
+    assertEquals(1, list.getAllNodesByValue(41).size());
+    assertEquals(0, list.getAllNodesByValue(67).size());
   }
 
   @Test
@@ -203,15 +203,15 @@ class UnidirectionalLinkedListTest {
     Node two = new Node(2);
     Node three = new Node(3);
     Node four = new Node(4);
-    list.insertAfter(list.get(1729), one);
-    assertEquals(list.get(1729), list.head);
+    list.insertAfter(list.getNodeByValue(1729), one);
+    assertEquals(list.getNodeByValue(1729), list.head);
     assertEquals(one, list.tail);
     list.insertAfter(one, two);
     assertEquals(two, list.tail);
     list.insertAfter(one, three);
     list.insertAfter(two, four);
-    assertEquals(list.get(1729), list.head);
+    assertEquals(list.getNodeByValue(1729), list.head);
     assertEquals(four, list.tail);
-    assertEquals(5, list.count());
+    assertEquals(5, list.countNodes());
   }
 }

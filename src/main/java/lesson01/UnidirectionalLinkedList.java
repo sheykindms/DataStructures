@@ -11,13 +11,13 @@ public class UnidirectionalLinkedList {
     tail = null;
   }
 
-  public void addInTail(Node item) {
+  public void addNodeInTail(Node item) {
     if (this.head == null) this.head = item;
     else this.tail.next = item;
     this.tail = item;
   }
 
-  public Node get(int value) {
+  public Node getNodeByValue(int value) {
     var currentNode = this.head;
     while (currentNode != null) {
       if (currentNode.value == value) return currentNode;
@@ -26,7 +26,7 @@ public class UnidirectionalLinkedList {
     return null;
   }
 
-  public ArrayList<Node> getAll(int _value) {
+  public ArrayList<Node> getAllNodesByValue(int _value) {
     ArrayList<Node> foundNodes = new ArrayList<>();
     var currentNode = this.head;
     while (currentNode != null) {
@@ -36,7 +36,7 @@ public class UnidirectionalLinkedList {
     return foundNodes;
   }
 
-  public boolean remove(int _value) {
+  public boolean removeNodeByValue(int _value) {
     if (this.head != null) {
       var currentNode = this.head;
       if (currentNode.value == _value) {
@@ -64,19 +64,19 @@ public class UnidirectionalLinkedList {
     return false;
   }
 
-  public void removeAll(int _value) {
-    ArrayList<Node> foundNodes = getAll(_value);
+  public void removeAllNodesByValue(int _value) {
+    ArrayList<Node> foundNodes = getAllNodesByValue(_value);
     for (Node node : foundNodes) {
-      remove(node.value);
+      removeNodeByValue(node.value);
     }
   }
 
-  public void clear() {
+  public void clearList() {
     this.head = null;
     this.tail = null;
   }
 
-  public int count() {
+  public int countNodes() {
     var currentNode = this.head;
     var numberOfNodes = 0;
     while (currentNode != null) {
@@ -93,7 +93,7 @@ public class UnidirectionalLinkedList {
       if (this.head.next == null) {
         this.tail = _nodeToInsert;
       }
-    } else if (get(_nodeAfter.value) != null) {
+    } else if (getNodeByValue(_nodeAfter.value) != null) {
       _nodeToInsert.next = _nodeAfter.next;
       _nodeAfter.next = _nodeToInsert;
       if (_nodeToInsert.next == null) {

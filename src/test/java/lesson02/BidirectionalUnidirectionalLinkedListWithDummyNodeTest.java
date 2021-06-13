@@ -15,81 +15,81 @@ class BidirectionalUnidirectionalLinkedListWithDummyNodeTest {
   }
 
   private void fillWithOneElement() {
-    list.addInTail(new DNode<>(10));
+    list.addNodeInTail(new DNode<>(10));
   }
 
   private void fillWithManyElements() {
-    list.addInTail(new DNode<>(10));
-    list.addInTail(new DNode<>(20));
-    list.addInTail(new DNode<>(30));
-    list.addInTail(new DNode<>(30));
-    list.addInTail(new DNode<>(40));
-    list.addInTail(new DNode<>(50));
+    list.addNodeInTail(new DNode<>(10));
+    list.addNodeInTail(new DNode<>(20));
+    list.addNodeInTail(new DNode<>(30));
+    list.addNodeInTail(new DNode<>(30));
+    list.addNodeInTail(new DNode<>(40));
+    list.addNodeInTail(new DNode<>(50));
   }
 
   @Test
   void findWhenOneElementInList() {
     fillWithOneElement();
-    assertEquals(10, list.get(10).value);
+    assertEquals(10, list.getNodeByValue(10).value);
   }
 
   @Test
   void findWhenManyElementsInList() {
     fillWithManyElements();
-    assertEquals(10, list.get(10).value);
-    assertEquals(30, list.get(30).value);
-    assertEquals(50, list.get(50).value);
+    assertEquals(10, list.getNodeByValue(10).value);
+    assertEquals(30, list.getNodeByValue(30).value);
+    assertEquals(50, list.getNodeByValue(50).value);
   }
 
   @Test
   void findAllWhenOneElementInList() {
     fillWithOneElement();
-    assertEquals(10, list.getAll(10).get(0).value);
-    assertEquals(1, list.getAll(10).size());
+    assertEquals(10, list.getAllNodeByValue(10).get(0).value);
+    assertEquals(1, list.getAllNodeByValue(10).size());
   }
 
   @Test
   void findAllWhenManyElementsInList() {
     fillWithManyElements();
-    assertEquals(30, list.getAll(30).get(0).value);
-    assertEquals(2, list.getAll(30).size());
+    assertEquals(30, list.getAllNodeByValue(30).get(0).value);
+    assertEquals(2, list.getAllNodeByValue(30).size());
   }
 
   @Test
   void removeWhenOneElementInList() {
     fillWithOneElement();
-    assertTrue(list.remove(10));
+    assertTrue(list.removeNodeByValue(10));
   }
 
   @Test
   void removeFirstAndLastWhenManyElementsInListAndCount() {
     fillWithManyElements();
-    assertTrue(list.remove(10));
-    assertTrue(list.remove(50));
-    assertEquals(4, list.count());
+    assertTrue(list.removeNodeByValue(10));
+    assertTrue(list.removeNodeByValue(50));
+    assertEquals(4, list.countNodes());
   }
 
   @Test
   void removeAllWhenManyElements() {
     fillWithManyElements();
-    list.removeAll(30);
-    assertNull(list.get(30));
-    assertEquals(4, list.count());
+    list.removeAllNodesByValue(30);
+    assertNull(list.getNodeByValue(30));
+    assertEquals(4, list.countNodes());
   }
 
   @Test
   void clearWhenManyElements() {
     fillWithManyElements();
-    list.clear();
-    assertNull(list.get(10));
-    assertNull(list.get(50));
-    assertEquals(0, list.count());
+    list.clearList();
+    assertNull(list.getNodeByValue(10));
+    assertNull(list.getNodeByValue(50));
+    assertEquals(0, list.countNodes());
   }
 
   @Test
   void countWhenSixElementsInList() {
     fillWithManyElements();
-    assertEquals(6, list.count());
+    assertEquals(6, list.countNodes());
   }
 
   @Test
@@ -101,10 +101,10 @@ class BidirectionalUnidirectionalLinkedListWithDummyNodeTest {
     list.insertAfter(node1, node2);
     list.insertAfter(node2, node3);
 
-    assertEquals(3, list.count());
-    assertEquals(node1, list.get(node1.value));
-    assertEquals(node2, list.get(node2.value));
-    assertEquals(node3, list.get(node3.value));
+    assertEquals(3, list.countNodes());
+    assertEquals(node1, list.getNodeByValue(node1.value));
+    assertEquals(node2, list.getNodeByValue(node2.value));
+    assertEquals(node3, list.getNodeByValue(node3.value));
 
     assertEquals(node1.next, node2);
     assertEquals(node2.next, node3);

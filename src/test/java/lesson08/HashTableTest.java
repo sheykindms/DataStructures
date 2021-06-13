@@ -21,14 +21,14 @@ class HashTableTest {
   @Test
   void hashFunConsistency() {
     String test1 = generateRandomString();
-    assertEquals(ht.hashFun(test1), ht.hashFun(test1));
+    assertEquals(ht.getIndexAsHashFun(test1), ht.getIndexAsHashFun(test1));
 
     String test2 = generateRandomString();
-    assertEquals(ht.hashFun(test2), ht.hashFun(test2));
+    assertEquals(ht.getIndexAsHashFun(test2), ht.getIndexAsHashFun(test2));
 
     // Classic
-    assertEquals(ht.hashFun("AaAa"), ht.hashFun("BBBB"));
-    assertEquals(ht.hashFun("AaBB"), ht.hashFun("BBAa"));
+    assertEquals(ht.getIndexAsHashFun("AaAa"), ht.getIndexAsHashFun("BBBB"));
+    assertEquals(ht.getIndexAsHashFun("AaBB"), ht.getIndexAsHashFun("BBAa"));
   }
 
   @Test
@@ -37,9 +37,9 @@ class HashTableTest {
     assertNotEquals(-1, ht.put("test2"));
     assertNotEquals(-1, ht.put("test3"));
     assertNotEquals(-1, ht.put("test4"));
-    assertEquals("test1", ht.slots[ht.find("test1")]);
-    assertEquals(ht.hashFun("test1"), ht.find("test1"));
-    assertEquals(-1, ht.find("test5"));
+    assertEquals("test1", ht.slots[ht.findIndexByValue("test1")]);
+    assertEquals(ht.getIndexAsHashFun("test1"), ht.findIndexByValue("test1"));
+    assertEquals(-1, ht.findIndexByValue("test5"));
   }
 
   @Test
@@ -48,15 +48,15 @@ class HashTableTest {
     ht.put("test2");
     ht.put("test3");
     ht.put("test4");
-    assertEquals(-1, ht.find("test10"));
-    assertNotEquals(-1, ht.find("test1"));
+    assertEquals(-1, ht.findIndexByValue("test10"));
+    assertNotEquals(-1, ht.findIndexByValue("test1"));
   }
 
   @Test
   void findIfEmpty() {
-    assertEquals(-1, ht.find("test10"));
-    assertEquals(-1, ht.find("test1"));
-    assertEquals(-1, ht.find(""));
+    assertEquals(-1, ht.findIndexByValue("test10"));
+    assertEquals(-1, ht.findIndexByValue("test1"));
+    assertEquals(-1, ht.findIndexByValue(""));
   }
 
   @Test
@@ -74,17 +74,17 @@ class HashTableTest {
     assertEquals("test4", ht.slots[1]);
     assertEquals("test5", ht.slots[2]);
 
-    assertEquals(3, ht.find("test1"));
-    assertEquals(4, ht.find("test2"));
-    assertEquals(0, ht.find("test3"));
-    assertEquals(1, ht.find("test4"));
-    assertEquals(2, ht.find("test5"));
+    assertEquals(3, ht.findIndexByValue("test1"));
+    assertEquals(4, ht.findIndexByValue("test2"));
+    assertEquals(0, ht.findIndexByValue("test3"));
+    assertEquals(1, ht.findIndexByValue("test4"));
+    assertEquals(2, ht.findIndexByValue("test5"));
 
     assertEquals(-1, ht.put("test6"));
     assertEquals(-1, ht.put("test7"));
 
-    assertEquals(-1, ht.find("test6"));
-    assertEquals(-1, ht.find("test7"));
+    assertEquals(-1, ht.findIndexByValue("test6"));
+    assertEquals(-1, ht.findIndexByValue("test7"));
   }
 
   @Test

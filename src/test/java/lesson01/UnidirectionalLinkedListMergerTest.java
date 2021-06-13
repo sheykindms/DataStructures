@@ -17,35 +17,35 @@ class UnidirectionalLinkedListMergerTest {
   }
 
   private void fillTheLists() {
-    firstList.addInTail(new Node(1));
-    firstList.addInTail(new Node(2));
-    firstList.addInTail(new Node(3));
-    firstList.addInTail(new Node(4));
-    secondList.addInTail(new Node(5));
-    secondList.addInTail(new Node(6));
-    secondList.addInTail(new Node(7));
-    secondList.addInTail(new Node(8));
+    firstList.addNodeInTail(new Node(1));
+    firstList.addNodeInTail(new Node(2));
+    firstList.addNodeInTail(new Node(3));
+    firstList.addNodeInTail(new Node(4));
+    secondList.addNodeInTail(new Node(5));
+    secondList.addNodeInTail(new Node(6));
+    secondList.addNodeInTail(new Node(7));
+    secondList.addNodeInTail(new Node(8));
   }
 
   private void fillWithIncorrectLengths() {
-    firstList.addInTail(new Node(1));
-    firstList.addInTail(new Node(2));
-    firstList.addInTail(new Node(3));
-    firstList.addInTail(new Node(4));
-    secondList.addInTail(new Node(5));
-    secondList.addInTail(new Node(6));
-    secondList.addInTail(new Node(7));
+    firstList.addNodeInTail(new Node(1));
+    firstList.addNodeInTail(new Node(2));
+    firstList.addNodeInTail(new Node(3));
+    firstList.addNodeInTail(new Node(4));
+    secondList.addNodeInTail(new Node(5));
+    secondList.addNodeInTail(new Node(6));
+    secondList.addNodeInTail(new Node(7));
   }
 
   @Test
   void sumOfListsWithIncorrectLengths() {
     fillWithIncorrectLengths();
-    assertEquals(0, LinkedListMerger.sumOfLists(firstList, secondList).count());
+    assertEquals(0, LinkedListMerger.sumOfLists(firstList, secondList).countNodes());
   }
 
   @Test
   void sumOfListsWhenBothAreEmpty() {
-    assertEquals(0, LinkedListMerger.sumOfLists(firstList, secondList).count());
+    assertEquals(0, LinkedListMerger.sumOfLists(firstList, secondList).countNodes());
   }
 
   @Test

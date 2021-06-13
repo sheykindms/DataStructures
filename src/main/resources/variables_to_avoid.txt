@@ -3,37 +3,37 @@ str1
 //Входной строковый параметр в BloomFilter, заменён, т.к. числа в именах переменных без острой необходимости - bad practice
 
 hash1 - firstIndexOfBitToSet, hash2 - secondIndexOfBitToSet
-//Индексы в BloomFilter,в методе add, в которые необходимо установить значение 1
+//Индексы в BloomFilter,в методе add, в которые необходимо установить значение 1.
 
 hash1 - firstIndexOfBitToCheck, hash2 - secondIndexOfBitToCheck
-//Индексы в BloomFilter, в методе isValue, по которым мы предполагаем наличие или отсутствие элемента в структуре
+//Индексы в BloomFilter, в методе isValue, по которым мы предполагаем наличие или отсутствие элемента в структуре.
 
 index - foundIndex
-//NativeDictionary, NativeCache, HashTable - операции вставки, получения, проверки наличия элемента
+//NativeDictionary, NativeCache, HashTable - операции вставки, получения, проверки наличия элемента.
 
 index - expectedIndex
 //NativeCache - seekSlot, HashTable - seekSlot. Ожидаемый индекс, полученный в результате вычисления хэш-функции
 //по которому мы попробуем найти место под добавление элемента или найти его, если он уже присутствует.
 
 index - indexOfElementToReplace
-//Индекс, по которому мы будем заменять элемент на новый в классе NativeCache
+//Индекс, по которому мы будем заменять элемент на новый в классе NativeCache.
 
 min - minValue
 //Имя переменной метода replaceWithNew класса NativeCache для более явного указания, что в переменной хранится
-//минимальное значение массива
+//минимальное значение массива.
 
 hash1 - firstHashFun, hash2 - secondHashFun
-//имена методов хэширования в классе BloomFilter заменены на более различимые и вербозные
+//Имена методов хэширования в классе BloomFilter заменены на более различимые и вербозные.
 
 set2 - secondSet
 //Убрано число из имён подаваемых на вход аргументов, дано более вербозное имя. Класс PowerSet, методы intersection,
-//union, difference, isSubset
+//union, difference, isSubset.
 
 powerSet - unitedSet
-//абстрактный сет метода union, класса PowerSet, заменён на более точный - unitedSet
+//Абстрактный сет метода union, класса PowerSet, заменён на более точный - unitedSet.
 
 powerSet - intersectedSet
-//абстрактный сет метода intersection, класса PowerSet, заменён на более точный - intersectedSet
+//Абстрактный сет метода intersection, класса PowerSet, заменён на более точный - intersectedSet.
 
 powerSet - diffSet
-//абстрактный сет метода difference, класса PowerSet, заменён на более точный - diffSet
+//Абстрактный сет метода difference, класса PowerSet, заменён на более точный - diffSet.

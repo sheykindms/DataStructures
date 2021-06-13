@@ -43,7 +43,7 @@ public class OrderedBidirectionalLinkedList<T> {
    *
    * @param value to add according to ordering
    */
-  public void add(T value) {
+  public void addValue(T value) {
     Node<T> newNode = new Node<>(value);
     if (head == null) {
       head = newNode;
@@ -108,7 +108,7 @@ public class OrderedBidirectionalLinkedList<T> {
    * @param value to find
    * @return Node object or null if nothing was found
    */
-  public Node<T> get(T value) {
+  public Node<T> getNodeByValue(T value) {
     Node<T> currentNode = head;
     if (isAscending) {
       while (currentNode != null && compare(currentNode.value, value) <= 0) {
@@ -133,11 +133,11 @@ public class OrderedBidirectionalLinkedList<T> {
    *
    * @param value to be found and deleted
    */
-  public void remove(T value) {
-    var foundNode = get(value);
+  public void removeNodeByValue(T value) {
+    var foundNode = getNodeByValue(value);
     if (foundNode != null) {
-      if (this.head.value == this.tail.value && this.head.value.equals(value) && count() == 1) {
-        clear(isAscending);
+      if (this.head.value == this.tail.value && this.head.value.equals(value) && countNodes() == 1) {
+        clearList(isAscending);
       } else if (this.tail.value == value) {
         this.tail = this.tail.prev;
         this.tail.next = null;
@@ -156,7 +156,7 @@ public class OrderedBidirectionalLinkedList<T> {
    *
    * @param isAscending
    */
-  public void clear(boolean isAscending) {
+  public void clearList(boolean isAscending) {
     this.isAscending = isAscending;
     head = null;
     tail = null;
@@ -167,7 +167,7 @@ public class OrderedBidirectionalLinkedList<T> {
    *
    * @return int value
    */
-  public int count() {
+  public int countNodes() {
     Node<T> currentNode = head;
     var numberOfNodes = 0;
     while (currentNode != null) {
@@ -182,7 +182,7 @@ public class OrderedBidirectionalLinkedList<T> {
    *
    * @return ArrayList of Node<T> objects
    */
-  ArrayList<Node<T>> getAll() {
+  ArrayList<Node<T>> getAllNodes() {
     ArrayList<Node<T>> foundNodes = new ArrayList<>();
     Node<T> currentNode = head;
     while (currentNode != null) {

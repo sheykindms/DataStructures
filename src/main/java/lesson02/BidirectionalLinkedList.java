@@ -11,7 +11,7 @@ public class BidirectionalLinkedList {
     tail = null;
   }
 
-  public void addInTail(Node _item) {
+  public void addNodeInTail(Node _item) {
     if (head == null) {
       this.head = _item;
       this.head.next = null;
@@ -23,7 +23,7 @@ public class BidirectionalLinkedList {
     this.tail = _item;
   }
 
-  public Node get(int _value) {
+  public Node getNodeByValue(int _value) {
     if (this.head != null) {
       var currentNode = this.head;
       while (currentNode != null) {
@@ -34,7 +34,7 @@ public class BidirectionalLinkedList {
     return null;
   }
 
-  public ArrayList<Node> getAll(int _value) {
+  public ArrayList<Node> getAllNodesByValue(int _value) {
     if (this.head != null) {
       ArrayList<Node> foundNodes = new ArrayList<>();
       var currentNode = this.head;
@@ -47,11 +47,11 @@ public class BidirectionalLinkedList {
     return new ArrayList<>();
   }
 
-  public boolean remove(int _value) {
-    var foundNode = get(_value);
+  public boolean removeNodeByValue(int _value) {
+    var foundNode = getNodeByValue(_value);
     if (foundNode != null) {
-      if (this.tail.value == this.head.value && this.head.value == _value && count() == 1) {
-        clear();
+      if (this.tail.value == this.head.value && this.head.value == _value && countNodes() == 1) {
+        clearList();
       } else if (this.tail.value == _value) {
         this.tail = this.tail.prev;
         this.tail.next = null;
@@ -67,18 +67,18 @@ public class BidirectionalLinkedList {
     return false;
   }
 
-  public void removeAll(int _value) {
-    while (get(_value) != null) {
-      remove(_value);
+  public void removeAllNodesByValue(int _value) {
+    while (getNodeByValue(_value) != null) {
+      removeNodeByValue(_value);
     }
   }
 
-  public void clear() {
+  public void clearList() {
     this.head = null;
     this.tail = null;
   }
 
-  public int count() {
+  public int countNodes() {
     var currentNode = this.head;
     var numberOfNodes = 0;
     while (currentNode != null) {
