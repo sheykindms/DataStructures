@@ -15,12 +15,12 @@ class Node<T> {
 
 public class OrderedList<T> {
   public Node<T> head, tail;
-  private boolean _ascending;
+  private boolean isAscending;
 
-  public OrderedList(boolean asc) {
+  public OrderedList(boolean isAscending) {
     head = null;
     tail = null;
-    _ascending = asc;
+    this.isAscending = isAscending;
   }
 
   /**
@@ -51,7 +51,7 @@ public class OrderedList<T> {
       return;
     }
     Node<T> currentNode = head;
-    if (_ascending) {
+    if (isAscending) {
       if (compare(head.value, newNode.value) > 0) {
         newNode.prev = null;
         newNode.next = head;
@@ -110,7 +110,7 @@ public class OrderedList<T> {
    */
   public Node<T> find(T val) {
     Node<T> currentNode = head;
-    if (_ascending) {
+    if (isAscending) {
       while (currentNode != null && compare(currentNode.value, val) <= 0) {
         if (currentNode.value.equals(val)) {
           return currentNode;
@@ -137,7 +137,7 @@ public class OrderedList<T> {
     var foundNode = find(val);
     if (foundNode != null) {
       if (this.head.value == this.tail.value && this.head.value.equals(val) && count() == 1) {
-        clear(_ascending);
+        clear(isAscending);
       } else if (this.tail.value == val) {
         this.tail = this.tail.prev;
         this.tail.next = null;
@@ -154,10 +154,10 @@ public class OrderedList<T> {
   /**
    * Clears the List
    *
-   * @param asc
+   * @param isAscending
    */
-  public void clear(boolean asc) {
-    _ascending = asc;
+  public void clear(boolean isAscending) {
+    this.isAscending = isAscending;
     head = null;
     tail = null;
   }

@@ -37,7 +37,8 @@ public class NativeCache<T> {
 
   public void put(String key, T value) {
     var index = seekSlot(key);
-    if (index == -1) {
+    boolean found = index != -1;
+    if (!found) {
       replaceWithNew(key, value);
     } else {
       slots[index] = key;
@@ -48,7 +49,8 @@ public class NativeCache<T> {
 
   public T get(String key) {
     var index = seekSlot(key);
-    if (index == -1 || slots[index] == null) {
+    boolean found = index != -1 && slots[index] != null;
+    if (!found) {
       return null;
     }
     hits[index]++;

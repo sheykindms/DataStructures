@@ -12,17 +12,17 @@ public class PostfixCalculator {
   public int calculate(String expression) {
     var numPattern = "[0-9]";
     var data = new Stack<String>();
-    for (var i = expression.length() - 1; i >= 0; i--) {
+    for (var currentIndexFromEnd = expression.length() - 1; currentIndexFromEnd >= 0; currentIndexFromEnd--) {
       // c - currentElement
       //Имя переменной, которое более чётко указывает на то, что мы имеем дело с текущим элементом в цикле
-      String currentElement = expression.charAt(i) + "";
+      String currentElement = expression.charAt(currentIndexFromEnd) + "";
       // num - digit
       //Теперь акцент выставлен на то, что это цифра(разряд) числа
       String digit = currentElement;
       if (currentElement.matches(numPattern)) {
-        while(i - 1 >= 0 && (expression.charAt(i - 1)+"").matches(numPattern)) {
-          String temp = expression.charAt(--i) + "";
-          digit = temp + digit;
+        while(currentIndexFromEnd - 1 >= 0 && (expression.charAt(currentIndexFromEnd - 1)+"").matches(numPattern)) {
+          String nextDigitToAppend = expression.charAt(--currentIndexFromEnd) + "";
+          digit = nextDigitToAppend + digit;
         }
         data.push(digit);
       }
@@ -39,11 +39,12 @@ public class PostfixCalculator {
 
     var operands = new Stack<Integer>();
     while (data.size() > 0) {
-      String c = data.pop();
-      if(c.equals("+") || c.equals("-") || c.equals("/") || c.equals("*")) {
-        operands.push(processResult(c.charAt(0), operands.pop(), operands.pop()));
+      String poppedElement = data.pop();
+      boolean isOperator = Operators.contains(poppedElement);
+      if(isOperator) {
+        operands.push(processResult(poppedElement.charAt(0), operands.pop(), operands.pop()));
       } else {
-        operands.push(Integer.valueOf(c));
+        operands.push(Integer.valueOf(poppedElement));
       }
     }
     return operands.pop();
@@ -64,5 +65,27 @@ public class PostfixCalculator {
       case '-' -> firstOperand - secondOperand;
       default -> 0;
     };
+  }
+  private enum Operators {
+    PLUS("+") , MINUS("-"), DIVIDE("/"), MULTIPLY("*");
+
+    private final String operand;
+
+    Operators(String operand) {
+      this.operand = operand;
+    }
+
+    public String getOperand() {
+      return operand;
+    }
+
+    public static boolean contains(String value) {
+      for(Operators o: Operators.values()) {
+        if(o.getOperand().equals(value)) {
+          return true;
+        }
+      }
+      return false;
+    }
   }
 }

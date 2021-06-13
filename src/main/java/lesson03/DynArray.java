@@ -17,10 +17,10 @@ public class DynArray<T> {
 
   public void makeArray(int new_capacity) {
     if (capacity != 0) {
-      new_capacity = new_capacity >= 16 ? new_capacity : 16;
-      T[] newArray = (T[]) Array.newInstance(this.clazz, new_capacity);
-      System.arraycopy(array, 0, newArray, 0, array.length);
-      array = newArray;
+      new_capacity = Math.max(new_capacity, 16);
+      T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, new_capacity);
+      System.arraycopy(array, 0, augmentedCapacityArray, 0, array.length);
+      array = augmentedCapacityArray;
     } else {
       array = (T[]) Array.newInstance(this.clazz, new_capacity);
     }
@@ -48,11 +48,11 @@ public class DynArray<T> {
       throw new ArrayIndexOutOfBoundsException();
     } else if (count == capacity) {
       capacity *= 2;
-      T[] newArray = (T[]) Array.newInstance(this.clazz, capacity);
-      System.arraycopy(array, 0, newArray, 0, index);
-      System.arraycopy(array, index, newArray, index + 1, count++ - index);
-      newArray[index] = itm;
-      array = newArray;
+      T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, capacity);
+      System.arraycopy(array, 0, augmentedCapacityArray, 0, index);
+      System.arraycopy(array, index, augmentedCapacityArray, index + 1, count++ - index);
+      augmentedCapacityArray[index] = itm;
+      array = augmentedCapacityArray;
     } else {
       System.arraycopy(array, index, array, index + 1, count++ - index);
       array[index] = itm;
@@ -67,10 +67,10 @@ public class DynArray<T> {
       if (capacity < 16) {
         capacity = 16;
       }
-      T[] newArray = (T[]) Array.newInstance(this.clazz, capacity);
-      System.arraycopy(array, 0, newArray, 0, index);
-      System.arraycopy(array, index + 1, newArray, index, count - index + 1);
-      array = newArray;
+      T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, capacity);
+      System.arraycopy(array, 0, augmentedCapacityArray, 0, index);
+      System.arraycopy(array, index + 1, augmentedCapacityArray, index, count - index + 1);
+      array = augmentedCapacityArray;
       count--;
     } else {
       System.arraycopy(array, 0, array, 0, index);

@@ -12,9 +12,6 @@ all - foundNodes
 //foundNodes - более вербозное и лаконичное имя для листа, содержащего список найденных нод в методе removeAll класса
 //LinkedList, LinkedList2, LinkedList2WithDummyNode
 
-balance - isBalanced
-//Имя метода класса ParenthesesBalancer для проверки сбалансированы ли скобки в переданной на вход строке
-
 c - currentChar
 //Имя переменной в цикле метода isBalanced, которое более чётко указывает на то, что мы работаем с текущим элементом итерации
 
@@ -46,3 +43,9 @@ salt - multiplier
 
 index - indexOfElementToReplace
 //Индекс, по которому мы будем заменять элемент на новый в классе NativeCache
+
+newArray - augmentedCapacityArray
+//новый массив увеличенной ёмкости, теперь имя переменной явно указывает на это. Класс DynArray
+
+с - poppedElement
+//название переменной, создаваемой в цикле для извлечения элемента из стека в классе PostfixCalculator
