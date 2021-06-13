@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OrderedListTest {
+class OrderedBidirectionalLinkedListTest {
 
-  OrderedList<Integer> listAsc;
-  OrderedList<Integer> listDesc;
+  OrderedBidirectionalLinkedList<Integer> listAsc;
+  OrderedBidirectionalLinkedList<Integer> listDesc;
 
   @BeforeEach
   void setUp() {
-    listAsc = new OrderedList<>(true);
-    listDesc = new OrderedList<>(false);
+    listAsc = new OrderedBidirectionalLinkedList<>(true);
+    listDesc = new OrderedBidirectionalLinkedList<>(false);
   }
 
   @Test
@@ -30,16 +30,16 @@ class OrderedListTest {
     listAsc.add(100);
     listAsc.add(10);
 
-    assertEquals(listAsc.head.next, listAsc.find(10));
-    assertEquals(listAsc.tail.prev, listAsc.find(10));
-    assertEquals(listAsc.head, listAsc.find(10).prev);
-    assertEquals(listAsc.tail, listAsc.find(10).next);
+    assertEquals(listAsc.head.next, listAsc.get(10));
+    assertEquals(listAsc.tail.prev, listAsc.get(10));
+    assertEquals(listAsc.head, listAsc.get(10).prev);
+    assertEquals(listAsc.tail, listAsc.get(10).next);
 
-    assertEquals(listAsc.head, listAsc.find(1));
-    assertEquals(listAsc.tail, listAsc.find(100));
+    assertEquals(listAsc.head, listAsc.get(1));
+    assertEquals(listAsc.tail, listAsc.get(100));
     assertEquals(3, listAsc.count());
-    assertNull(listAsc.find(1).prev);
-    assertNull(listAsc.find(100).next);
+    assertNull(listAsc.get(1).prev);
+    assertNull(listAsc.get(100).next);
   }
 
   @Test
@@ -48,16 +48,16 @@ class OrderedListTest {
     listDesc.add(100);
     listDesc.add(10);
 
-    assertEquals(listDesc.head.next, listDesc.find(10));
-    assertEquals(listDesc.tail.prev, listDesc.find(10));
-    assertEquals(listDesc.head, listDesc.find(10).prev);
-    assertEquals(listDesc.tail, listDesc.find(10).next);
+    assertEquals(listDesc.head.next, listDesc.get(10));
+    assertEquals(listDesc.tail.prev, listDesc.get(10));
+    assertEquals(listDesc.head, listDesc.get(10).prev);
+    assertEquals(listDesc.tail, listDesc.get(10).next);
 
-    assertEquals(listDesc.head, listDesc.find(100));
-    assertEquals(listDesc.tail, listDesc.find(1));
+    assertEquals(listDesc.head, listDesc.get(100));
+    assertEquals(listDesc.tail, listDesc.get(1));
     assertEquals(3, listDesc.count());
-    assertNull(listDesc.find(100).prev);
-    assertNull(listDesc.find(1).next);
+    assertNull(listDesc.get(100).prev);
+    assertNull(listDesc.get(1).next);
   }
 
   @Test
@@ -65,12 +65,12 @@ class OrderedListTest {
     listAsc.add(1);
     listAsc.add(100);
     listAsc.add(10);
-    listAsc.delete(1);
+    listAsc.remove(1);
     assertEquals(2, listAsc.count());
 
-    listAsc.delete(10);
-    listAsc.delete(100);
-    listAsc.delete(1000);
+    listAsc.remove(10);
+    listAsc.remove(100);
+    listAsc.remove(1000);
     assertEquals(0, listAsc.count());
 
   }
@@ -80,10 +80,10 @@ class OrderedListTest {
     listDesc.add(1);
     listDesc.add(100);
     listDesc.add(10);
-    listDesc.delete(1);
+    listDesc.remove(1);
     assertEquals(10, listDesc.tail.value);
 
-    listDesc.delete(100);
+    listDesc.remove(100);
     assertEquals(10, listDesc.head.value);
     assertEquals(1, listDesc.count());
   }

@@ -59,11 +59,7 @@ public class NativeCache<T> {
   }
 
   private void replaceWithNew(String key, T value) {
-    // min - minValue
-    // Имя для более явного указания, что в переменной хранится минимальное значение массива
     int minValue = hits[0];
-    // index - indexOfElementToReplace
-    // Индекс, по которому мы будем заменять элемент на новый
     var indexOfElementToReplace = 0;
     for (var i = 0; i < hits.length; i++) {
       if (minValue > hits[i]) {

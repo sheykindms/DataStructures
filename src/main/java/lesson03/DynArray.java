@@ -27,7 +27,7 @@ public class DynArray<T> {
     capacity = new_capacity;
   }
 
-  public T getItem(int index) {
+  public T get(int index) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException();
     }

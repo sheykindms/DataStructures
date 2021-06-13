@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PostfixCalculatorTest {
+class PostfixExpressionCalculatorTest {
 
-  PostfixCalculator pc = new PostfixCalculator();
+  PostfixExpressionCalculator pc = new PostfixExpressionCalculator();
 
   @Test
   void calculate() {

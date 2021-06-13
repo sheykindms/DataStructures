@@ -6,11 +6,11 @@ import java.util.*;
  * Self-Made implementation of bidirectional Linked List with "Dummy Node"
  * @param <E>
  */
-public class LinkedList2WithDummyNode<E> {
+public class BidirectionalLinkedListWithDummyNode<E> {
   private final DNode<E> dummyHead;
   private final DNode<E> dummyTail;
 
-  public LinkedList2WithDummyNode() {
+  public BidirectionalLinkedListWithDummyNode() {
     dummyHead = new DNode<>(null);
     dummyTail = new DNode<>(null);
     dummyHead.next = dummyTail;
@@ -33,7 +33,7 @@ public class LinkedList2WithDummyNode<E> {
    * @param _value to be found
    * @return DNode or null if object has not been found
    */
-  public DNode<E> find(E _value) {
+  public DNode<E> get(E _value) {
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
       if (currentNode.value.equals(_value)) {
@@ -49,7 +49,7 @@ public class LinkedList2WithDummyNode<E> {
    * @param _value to be founnd
    * @return instance of List containing founded objects or empty List otherwise
    */
-  public List<DNode<E>> findAll(E _value) {
+  public List<DNode<E>> getAll(E _value) {
     ArrayList<DNode<E>> foundNodes = new ArrayList<>();
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
@@ -84,7 +84,7 @@ public class LinkedList2WithDummyNode<E> {
    * @param _value to be found and deleted
    */
   public void removeAll(E _value) {
-    while (find(_value) != null) {
+    while (get(_value) != null) {
       remove(_value);
     }
   }

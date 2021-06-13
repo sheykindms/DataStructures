@@ -16,8 +16,6 @@ public class Stack<T> {
 
   public T pop() {
     if (stack.isEmpty()) return null;
-    // element - elementToRemove
-    // Имя переменной, референс которой мы получаем для удаления
     var elementToRemove = stack.get(0);
     stack.remove(0);
     return elementToRemove;

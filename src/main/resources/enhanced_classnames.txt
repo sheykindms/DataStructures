@@ -1,0 +1,39 @@
+
+3.1
+DequePalindromeSolver - DequePalindromeValidator
+//Всё-таки назначение класса - проверять палиндром, а не "решать" его.
+
+LinkedList2WithDummyNode - BidirectionalLinkedListWithDummyNode
+//Чёткое описание содержимого
+
+LinkedList2 - BidirectionalLinkedList
+//Возможно с таким названием, не появлялись бы вопросы на stackoverflow типа: "стандартный LinkedList односвязный или двусвязный?" :)
+
+LinkedList - UnidirectionalLinkedList
+//Чёткое указание на односвязность списка
+
+PostfixCalculator - PostfixExpressionCalculator
+//Считаем не постфиксы, а постфиксные выражения, улучшена описательность
+
+OrderedList - OrderedBidirectionalLinkedList
+//Чёткое указание на двусвязность и ордеринг элементов
+
+3.2
+united - unite
+//Имя метода должно быть глаголом. Класс PowerSet
+
+difference - diff
+//diff - Вполне валидное английское слово, глагол. Класс PowerSet
+
+intersection - intersect
+//Имя метода должно быть глаголом. Класс PowerSet
+
+find - get
+//Унифицированы методы получения одного элемента из структуры типа LinkedList, LinkedList2, OrderedList
+
+findAll - getAll
+//Унифицированы методы получения всех элементов из структуры типа LinkedList, LinkedList2, OrderedList
+
+delete - remove
+//Имя метода унифицировано по аналогии с другими методами имплементации листа. Класс OrderedList
+

@@ -30,22 +30,22 @@ class DynArrayTest {
   @Test
   void getItemWhenOneElement() {
     fillDynArrayWithOneElement();
-    assertEquals(100, array.getItem(0));
+    assertEquals(100, array.get(0));
     array.remove(array.count - 1);
     assertEquals(0, array.count);
     assertEquals(16, array.capacity);
-    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getItem(16));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.get(16));
   }
 
   @Test
   void getItemWhenManyElements() {
     fillDynArrayWithManyElements();
-    assertEquals(10, array.getItem(0));
-    assertEquals(20, array.getItem(1));
-    assertEquals(30, array.getItem(2));
-    assertEquals(30, array.getItem(3));
-    assertEquals(40, array.getItem(4));
-    assertEquals(50, array.getItem(5));
+    assertEquals(10, array.get(0));
+    assertEquals(20, array.get(1));
+    assertEquals(30, array.get(2));
+    assertEquals(30, array.get(3));
+    assertEquals(40, array.get(4));
+    assertEquals(50, array.get(5));
   }
 
   @Test
@@ -66,9 +66,9 @@ class DynArrayTest {
   @Test
   void insertWhenEmptyArray() {
     array.insert(2, 0);
-    assertEquals(2, array.getItem(0));
+    assertEquals(2, array.get(0));
     array.insert(2, 1);
-    assertEquals(2, array.getItem(1));
+    assertEquals(2, array.get(1));
     assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.insert(3, 3));
   }
 
@@ -146,9 +146,9 @@ class DynArrayTest {
     array.insert(2, 0);
     array.insert(3, 3);
     assertEquals(4, array.count);
-    assertEquals(0, array.getItem(1));
-    assertEquals(1, array.getItem(2));
-    assertEquals(3, array.getItem(3));
+    assertEquals(0, array.get(1));
+    assertEquals(1, array.get(2));
+    assertEquals(3, array.get(3));
     array.remove(3);
     array.remove(2);
     array.remove(1);
@@ -217,7 +217,7 @@ class DynArrayTest {
     while (array.count != 0) {
       array.remove(array.count - 1);
     }
-    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getItem(0));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.get(0));
     assertEquals(16, array.capacity);
   }
 

@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinkedListMergerTest {
+class UnidirectionalLinkedListMergerTest {
 
-  private LinkedList firstList;
-  private LinkedList secondList;
+  private UnidirectionalLinkedList firstList;
+  private UnidirectionalLinkedList secondList;
 
   @BeforeEach
   void setup() {
-    firstList = new LinkedList();
-    secondList = new LinkedList();
+    firstList = new UnidirectionalLinkedList();
+    secondList = new UnidirectionalLinkedList();
   }
 
   private void fillTheLists() {
@@ -51,7 +51,7 @@ class LinkedListMergerTest {
   @Test
   void sumOfLists() {
     fillTheLists();
-    LinkedList result = LinkedListMerger.sumOfLists(secondList, firstList);
+    UnidirectionalLinkedList result = LinkedListMerger.sumOfLists(secondList, firstList);
     assertEquals(6, result.head.value);
     assertEquals(12, result.tail.value);
   }

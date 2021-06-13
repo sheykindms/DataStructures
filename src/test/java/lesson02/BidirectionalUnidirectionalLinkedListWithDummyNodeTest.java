@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinkedList2WithDummyNodeTest {
+class BidirectionalUnidirectionalLinkedListWithDummyNodeTest {
 
-  private LinkedList2WithDummyNode<Integer> list;
+  private BidirectionalLinkedListWithDummyNode<Integer> list;
 
   @BeforeEach
   void setUp() {
-    list = new LinkedList2WithDummyNode<>();
+    list = new BidirectionalLinkedListWithDummyNode<>();
   }
 
   private void fillWithOneElement() {
@@ -30,29 +30,29 @@ class LinkedList2WithDummyNodeTest {
   @Test
   void findWhenOneElementInList() {
     fillWithOneElement();
-    assertEquals(10, list.find(10).value);
+    assertEquals(10, list.get(10).value);
   }
 
   @Test
   void findWhenManyElementsInList() {
     fillWithManyElements();
-    assertEquals(10, list.find(10).value);
-    assertEquals(30, list.find(30).value);
-    assertEquals(50, list.find(50).value);
+    assertEquals(10, list.get(10).value);
+    assertEquals(30, list.get(30).value);
+    assertEquals(50, list.get(50).value);
   }
 
   @Test
   void findAllWhenOneElementInList() {
     fillWithOneElement();
-    assertEquals(10, list.findAll(10).get(0).value);
-    assertEquals(1, list.findAll(10).size());
+    assertEquals(10, list.getAll(10).get(0).value);
+    assertEquals(1, list.getAll(10).size());
   }
 
   @Test
   void findAllWhenManyElementsInList() {
     fillWithManyElements();
-    assertEquals(30, list.findAll(30).get(0).value);
-    assertEquals(2, list.findAll(30).size());
+    assertEquals(30, list.getAll(30).get(0).value);
+    assertEquals(2, list.getAll(30).size());
   }
 
   @Test
@@ -73,7 +73,7 @@ class LinkedList2WithDummyNodeTest {
   void removeAllWhenManyElements() {
     fillWithManyElements();
     list.removeAll(30);
-    assertNull(list.find(30));
+    assertNull(list.get(30));
     assertEquals(4, list.count());
   }
 
@@ -81,8 +81,8 @@ class LinkedList2WithDummyNodeTest {
   void clearWhenManyElements() {
     fillWithManyElements();
     list.clear();
-    assertNull(list.find(10));
-    assertNull(list.find(50));
+    assertNull(list.get(10));
+    assertNull(list.get(50));
     assertEquals(0, list.count());
   }
 
@@ -102,9 +102,9 @@ class LinkedList2WithDummyNodeTest {
     list.insertAfter(node2, node3);
 
     assertEquals(3, list.count());
-    assertEquals(node1, list.find(node1.value));
-    assertEquals(node2, list.find(node2.value));
-    assertEquals(node3, list.find(node3.value));
+    assertEquals(node1, list.get(node1.value));
+    assertEquals(node2, list.get(node2.value));
+    assertEquals(node3, list.get(node3.value));
 
     assertEquals(node1.next, node2);
     assertEquals(node2.next, node3);

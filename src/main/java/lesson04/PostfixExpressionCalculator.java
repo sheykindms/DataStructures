@@ -1,6 +1,6 @@
 package lesson04;
 
-public class PostfixCalculator {
+public class PostfixExpressionCalculator {
 
   /**
    * Calculates result of the postfix expression using two Stacks
@@ -13,11 +13,7 @@ public class PostfixCalculator {
     var numPattern = "[0-9]";
     var data = new Stack<String>();
     for (var currentIndexFromEnd = expression.length() - 1; currentIndexFromEnd >= 0; currentIndexFromEnd--) {
-      // c - currentElement
-      //Имя переменной, которое более чётко указывает на то, что мы имеем дело с текущим элементом в цикле
       String currentElement = expression.charAt(currentIndexFromEnd) + "";
-      // num - digit
-      //Теперь акцент выставлен на то, что это цифра(разряд) числа
       String digit = currentElement;
       if (currentElement.matches(numPattern)) {
         while(currentIndexFromEnd - 1 >= 0 && (expression.charAt(currentIndexFromEnd - 1) + "").matches(numPattern)) {

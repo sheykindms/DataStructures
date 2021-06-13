@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinkedList2Test {
+class BidirectionalUnidirectionalLinkedListTest {
 
-  private LinkedList2 list;
+  private BidirectionalLinkedList list;
 
   @BeforeEach
   void setUp() {
-    list = new LinkedList2();
+    list = new BidirectionalLinkedList();
   }
 
   private void fillWithOneElement() {
@@ -29,8 +29,8 @@ class LinkedList2Test {
 
   @Test
   void findWhenEmptyList() {
-    assertNull(list.find(1729));
-    assertNull(list.find(2));
+    assertNull(list.get(1729));
+    assertNull(list.get(2));
     assertNull(list.head);
     assertNull(list.tail);
   }
@@ -38,24 +38,24 @@ class LinkedList2Test {
   @Test
   void findWhenOneElementList() {
     fillWithOneElement();
-    assertEquals(1729, list.find(1729).value);
+    assertEquals(1729, list.get(1729).value);
     assertEquals(list.head, list.tail);
-    assertNull(list.find(1729).next);
-    assertNull(list.find(1729).prev);
+    assertNull(list.get(1729).next);
+    assertNull(list.get(1729).prev);
   }
 
   @Test
   void findWhenManyElements() {
     fillWithManyElements();
-    assertEquals(2, list.find(2).value);
-    assertEquals(17, list.find(17).value);
-    assertEquals(41, list.find(41).value);
+    assertEquals(2, list.get(2).value);
+    assertEquals(17, list.get(17).value);
+    assertEquals(41, list.get(41).value);
   }
 
   @Test
   void findAllWhenListEmpty() {
-    assertEquals(0, list.findAll(1729).size());
-    assertEquals(0, list.findAll(17).size());
+    assertEquals(0, list.getAll(1729).size());
+    assertEquals(0, list.getAll(17).size());
     assertNull(list.head);
     assertNull(list.tail);
   }
@@ -63,7 +63,7 @@ class LinkedList2Test {
   @Test
   void findAllWhenOneElement() {
     fillWithOneElement();
-    assertEquals(1, list.findAll(1729).size());
+    assertEquals(1, list.getAll(1729).size());
     assertEquals(list.head, list.tail);
     assertNull(list.head.prev);
     assertNull(list.head.next);
@@ -72,9 +72,9 @@ class LinkedList2Test {
   @Test
   void findAllWhenManyElements() {
     fillWithManyElements();
-    assertEquals(1, list.findAll(2).size());
-    assertEquals(2, list.findAll(17).size());
-    assertEquals(17, list.findAll(17).get(0).value);
+    assertEquals(1, list.getAll(2).size());
+    assertEquals(2, list.getAll(17).size());
+    assertEquals(17, list.getAll(17).get(0).value);
   }
 
   @Test
@@ -153,7 +153,7 @@ class LinkedList2Test {
   void removeAllWhenManyElements() {
     fillWithManyElements();
     list.removeAll(17);
-    assertNull(list.find(17));
+    assertNull(list.get(17));
     assertEquals(4, list.count());
   }
 
@@ -222,7 +222,7 @@ class LinkedList2Test {
   void insertAfterWhenOneElement() {
     fillWithOneElement();
     Node nodeToInsert = new Node(200);
-    list.insertAfter(list.find(1729), nodeToInsert);
+    list.insertAfter(list.get(1729), nodeToInsert);
     assertEquals(2, list.count());
     assertEquals(list.head.next, list.tail);
     assertEquals(list.tail.prev, list.head);
@@ -244,7 +244,7 @@ class LinkedList2Test {
   @Test
   void insertAfterAsLastWhenManyElements() {
     fillWithManyElements();
-    list.insertAfter(list.find(41), new Node(200));
+    list.insertAfter(list.get(41), new Node(200));
     assertEquals(7, list.count());
     assertEquals(200, list.tail.value);
     assertEquals(41, list.tail.prev.value);
@@ -259,7 +259,7 @@ class LinkedList2Test {
     Node two = new Node(2);
     Node three = new Node(3);
     Node four = new Node(4);
-    list.insertAfter(list.find(1729), one);
+    list.insertAfter(list.get(1729), one);
     list.insertAfter(null, two);
     list.insertAfter(one, three);
     list.insertAfter(one, four);
@@ -270,16 +270,16 @@ class LinkedList2Test {
     assertEquals(two, list.head);
     assertNull(two.prev);
     assertEquals(four, three.prev);
-    assertEquals(list.find(1729), two.next);
-    assertEquals(one, list.find(1729).next);
+    assertEquals(list.get(1729), two.next);
+    assertEquals(one, list.get(1729).next);
     assertEquals(four, one.next);
     assertEquals(one, four.prev);
 
     assertTrue(list.remove(two.value));
-    assertEquals(list.find(1729), list.head);
+    assertEquals(list.get(1729), list.head);
     assertTrue(list.remove(three.value));
     assertEquals(four, list.tail);
     assertNull(four.next);
-    assertNull(list.find(1729).prev);
+    assertNull(list.get(1729).prev);
   }
 }

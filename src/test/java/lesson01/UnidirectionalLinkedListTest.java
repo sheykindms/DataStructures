@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinkedListTest {
+class UnidirectionalLinkedListTest {
 
-  LinkedList list;
+  UnidirectionalLinkedList list;
 
   @BeforeEach
   void setUp() {
-    list = new LinkedList();
+    list = new UnidirectionalLinkedList();
   }
 
   private void fillListWithOneElement() {
@@ -39,8 +39,8 @@ class LinkedListTest {
   void removeFromListWithOneNodeIfNotExists() {
     fillListWithOneElement();
     assertFalse(list.remove(1));
-    assertEquals(list.head, list.find(1729));
-    assertEquals(list.tail, list.find(1729));
+    assertEquals(list.head, list.get(1729));
+    assertEquals(list.tail, list.get(1729));
   }
 
   @Test
@@ -49,15 +49,15 @@ class LinkedListTest {
     list.remove(2);
     list.remove(41);
     list.remove(17);
-    assertEquals(list.find(11), list.head);
-    assertEquals(list.find(29), list.tail);
+    assertEquals(list.get(11), list.head);
+    assertEquals(list.get(29), list.tail);
   }
 
   @Test
   void removeAllFromListWithOneNode() {
     fillListWithOneElement();
     list.removeAll(1729);
-    assertNull(list.find(1729));
+    assertNull(list.get(1729));
     assertNull(list.head);
     assertNull(list.tail);
   }
@@ -67,9 +67,9 @@ class LinkedListTest {
     fillListWithManyElements();
     list.removeAll(17);
     list.removeAll(41);
-    assertEquals(list.find(2), list.head);
-    assertEquals(list.find(29), list.tail);
-    assertNull(list.find(17));
+    assertEquals(list.get(2), list.head);
+    assertEquals(list.get(29), list.tail);
+    assertNull(list.get(17));
   }
 
   @Test
@@ -89,8 +89,8 @@ class LinkedListTest {
   void removeFromListIfElementNotExists() {
     fillListWithManyElements();
     list.remove(67);
-    assertEquals(list.find(2), list.head);
-    assertEquals(list.find(41), list.tail);
+    assertEquals(list.get(2), list.head);
+    assertEquals(list.get(41), list.tail);
     assertEquals(6, list.count());
   }
 
@@ -98,8 +98,8 @@ class LinkedListTest {
   void removeAllFromListIfElementNotExists() {
     fillListWithManyElements();
     list.removeAll(67);
-    assertEquals(list.find(2), list.head);
-    assertEquals(list.find(41), list.tail);
+    assertEquals(list.get(2), list.head);
+    assertEquals(list.get(41), list.tail);
     assertEquals(6, list.count());
   }
 
@@ -108,8 +108,8 @@ class LinkedListTest {
     fillListWithManyElements();
     list.addInTail(new Node(2));
     list.removeAll(2);
-    assertEquals(list.find(11), list.head);
-    assertEquals(list.find(41), list.tail);
+    assertEquals(list.get(11), list.head);
+    assertEquals(list.get(41), list.tail);
   }
 
   @Test
@@ -166,8 +166,8 @@ class LinkedListTest {
     Node toInsertAfter = new Node(29);
     list.addInTail(toInsertInTail);
     list.insertAfter(toInsertInTail, toInsertAfter);
-    assertEquals(list.find(1729), list.head);
-    assertEquals(list.find(29), list.tail);
+    assertEquals(list.get(1729), list.head);
+    assertEquals(list.get(29), list.tail);
     assertEquals(3, list.count());
   }
 
@@ -175,7 +175,7 @@ class LinkedListTest {
   void insertAfterLast() {
     fillListWithManyElements();
     Node toInsert = new Node(59);
-    Node after = list.find(41);
+    Node after = list.get(41);
     list.insertAfter(after, toInsert);
     assertEquals(toInsert, list.tail);
   }
@@ -191,9 +191,9 @@ class LinkedListTest {
   @Test
   void findAll() {
     fillListWithManyElements();
-    assertEquals(2, list.findAll(17).size());
-    assertEquals(1, list.findAll(41).size());
-    assertEquals(0, list.findAll(67).size());
+    assertEquals(2, list.getAll(17).size());
+    assertEquals(1, list.getAll(41).size());
+    assertEquals(0, list.getAll(67).size());
   }
 
   @Test
@@ -203,14 +203,14 @@ class LinkedListTest {
     Node two = new Node(2);
     Node three = new Node(3);
     Node four = new Node(4);
-    list.insertAfter(list.find(1729), one);
-    assertEquals(list.find(1729), list.head);
+    list.insertAfter(list.get(1729), one);
+    assertEquals(list.get(1729), list.head);
     assertEquals(one, list.tail);
     list.insertAfter(one, two);
     assertEquals(two, list.tail);
     list.insertAfter(one, three);
     list.insertAfter(two, four);
-    assertEquals(list.find(1729), list.head);
+    assertEquals(list.get(1729), list.head);
     assertEquals(four, list.tail);
     assertEquals(5, list.count());
   }

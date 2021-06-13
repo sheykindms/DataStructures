@@ -14,9 +14,6 @@ public class ParenthesesBalancer {
 
     Stack<Character> stack = new Stack<>();
     for (var i = 0; i < s.length(); i++) {
-      // c - currentChar
-      // Имя переменной в цикле метода, которое более чётко указывает на то, что мы работаем с
-      // текущим элементом итерации
       var currentChar = s.charAt(i);
       if (currentChar == '(') {
         stack.push(currentChar);

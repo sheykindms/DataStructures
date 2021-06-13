@@ -2,11 +2,11 @@ package lesson02;
 
 import java.util.*;
 
-public class LinkedList2 {
+public class BidirectionalLinkedList {
   public Node head;
   public Node tail;
 
-  public LinkedList2() {
+  public BidirectionalLinkedList() {
     head = null;
     tail = null;
   }
@@ -23,7 +23,7 @@ public class LinkedList2 {
     this.tail = _item;
   }
 
-  public Node find(int _value) {
+  public Node get(int _value) {
     if (this.head != null) {
       var currentNode = this.head;
       while (currentNode != null) {
@@ -34,7 +34,7 @@ public class LinkedList2 {
     return null;
   }
 
-  public ArrayList<Node> findAll(int _value) {
+  public ArrayList<Node> getAll(int _value) {
     if (this.head != null) {
       ArrayList<Node> foundNodes = new ArrayList<>();
       var currentNode = this.head;
@@ -48,7 +48,7 @@ public class LinkedList2 {
   }
 
   public boolean remove(int _value) {
-    var foundNode = find(_value);
+    var foundNode = get(_value);
     if (foundNode != null) {
       if (this.tail.value == this.head.value && this.head.value == _value && count() == 1) {
         clear();
@@ -68,7 +68,7 @@ public class LinkedList2 {
   }
 
   public void removeAll(int _value) {
-    while (find(_value) != null) {
+    while (get(_value) != null) {
       remove(_value);
     }
   }

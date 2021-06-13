@@ -13,11 +13,11 @@ class Node<T> {
   }
 }
 
-public class OrderedList<T> {
+public class OrderedBidirectionalLinkedList<T> {
   public Node<T> head, tail;
   private boolean isAscending;
 
-  public OrderedList(boolean isAscending) {
+  public OrderedBidirectionalLinkedList(boolean isAscending) {
     head = null;
     tail = null;
     this.isAscending = isAscending;
@@ -108,7 +108,7 @@ public class OrderedList<T> {
    * @param value to find
    * @return Node object or null if nothing was found
    */
-  public Node<T> find(T value) {
+  public Node<T> get(T value) {
     Node<T> currentNode = head;
     if (isAscending) {
       while (currentNode != null && compare(currentNode.value, value) <= 0) {
@@ -133,8 +133,8 @@ public class OrderedList<T> {
    *
    * @param value to be found and deleted
    */
-  public void delete(T value) {
-    var foundNode = find(value);
+  public void remove(T value) {
+    var foundNode = get(value);
     if (foundNode != null) {
       if (this.head.value == this.tail.value && this.head.value.equals(value) && count() == 1) {
         clear(isAscending);
