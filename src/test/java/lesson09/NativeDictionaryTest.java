@@ -16,7 +16,6 @@ class NativeDictionaryTest {
     int size = new Random().nextInt(95);
     int min = 5;
     dict = new NativeDictionary<>(size + min, Integer.class);
-    System.out.println(size);
   }
 
   @Test
