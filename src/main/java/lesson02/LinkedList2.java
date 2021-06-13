@@ -25,7 +25,7 @@ public class LinkedList2 {
 
   public Node find(int _value) {
     if (this.head != null) {
-      Node currentNode = this.head;
+      var currentNode = this.head;
       while (currentNode != null) {
         if (currentNode.value == _value) return currentNode;
         currentNode = currentNode.next;
@@ -36,19 +36,19 @@ public class LinkedList2 {
 
   public ArrayList<Node> findAll(int _value) {
     if (this.head != null) {
-      ArrayList<Node> nodes = new ArrayList<>();
+      ArrayList<Node> foundNodes = new ArrayList<>();
       var currentNode = this.head;
       while (currentNode != null) {
-        if (currentNode.value == _value) nodes.add(currentNode);
+        if (currentNode.value == _value) foundNodes.add(currentNode);
         currentNode = currentNode.next;
       }
-      return nodes;
+      return foundNodes;
     }
     return new ArrayList<>();
   }
 
   public boolean remove(int _value) {
-    Node foundNode = find(_value);
+    var foundNode = find(_value);
     if (foundNode != null) {
       if (this.tail.value == this.head.value && this.head.value == _value && count() == 1) {
         clear();

@@ -29,37 +29,37 @@ public class PowerSet {
     return set.remove(value);
   }
 
-  public PowerSet intersection(PowerSet set2) {
-    var powerSet = new PowerSet();
+  public PowerSet intersection(PowerSet secondSet) {
+    var intersectedSet = new PowerSet();
     for (String s : set) {
-      if (set2.get(s)) {
-        powerSet.put(s);
+      if (secondSet.get(s)) {
+        intersectedSet.put(s);
       }
     }
-    return powerSet;
+    return intersectedSet;
   }
 
-  public PowerSet union(PowerSet set2) {
-    var powerSet = new PowerSet();
+  public PowerSet union(PowerSet secondSet) {
+    var unitedSet = new PowerSet();
     for (String s : set) {
-      powerSet.put(s);
+      unitedSet.put(s);
     }
-    for (var i = 0; i < set2.size(); i++) {
-      if (!powerSet.get(set2.getElement(i))) {
-        powerSet.put(set2.getElement(i));
+    for (var i = 0; i < secondSet.size(); i++) {
+      if (!unitedSet.get(secondSet.getElement(i))) {
+        unitedSet.put(secondSet.getElement(i));
       }
     }
-    return powerSet;
+    return unitedSet;
   }
 
-  public PowerSet difference(PowerSet set2) {
-    var powerSet = new PowerSet();
+  public PowerSet difference(PowerSet secondSet) {
+    var diffSet = new PowerSet();
     for (String s : set) {
-      if (!set2.get(s)) {
-        powerSet.put(s);
+      if (!secondSet.get(s)) {
+        diffSet.put(s);
       }
     }
-    return powerSet;
+    return diffSet;
   }
 
   public boolean isSubset(PowerSet set2) {

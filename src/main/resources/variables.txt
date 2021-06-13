@@ -1,6 +1,3 @@
-Имена переменных полей и сигнатур методов не изменялись для сохранения совместимости с валидатором сайта, хотя стоило бы
-избавиться от нижних подчёркиваний и использовать camelCase вместо snake_case
-
 counter - numberOfNodes
 //Подсчёт числа найденных нод в LinkedList в методе count и ещё нескольких классах с аналогичной логикой
 
@@ -29,10 +26,6 @@ num - digit
 DequePalindromeSolver - DequePalindromeValidator
 //Всё-таки класс предназначен для проверки строки, является она палиндромом или нет, поэтому "validate" - более подходящее слово
 
-min - minValue
-//Имя переменной метода replaceWithNew класса NativeCache для более явного указания, что в переменной хранится
-//минимальное значение массива
-
 code - currentCharAsciiCode
 //Абстрактное "code" в теле методов hash1 и hash2 класса BloomFilter изменено на более описательное currentCharAsciiCode
 //для методов hash1 и hash2 класса BloomFilter
@@ -40,9 +33,6 @@ code - currentCharAsciiCode
 salt - multiplier
 //Всё-таки salt выполняет в хэшировании несколько иную функцию. Multiplier - более подходящее значение переменной для
 //методов hash1 и hash2 класса BloomFilter
-
-index - indexOfElementToReplace
-//Индекс, по которому мы будем заменять элемент на новый в классе NativeCache
 
 newArray - augmentedCapacityArray
 //новый массив увеличенной ёмкости, теперь имя переменной явно указывает на это. Класс DynArray

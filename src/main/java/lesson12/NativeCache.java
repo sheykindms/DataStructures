@@ -17,44 +17,45 @@ public class NativeCache<T> {
   }
 
   public int hashFun(String key) {
+    final var multiplier = 31;
     if (key.isEmpty()) {
       return 0;
     }
     var hash = 1;
     for (char c : key.toCharArray()) {
-      hash = hash * 31 + c;
+      hash = hash * multiplier + c;
     }
     return Math.abs(hash) % size;
   }
 
   public boolean isKey(String key) {
-    var index = seekSlot(key);
-    if (index == -1) {
+    var foundIndex = seekSlot(key);
+    if (foundIndex == -1) {
       return false;
     }
-    return slots[index] != null;
+    return slots[foundIndex] != null;
   }
 
   public void put(String key, T value) {
-    var index = seekSlot(key);
-    boolean found = index != -1;
+    var foundIndex = seekSlot(key);
+    boolean found = foundIndex != -1;
     if (!found) {
       replaceWithNew(key, value);
     } else {
-      slots[index] = key;
-      values[index] = value;
-      hits[index]++;
+      slots[foundIndex] = key;
+      values[foundIndex] = value;
+      hits[foundIndex]++;
     }
   }
 
   public T get(String key) {
-    var index = seekSlot(key);
-    boolean found = index != -1 && slots[index] != null;
+    var foundIndex = seekSlot(key);
+    boolean found = foundIndex != -1 && slots[foundIndex] != null;
     if (!found) {
       return null;
     }
-    hits[index]++;
-    return values[index];
+    hits[foundIndex]++;
+    return values[foundIndex];
   }
 
   private void replaceWithNew(String key, T value) {
@@ -76,22 +77,22 @@ public class NativeCache<T> {
   }
 
   private int seekSlot(String value) {
-    var index = hashFun(value);
+    var expectedIndex = hashFun(value);
     var step = 1;
     var iterations = 0;
-    while (slots[index] != null) {
-      if (slots[index].equals(value)) {
-        return index;
+    while (slots[expectedIndex] != null) {
+      if (slots[expectedIndex].equals(value)) {
+        return expectedIndex;
       }
-      index += step;
-      if (index >= size && iterations < step) {
-        index = iterations;
+      expectedIndex += step;
+      if (expectedIndex >= size && iterations < step) {
+        expectedIndex = iterations;
         iterations++;
       }
-      if (index >= size) {
+      if (expectedIndex >= size) {
         return -1;
       }
     }
-    return index;
+    return expectedIndex;
   }
 }

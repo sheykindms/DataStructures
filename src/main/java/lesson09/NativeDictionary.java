@@ -26,28 +26,31 @@ class NativeDictionary<T> {
   }
 
   public boolean isKey(String key) {
-    var index = seekSlot(key);
-    if (index == -1) {
+    var foundIndex = seekSlot(key);
+    boolean found = foundIndex != -1;
+    if (!found) {
       return false;
     }
-    return slots[index] != null;
+    return slots[foundIndex] != null;
   }
 
   public void put(String key, T value) {
-    var index = seekSlot(key);
-    if (index == -1) {
+    var foundIndex = seekSlot(key);
+    boolean found = foundIndex != -1;
+    if (!found) {
       return;
     }
-    slots[index] = key;
-    values[index] = value;
+    slots[foundIndex] = key;
+    values[foundIndex] = value;
   }
 
   public T get(String key) {
-    var index = seekSlot(key);
-    if (index == -1 || slots[index] == null) {
+    var foundIndex = seekSlot(key);
+    boolean found = foundIndex != -1 && slots[foundIndex] != null;
+    if (!found) {
       return null;
     }
-    return values[index];
+    return values[foundIndex];
   }
 
   private int seekSlot(String value) {

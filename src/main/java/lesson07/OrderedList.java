@@ -105,21 +105,21 @@ public class OrderedList<T> {
   /**
    * Finds an element in the List by its value
    *
-   * @param val to find
+   * @param value to find
    * @return Node object or null if nothing was found
    */
-  public Node<T> find(T val) {
+  public Node<T> find(T value) {
     Node<T> currentNode = head;
     if (isAscending) {
-      while (currentNode != null && compare(currentNode.value, val) <= 0) {
-        if (currentNode.value.equals(val)) {
+      while (currentNode != null && compare(currentNode.value, value) <= 0) {
+        if (currentNode.value.equals(value)) {
           return currentNode;
         }
         currentNode = currentNode.next;
       }
     } else {
-      while (currentNode != null && compare(currentNode.value, val) >= 0) {
-        if (currentNode.value.equals(val)) {
+      while (currentNode != null && compare(currentNode.value, value) >= 0) {
+        if (currentNode.value.equals(value)) {
           return currentNode;
         }
         currentNode = currentNode.next;
@@ -131,17 +131,17 @@ public class OrderedList<T> {
   /**
    * Deletes fist occurrence of DNone with given value
    *
-   * @param val to be found and deleted
+   * @param value to be found and deleted
    */
-  public void delete(T val) {
-    var foundNode = find(val);
+  public void delete(T value) {
+    var foundNode = find(value);
     if (foundNode != null) {
-      if (this.head.value == this.tail.value && this.head.value.equals(val) && count() == 1) {
+      if (this.head.value == this.tail.value && this.head.value.equals(value) && count() == 1) {
         clear(isAscending);
-      } else if (this.tail.value == val) {
+      } else if (this.tail.value == value) {
         this.tail = this.tail.prev;
         this.tail.next = null;
-      } else if (this.head.value == val) {
+      } else if (this.head.value == value) {
         this.head = this.head.next;
         this.head.prev = null;
       } else {

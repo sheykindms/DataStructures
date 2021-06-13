@@ -39,22 +39,22 @@ public class HashTable {
    * @return index in array or -1
    */
   public int seekSlot(String value) {
-    int index = hashFun(value);
+    int foundIndex = hashFun(value);
     var iterations = 0;
-    while (slots[index] != null) {
-      if (slots[index].equals(value)) {
-        return index;
+    while (slots[foundIndex] != null) {
+      if (slots[foundIndex].equals(value)) {
+        return foundIndex;
       }
-      index += step;
-      if (index >= size && iterations < step) {
-        index = iterations;
+      foundIndex += step;
+      if (foundIndex >= size && iterations < step) {
+        foundIndex = iterations;
         iterations++;
       }
-      if (index >= size && iterations >= step) {
+      if (foundIndex >= size && iterations >= step) {
         return -1;
       }
     }
-    return index;
+    return foundIndex;
   }
 
   /**
@@ -64,11 +64,12 @@ public class HashTable {
    * @return index of element in array or -1
    */
   public int put(String value) {
-    int index = seekSlot(value);
-    if (index != -1) {
-      slots[index] = value;
+    int foundIndex = seekSlot(value);
+    boolean found = foundIndex != -1;
+    if (found) {
+      slots[foundIndex] = value;
     }
-    return index;
+    return foundIndex;
   }
 
   /**
@@ -78,10 +79,11 @@ public class HashTable {
    * @return index of element or -1
    */
   public int find(String value) {
-    int index = seekSlot(value);
-    if (index == -1 || slots[index] == null) {
+    int foundIndex = seekSlot(value);
+    boolean found = foundIndex != -1 && slots[foundIndex] != null;
+    if (!found) {
       return -1;
     }
-    return index;
+    return foundIndex;
   }
 }

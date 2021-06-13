@@ -20,7 +20,7 @@ public class PostfixCalculator {
       //Теперь акцент выставлен на то, что это цифра(разряд) числа
       String digit = currentElement;
       if (currentElement.matches(numPattern)) {
-        while(currentIndexFromEnd - 1 >= 0 && (expression.charAt(currentIndexFromEnd - 1)+"").matches(numPattern)) {
+        while(currentIndexFromEnd - 1 >= 0 && (expression.charAt(currentIndexFromEnd - 1) + "").matches(numPattern)) {
           String nextDigitToAppend = expression.charAt(--currentIndexFromEnd) + "";
           digit = nextDigitToAppend + digit;
         }
@@ -29,10 +29,7 @@ public class PostfixCalculator {
       else if(currentElement.equals("+") || currentElement.equals("-") || currentElement.equals("/") || currentElement.equals("*")) {
         data.push(currentElement);
       }
-      else if (currentElement.equals(" ")) {
-        continue;
-      }
-      else {
+      else if (!currentElement.equals(" ")) {
         throw new IllegalArgumentException("Expression is invalid");
       }
     }
