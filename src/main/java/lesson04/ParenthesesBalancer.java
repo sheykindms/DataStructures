@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class ParenthesesBalancer {
 
-  public boolean balance(String s) {
+  public boolean isBalanced(String s) {
     if (!Objects.nonNull(s)
         || !s.contains(")")
         || !s.contains("(")
@@ -14,10 +14,10 @@ public class ParenthesesBalancer {
 
     Stack<Character> stack = new Stack<>();
     for (var i = 0; i < s.length(); i++) {
-      var c = s.charAt(i);
-      if (c == '(') {
-        stack.push(c);
-      } else if (c == ')') {
+      var currentChar = s.charAt(i);
+      if (currentChar == '(') {
+        stack.push(currentChar);
+      } else if (currentChar == ')') {
         stack.pop();
       }
     }

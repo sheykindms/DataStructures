@@ -22,18 +22,18 @@ public class Deque<T> {
     if (deque.isEmpty()) {
       return null;
     }
-    T element = deque.get(0);
-    deque.remove(element);
-    return element;
+    var elementToRemove = deque.get(0);
+    deque.remove(elementToRemove);
+    return elementToRemove;
   }
 
   public T removeTail() {
     if (deque.isEmpty()) {
       return null;
     }
-    T element = deque.get(deque.size() - 1);
-    deque.remove(element);
-    return element;
+    var elementToRemove = deque.get(deque.size() - 1);
+    deque.remove(elementToRemove);
+    return elementToRemove;
   }
 
   public int size() {

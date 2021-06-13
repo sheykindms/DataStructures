@@ -44,7 +44,7 @@ public class PowerSet {
     for (String s : set) {
       powerSet.put(s);
     }
-    for (int i = 0; i < set2.size(); i++) {
+    for (var i = 0; i < set2.size(); i++) {
       if (!powerSet.get(set2.getElement(i))) {
         powerSet.put(set2.getElement(i));
       }
@@ -63,7 +63,7 @@ public class PowerSet {
   }
 
   public boolean isSubset(PowerSet set2) {
-    for (int i = 0; i < set2.size(); i++) {
+    for (var i = 0; i < set2.size(); i++) {
       if (!get(set2.getElement(i))) {
         return false;
       }

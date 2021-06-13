@@ -25,10 +25,10 @@ public class LinkedList2 {
 
   public Node find(int _value) {
     if (this.head != null) {
-      Node node = this.head;
-      while (node != null) {
-        if (node.value == _value) return node;
-        node = node.next;
+      Node currentNode = this.head;
+      while (currentNode != null) {
+        if (currentNode.value == _value) return currentNode;
+        currentNode = currentNode.next;
       }
     }
     return null;
@@ -37,10 +37,10 @@ public class LinkedList2 {
   public ArrayList<Node> findAll(int _value) {
     if (this.head != null) {
       ArrayList<Node> nodes = new ArrayList<>();
-      Node node = this.head;
-      while (node != null) {
-        if (node.value == _value) nodes.add(node);
-        node = node.next;
+      var currentNode = this.head;
+      while (currentNode != null) {
+        if (currentNode.value == _value) nodes.add(currentNode);
+        currentNode = currentNode.next;
       }
       return nodes;
     }
@@ -68,8 +68,8 @@ public class LinkedList2 {
   }
 
   public void removeAll(int _value) {
-    while (this.find(_value) != null) {
-      this.remove(_value);
+    while (find(_value) != null) {
+      remove(_value);
     }
   }
 
@@ -79,13 +79,13 @@ public class LinkedList2 {
   }
 
   public int count() {
-    Node node = this.head;
-    int counter = 0;
-    while (node != null) {
-      counter++;
-      node = node.next;
+    var currentNode = this.head;
+    var numberOfNodes = 0;
+    while (currentNode != null) {
+      numberOfNodes++;
+      currentNode = currentNode.next;
     }
-    return counter;
+    return numberOfNodes;
   }
 
   public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {

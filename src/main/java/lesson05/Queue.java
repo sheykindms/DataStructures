@@ -18,7 +18,7 @@ public class Queue<T> {
     if (queue.isEmpty()) {
       return null;
     }
-    T element = queue.get(0);
+    var element = queue.get(0);
     queue.remove(0);
     return element;
   }

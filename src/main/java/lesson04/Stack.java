@@ -16,9 +16,9 @@ public class Stack<T> {
 
   public T pop() {
     if (stack.isEmpty()) return null;
-    T element = stack.get(0);
+    var elementToRemove = stack.get(0);
     stack.remove(0);
-    return element;
+    return elementToRemove;
   }
 
   public void push(T val) {

@@ -13,19 +13,19 @@ public class PostfixCalculator {
     String numPattern = "[0-9]";
     var data = new Stack<String>();
     for (var i = expression.length() - 1; i >= 0; i--) {
-      String c = expression.charAt(i) + "";
-      String num = c;
-      if (c.matches(numPattern)) {
+      String currentElement = expression.charAt(i) + "";
+      String digit = currentElement;
+      if (currentElement.matches(numPattern)) {
         while(i - 1 >= 0 && (expression.charAt(i - 1)+"").matches(numPattern)) {
           String temp = expression.charAt(--i) + "";
-          num = temp + num;
+          digit = temp + digit;
         }
-        data.push(num);
+        data.push(digit);
       }
-      else if(c.equals("+") || c.equals("-") || c.equals("/") || c.equals("*")) {
-        data.push(c);
+      else if(currentElement.equals("+") || currentElement.equals("-") || currentElement.equals("/") || currentElement.equals("*")) {
+        data.push(currentElement);
       }
-      else if (c.equals(" ")) {
+      else if (currentElement.equals(" ")) {
         continue;
       }
       else {
@@ -48,16 +48,16 @@ public class PostfixCalculator {
   /**
    *
    * @param operator to compare and process operation
-   * @param second second operand
-   * @param first first operand
+   * @param secondOperand second operand
+   * @param firstOperand first operand
    * @return result of algebraic operation
    */
-  private int processResult(Character operator, Integer second, Integer first) {
+  private int processResult(Character operator, Integer secondOperand, Integer firstOperand) {
     return switch (operator) {
-      case '*' -> first * second;
-      case '/' -> first / second;
-      case '+' -> first + second;
-      case '-' -> first - second;
+      case '*' -> firstOperand * secondOperand;
+      case '/' -> firstOperand / secondOperand;
+      case '+' -> firstOperand + secondOperand;
+      case '-' -> firstOperand - secondOperand;
       default -> 0;
     };
   }

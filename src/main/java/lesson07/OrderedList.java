@@ -50,7 +50,7 @@ public class OrderedList<T> {
       tail = newNode;
       return;
     }
-    Node<T> node = head;
+    Node<T> currentNode = head;
     if (_ascending) {
       if (compare(head.value, newNode.value) > 0) {
         newNode.prev = null;
@@ -60,20 +60,20 @@ public class OrderedList<T> {
         return;
       }
       while (true) {
-        if (node.next != null && compare(node.next.value, value) > 0) {
-          newNode.next = node.next;
-          node.next = newNode;
-          newNode.prev = node;
+        if (currentNode.next != null && compare(currentNode.next.value, value) > 0) {
+          newNode.next = currentNode.next;
+          currentNode.next = newNode;
+          newNode.prev = currentNode;
           newNode.next.prev = newNode;
           return;
-        } else if (node.next == null) {
+        } else if (currentNode.next == null) {
           newNode.next = null;
           newNode.prev = tail;
           tail.next = newNode;
           tail = newNode;
           return;
         }
-        node = node.next;
+        currentNode = currentNode.next;
       }
     } else {
       if (compare(head.value, newNode.value) < 0) {
@@ -84,20 +84,20 @@ public class OrderedList<T> {
         return;
       }
       while (true) {
-        if (node.next != null && compare(node.next.value, value) < 0) {
-          newNode.next = node.next;
-          node.next = newNode;
-          newNode.prev = node;
+        if (currentNode.next != null && compare(currentNode.next.value, value) < 0) {
+          newNode.next = currentNode.next;
+          currentNode.next = newNode;
+          newNode.prev = currentNode;
           newNode.next.prev = newNode;
           return;
-        } else if (node.next == null) {
+        } else if (currentNode.next == null) {
           newNode.next = null;
           newNode.prev = tail;
           tail.next = newNode;
           tail = newNode;
           return;
         }
-        node = node.next;
+        currentNode = currentNode.next;
       }
     }
   }
@@ -109,20 +109,20 @@ public class OrderedList<T> {
    * @return Node object or null if nothing was found
    */
   public Node<T> find(T val) {
-    Node<T> node = head;
+    Node<T> currentNode = head;
     if (_ascending) {
-      while (node != null && compare(node.value, val) <= 0) {
-        if (node.value.equals(val)) {
-          return node;
+      while (currentNode != null && compare(currentNode.value, val) <= 0) {
+        if (currentNode.value.equals(val)) {
+          return currentNode;
         }
-        node = node.next;
+        currentNode = currentNode.next;
       }
     } else {
-      while (node != null && compare(node.value, val) >= 0) {
-        if (node.value.equals(val)) {
-          return node;
+      while (currentNode != null && compare(currentNode.value, val) >= 0) {
+        if (currentNode.value.equals(val)) {
+          return currentNode;
         }
-        node = node.next;
+        currentNode = currentNode.next;
       }
     }
     return null;
@@ -168,13 +168,13 @@ public class OrderedList<T> {
    * @return int value
    */
   public int count() {
-    Node<T> node = head;
-    var counter = 0;
-    while (node != null) {
-      counter++;
-      node = node.next;
+    Node<T> currentNode = head;
+    var numberOfNodes = 0;
+    while (currentNode != null) {
+      numberOfNodes++;
+      currentNode = currentNode.next;
     }
-    return counter;
+    return numberOfNodes;
   }
 
   /**
@@ -183,12 +183,12 @@ public class OrderedList<T> {
    * @return ArrayList of Node<T> objects
    */
   ArrayList<Node<T>> getAll() {
-    ArrayList<Node<T>> r = new ArrayList<>();
-    Node<T> node = head;
-    while (node != null) {
-      r.add(node);
-      node = node.next;
+    ArrayList<Node<T>> foundNodes = new ArrayList<>();
+    Node<T> currentNode = head;
+    while (currentNode != null) {
+      foundNodes.add(currentNode);
+      currentNode = currentNode.next;
     }
-    return r;
+    return foundNodes;
   }
 }

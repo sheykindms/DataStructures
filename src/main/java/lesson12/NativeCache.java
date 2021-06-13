@@ -56,11 +56,11 @@ public class NativeCache<T> {
   }
 
   private void replaceWithNew(String key, T value) {
-    int min = hits[0];
+    int minValue = hits[0];
     var index = 0;
     for (var i = 0; i < hits.length; i++) {
-      if (min > hits[i]) {
-        min = hits[i];
+      if (minValue > hits[i]) {
+        minValue = hits[i];
         index = i;
       }
     }

@@ -18,46 +18,46 @@ public class LinkedList {
   }
 
   public Node find(int value) {
-    Node node = this.head;
-    while (node != null) {
-      if (node.value == value) return node;
-      node = node.next;
+    var currentNode = this.head;
+    while (currentNode != null) {
+      if (currentNode.value == value) return currentNode;
+      currentNode = currentNode.next;
     }
     return null;
   }
 
   public ArrayList<Node> findAll(int _value) {
     ArrayList<Node> nodes = new ArrayList<>();
-    Node node = this.head;
-    while (node != null) {
-      if (node.value == _value) nodes.add(node);
-      node = node.next;
+    var currentNode = this.head;
+    while (currentNode != null) {
+      if (currentNode.value == _value) nodes.add(currentNode);
+      currentNode = currentNode.next;
     }
     return nodes;
   }
 
   public boolean remove(int _value) {
     if (this.head != null) {
-      Node node = this.head;
-      if (node.value == _value) {
-        this.head = node.next;
-        if (node.next == null) {
+      var currentNode = this.head;
+      if (currentNode.value == _value) {
+        this.head = currentNode.next;
+        if (currentNode.next == null) {
           this.tail = null;
         }
         return true;
       } else {
-        while (node != null) {
-          if (node.next != null && node.next.value == _value) {
-            if (node.next.next != null) {
-              node.next = node.next.next;
+        while (currentNode != null) {
+          if (currentNode.next != null && currentNode.next.value == _value) {
+            if (currentNode.next.next != null) {
+              currentNode.next = currentNode.next.next;
               return true;
             } else {
-              node.next = null;
-              this.tail = node;
+              currentNode.next = null;
+              this.tail = currentNode;
             }
             return true;
           }
-          node = node.next;
+          currentNode = currentNode.next;
         }
       }
     }
@@ -65,8 +65,8 @@ public class LinkedList {
   }
 
   public void removeAll(int _value) {
-    ArrayList<Node> all = findAll(_value);
-    for (Node node : all) {
+    ArrayList<Node> foundNodes = findAll(_value);
+    for (Node node : foundNodes) {
       remove(node.value);
     }
   }
@@ -77,13 +77,13 @@ public class LinkedList {
   }
 
   public int count() {
-    Node node = this.head;
-    int counter = 0;
-    while (node != null) {
-      counter++;
-      node = node.next;
+    var currentNode = this.head;
+    var numberOfNodes = 0;
+    while (currentNode != null) {
+      numberOfNodes++;
+      currentNode = currentNode.next;
     }
-    return counter;
+    return numberOfNodes;
   }
 
   public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {

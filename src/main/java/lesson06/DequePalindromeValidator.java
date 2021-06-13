@@ -1,6 +1,6 @@
 package lesson06;
 
-public class DequePalindromeSolver {
+public class DequePalindromeValidator {
 
   public boolean isPalindrome(String toCheck) {
     Deque<Character> deq = new Deque<>();

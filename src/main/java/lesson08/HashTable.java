@@ -21,12 +21,13 @@ public class HashTable {
    * @return index in array
    */
   public int hashFun(String value) {
+    final var multiplier = 31;
     if (value.isEmpty()) {
       return 0;
     }
     var hash = 1;
     for (char c : value.toCharArray()) {
-      hash = hash * 31 + c;
+      hash = hash * multiplier + c;
     }
     return Math.abs(hash) % size;
   }

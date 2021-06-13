@@ -13,22 +13,22 @@ public class BloomFilter {
   }
 
   public int hash1(String str1) {
-    var salt = 17;
+    final var multiplier = 17;
     var hash = 0;
     for (var i = 0; i < str1.length(); i++) {
-      int code = str1.charAt(i);
-      hash = hash * salt + code;
+      int currentCharAsciiCode = str1.charAt(i);
+      hash = hash * multiplier + currentCharAsciiCode;
     }
     return Math.abs(hash) % filter_len;
   }
 
   public int hash2(String str1) {
-    var salt = 233;
+    final var multiplier = 233;
     var hash = 0;
     var bitShift = 2;
     for (var i = 0; i < str1.length(); i++) {
-      int code = str1.charAt(i);
-      hash |= (hash * salt + code) << bitShift;
+      int currentCharAsciiCode = str1.charAt(i);
+      hash |= (hash * multiplier + currentCharAsciiCode) << bitShift;
     }
     return Math.abs(hash) % filter_len;
   }

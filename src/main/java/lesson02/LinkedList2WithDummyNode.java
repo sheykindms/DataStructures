@@ -34,12 +34,12 @@ public class LinkedList2WithDummyNode<E> {
    * @return DNode or null if object has not been found
    */
   public DNode<E> find(E _value) {
-    DNode<E> node = dummyHead.next;
-    while (node != dummyTail) {
-      if (node.value.equals(_value)) {
-        return node;
+    DNode<E> currentNode = dummyHead.next;
+    while (currentNode != dummyTail) {
+      if (currentNode.value.equals(_value)) {
+        return currentNode;
       }
-      node = node.next;
+      currentNode = currentNode.next;
     }
     return null;
   }
@@ -50,15 +50,15 @@ public class LinkedList2WithDummyNode<E> {
    * @return instance of List containing founded objects or empty List otherwise
    */
   public List<DNode<E>> findAll(E _value) {
-    ArrayList<DNode<E>> dNodes = new ArrayList<>();
-    DNode<E> node = dummyHead.next;
-    while (node != dummyTail) {
-      if (node.value.equals(_value)) {
-        dNodes.add(node);
+    ArrayList<DNode<E>> foundNodes = new ArrayList<>();
+    DNode<E> currentNode = dummyHead.next;
+    while (currentNode != dummyTail) {
+      if (currentNode.value.equals(_value)) {
+        foundNodes.add(currentNode);
       }
-      node = node.next;
+      currentNode = currentNode.next;
     }
-    return dNodes;
+    return foundNodes;
   }
 
   /**
@@ -67,14 +67,14 @@ public class LinkedList2WithDummyNode<E> {
    * @return true if element has been found, otherwise returns false
    */
   public boolean remove(E _value) {
-    DNode<E> node = dummyHead.next;
-    while (node != dummyTail) {
-      if (node.value.equals(_value)) {
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
+    DNode<E> currentNode = dummyHead.next;
+    while (currentNode != dummyTail) {
+      if (currentNode.value.equals(_value)) {
+        currentNode.prev.next = currentNode.next;
+        currentNode.next.prev = currentNode.prev;
         return true;
       }
-      node = node.next;
+      currentNode = currentNode.next;
     }
     return false;
   }
@@ -102,13 +102,13 @@ public class LinkedList2WithDummyNode<E> {
    * @return int value
    */
   public int count() {
-    DNode<E> node = dummyHead.next;
-    int count = 0;
-    while (node != dummyTail) {
-      count++;
-      node = node.next;
+    DNode<E> currentNode = dummyHead.next;
+    var numberOfNodes = 0;
+    while (currentNode != dummyTail) {
+      numberOfNodes++;
+      currentNode = currentNode.next;
     }
-    return count;
+    return numberOfNodes;
   }
 
   /**

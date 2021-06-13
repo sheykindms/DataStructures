@@ -14,12 +14,13 @@ class NativeDictionary<T> {
   }
 
   public int hashFun(String key) {
+    final var multiplier = 31;
     if (key.isEmpty()) {
       return 0;
     }
     var hash = 1;
     for (char c : key.toCharArray()) {
-      hash = hash * 31 + c;
+      hash = hash * multiplier + c;
     }
     return Math.abs(hash) % size;
   }
