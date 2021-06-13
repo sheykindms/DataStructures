@@ -5,11 +5,13 @@ import java.util.BitSet;
 public class BloomFilter {
 
   private final BitSet bits;
-  public int filter_len;
+  // filter_len - filterLength
+  // в соответствии с нейминг конвенцией джавы
+  public int filterLength;
 
   public BloomFilter(int f_len) {
-    filter_len = f_len;
-    bits = new BitSet(filter_len);
+    filterLength = f_len;
+    bits = new BitSet(filterLength);
   }
 
   public int hash1(String str1) {
@@ -19,18 +21,24 @@ public class BloomFilter {
       int currentCharAsciiCode = str1.charAt(i);
       hash = hash * multiplier + currentCharAsciiCode;
     }
-    return Math.abs(hash) % filter_len;
+    return Math.abs(hash) % filterLength;
   }
 
   public int hash2(String str1) {
+    // salt - multiplier
+    // Всё-таки salt выполняет в хэшировании несколько иную функцию. Multiplier - более подходящее
+    // значение переменной
     final var multiplier = 233;
     var hash = 0;
     var bitShift = 2;
     for (var i = 0; i < str1.length(); i++) {
+      // code - currentCharAsciiCode
+      // Абстрактное "code" в теле методов hash1 и hash2 класса BloomFilter изменено на более
+      // описательное currentCharAsciiCode
       int currentCharAsciiCode = str1.charAt(i);
       hash |= (hash * multiplier + currentCharAsciiCode) << bitShift;
     }
-    return Math.abs(hash) % filter_len;
+    return Math.abs(hash) % filterLength;
   }
 
   public void add(String str1) {

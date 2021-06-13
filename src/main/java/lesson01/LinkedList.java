@@ -27,13 +27,13 @@ public class LinkedList {
   }
 
   public ArrayList<Node> findAll(int _value) {
-    ArrayList<Node> nodes = new ArrayList<>();
+    ArrayList<Node> foundNodes = new ArrayList<>();
     var currentNode = this.head;
     while (currentNode != null) {
-      if (currentNode.value == _value) nodes.add(currentNode);
+      if (currentNode.value == _value) foundNodes.add(currentNode);
       currentNode = currentNode.next;
     }
-    return nodes;
+    return foundNodes;
   }
 
   public boolean remove(int _value) {
@@ -65,6 +65,9 @@ public class LinkedList {
   }
 
   public void removeAll(int _value) {
+    // all - foundNodes
+    // foundNodes - более вербозное и лаконичное имя для листа, содержащего список найденных нод,
+    // изменено для всех классов с похожей логикой
     ArrayList<Node> foundNodes = findAll(_value);
     for (Node node : foundNodes) {
       remove(node.value);
@@ -77,7 +80,12 @@ public class LinkedList {
   }
 
   public int count() {
+    // node - currentNode
+    // Текущая нода , которая изменялась на каждой итерации на следующую, изменено во всех классах с
+    // похожей логикой
     var currentNode = this.head;
+    // counter - numberOfNodes
+    // Подсчёт числа найденных нод, заменено во всех классах с похожей логикой
     var numberOfNodes = 0;
     while (currentNode != null) {
       numberOfNodes++;

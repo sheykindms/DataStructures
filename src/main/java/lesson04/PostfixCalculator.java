@@ -10,10 +10,14 @@ public class PostfixCalculator {
    * @return Integer result of calculation
    */
   public int calculate(String expression) {
-    String numPattern = "[0-9]";
+    var numPattern = "[0-9]";
     var data = new Stack<String>();
     for (var i = expression.length() - 1; i >= 0; i--) {
+      // c - currentElement
+      //Имя переменной, которое более чётко указывает на то, что мы имеем дело с текущим элементом в цикле
       String currentElement = expression.charAt(i) + "";
+      // num - digit
+      //Теперь акцент выставлен на то, что это цифра(разряд) числа
       String digit = currentElement;
       if (currentElement.matches(numPattern)) {
         while(i - 1 >= 0 && (expression.charAt(i - 1)+"").matches(numPattern)) {
