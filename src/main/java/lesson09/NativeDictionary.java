@@ -7,9 +7,9 @@ class NativeDictionary<T> {
   public String[] slots;
   public T[] values;
 
-  public NativeDictionary(int sz, Class clazz) {
-    size = sz;
-    slots = new String[size];
+  public NativeDictionary(int size, Class clazz) {
+    this.size = size;
+    slots = new String[this.size];
     values = (T[]) Array.newInstance(clazz, this.size);
   }
 

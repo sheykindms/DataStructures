@@ -10,7 +10,7 @@ class BloomFilterTest {
 
   @BeforeEach
   void setUp() {
-    bf = new BloomFilter(32);
+    bf = BloomFilter.withLength(32);
   }
 
   @Test

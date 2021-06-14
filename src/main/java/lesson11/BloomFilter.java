@@ -7,9 +7,13 @@ public class BloomFilter {
   private final BitSet bits;
   public final int filterLength;
 
-  public BloomFilter(int f_len) {
-    filterLength = f_len;
-    bits = new BitSet(filterLength);
+  private BloomFilter(int filterLength) {
+    this.filterLength = filterLength;
+    bits = new BitSet(this.filterLength);
+  }
+
+  public static BloomFilter withLength(int filterLength) {
+    return new BloomFilter(filterLength);
   }
 
   public int firstHashFun(String value) {

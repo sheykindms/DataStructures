@@ -1,0 +1,24 @@
+
+3.1
+new BloomFilter() - BloomFilter.withLength()
+//Фильтр Блума инстанциируется в BloomFilterTest классе при помощи статического фабричного метода.
+//Конструктор класса BloomFilter объявлен приватным.
+
+new DynArray() - DynArray.ofClass()
+//Динамический массив в классе DynArrayTest инстанциируется с помощью фабричного метода, куда передаётся класс.
+//Конструктор DynArray объявлен приватным
+
+new NativeCache() - NativeCache.withSizeAndClass()
+//Кэш инстанциируется двумя аргументами, передаваемыми в статический фабричный метод. В классе NativeCacheTest
+
+3.2
+LinkedList
+//Для классов типа LinkedList можно было бы использовать интерфейс LinkedList, содержащий одинаковые для
+//всех коллекций методы типа getAllByValue, getByValue, add, removeByValue, clear и т.п., где UnidirectionalLinkedList,
+//BidirectionalLinkedList, BidirectionalLikedListWithDummyNode были бы его имплементациями.
+
+Comparable, Cloneable, Iterable, Serializable, Appendable etc
+//В ряде случаев интерфейсы принято делать прилагательными
+
+List, Set, Map, CharSequence
+//В ряде случаев интерфейсы принято именовать существительными

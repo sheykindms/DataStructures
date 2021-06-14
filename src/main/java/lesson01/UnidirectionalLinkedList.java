@@ -26,20 +26,20 @@ public class UnidirectionalLinkedList {
     return null;
   }
 
-  public ArrayList<Node> getAllNodesByValue(int _value) {
+  public ArrayList<Node> getAllNodesByValue(int value) {
     ArrayList<Node> foundNodes = new ArrayList<>();
     var currentNode = this.head;
     while (currentNode != null) {
-      if (currentNode.value == _value) foundNodes.add(currentNode);
+      if (currentNode.value == value) foundNodes.add(currentNode);
       currentNode = currentNode.next;
     }
     return foundNodes;
   }
 
-  public boolean removeNodeByValue(int _value) {
+  public boolean removeNodeByValue(int value) {
     if (this.head != null) {
       var currentNode = this.head;
-      if (currentNode.value == _value) {
+      if (currentNode.value == value) {
         this.head = currentNode.next;
         if (currentNode.next == null) {
           this.tail = null;
@@ -47,7 +47,7 @@ public class UnidirectionalLinkedList {
         return true;
       } else {
         while (currentNode != null) {
-          if (currentNode.next != null && currentNode.next.value == _value) {
+          if (currentNode.next != null && currentNode.next.value == value) {
             if (currentNode.next.next != null) {
               currentNode.next = currentNode.next.next;
               return true;
@@ -64,8 +64,8 @@ public class UnidirectionalLinkedList {
     return false;
   }
 
-  public void removeAllNodesByValue(int _value) {
-    ArrayList<Node> foundNodes = getAllNodesByValue(_value);
+  public void removeAllNodesByValue(int value) {
+    ArrayList<Node> foundNodes = getAllNodesByValue(value);
     for (Node node : foundNodes) {
       removeNodeByValue(node.value);
     }
@@ -86,18 +86,18 @@ public class UnidirectionalLinkedList {
     return numberOfNodes;
   }
 
-  public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
-    if (_nodeAfter == null) {
-      _nodeToInsert.next = this.head;
-      this.head = _nodeToInsert;
+  public void insertAfter(Node nodeAfter, Node nodeToInsert) {
+    if (nodeAfter == null) {
+      nodeToInsert.next = this.head;
+      this.head = nodeToInsert;
       if (this.head.next == null) {
-        this.tail = _nodeToInsert;
+        this.tail = nodeToInsert;
       }
-    } else if (getNodeByValue(_nodeAfter.value) != null) {
-      _nodeToInsert.next = _nodeAfter.next;
-      _nodeAfter.next = _nodeToInsert;
-      if (_nodeToInsert.next == null) {
-        this.tail = _nodeToInsert;
+    } else if (getNodeByValue(nodeAfter.value) != null) {
+      nodeToInsert.next = nodeAfter.next;
+      nodeAfter.next = nodeToInsert;
+      if (nodeToInsert.next == null) {
+        this.tail = nodeToInsert;
       }
     }
   }
@@ -107,8 +107,8 @@ class Node {
   public int value;
   public Node next;
 
-  public Node(int _value) {
-    value = _value;
+  public Node(int value) {
+    this.value = value;
     next = null;
   }
 }

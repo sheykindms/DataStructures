@@ -21,18 +21,18 @@ public class PowerSet {
     }
   }
 
-  public boolean get(String value) {
+  public boolean getByValue(String value) {
     return set.contains(value);
   }
 
-  public boolean remove(String value) {
+  public boolean removeByValue(String value) {
     return set.remove(value);
   }
 
   public PowerSet intersect(PowerSet secondSet) {
     var intersectedSet = new PowerSet();
     for (String s : set) {
-      if (secondSet.get(s)) {
+      if (secondSet.getByValue(s)) {
         intersectedSet.put(s);
       }
     }
@@ -45,8 +45,8 @@ public class PowerSet {
       unitedSet.put(s);
     }
     for (var i = 0; i < secondSet.size(); i++) {
-      if (!unitedSet.get(secondSet.getElement(i))) {
-        unitedSet.put(secondSet.getElement(i));
+      if (!unitedSet.getByValue(secondSet.getElementByIndex(i))) {
+        unitedSet.put(secondSet.getElementByIndex(i));
       }
     }
     return unitedSet;
@@ -55,7 +55,7 @@ public class PowerSet {
   public PowerSet diff(PowerSet secondSet) {
     var diffSet = new PowerSet();
     for (String s : set) {
-      if (!secondSet.get(s)) {
+      if (!secondSet.getByValue(s)) {
         diffSet.put(s);
       }
     }
@@ -64,14 +64,14 @@ public class PowerSet {
 
   public boolean isSubset(PowerSet secondSet) {
     for (var i = 0; i < secondSet.size(); i++) {
-      if (!get(secondSet.getElement(i))) {
+      if (!getByValue(secondSet.getElementByIndex(i))) {
         return false;
       }
     }
     return true;
   }
 
-  private String getElement(int index) {
+  private String getElementByIndex(int index) {
     return set.get(index);
   }
 }

@@ -4,17 +4,17 @@ import java.util.Objects;
 
 public class ParenthesesBalancer {
 
-  public boolean isBalanced(String s) {
-    if (!Objects.nonNull(s)
-        || !s.contains(")")
-        || !s.contains("(")
-        || s.isBlank()
-        || s.charAt(0) == ')'
-        || s.charAt(s.length() - 1) == '(') return false;
+  public boolean isBalanced(String expression) {
+    if (!Objects.nonNull(expression)
+        || !expression.contains(")")
+        || !expression.contains("(")
+        || expression.isBlank()
+        || expression.charAt(0) == ')'
+        || expression.charAt(expression.length() - 1) == '(') return false;
 
     Stack<Character> stack = new Stack<>();
-    for (var i = 0; i < s.length(); i++) {
-      var currentChar = s.charAt(i);
+    for (var i = 0; i < expression.length(); i++) {
+      var currentChar = expression.charAt(i);
       if (currentChar == '(') {
         stack.push(currentChar);
       } else if (currentChar == ')') {

@@ -9,22 +9,26 @@ public class DynArray<T> {
   public int capacity;
   Class clazz;
 
-  public DynArray(Class clz) {
+  private DynArray(Class clz) {
     clazz = clz;
     count = 0;
     instantiateArrayWithNewCapacity(16);
   }
 
-  public void instantiateArrayWithNewCapacity(int new_capacity) {
+  public static DynArray ofClass(Class clz) {
+    return new DynArray<>(clz);
+  }
+
+  public void instantiateArrayWithNewCapacity(int newCapacity) {
     if (capacity != 0) {
-      new_capacity = Math.max(new_capacity, 16);
-      T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, new_capacity);
+      newCapacity = Math.max(newCapacity, 16);
+      T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, newCapacity);
       System.arraycopy(array, 0, augmentedCapacityArray, 0, array.length);
       array = augmentedCapacityArray;
     } else {
-      array = (T[]) Array.newInstance(this.clazz, new_capacity);
+      array = (T[]) Array.newInstance(this.clazz, newCapacity);
     }
-    capacity = new_capacity;
+    capacity = newCapacity;
   }
 
   public T getValueByIndex(int index) {

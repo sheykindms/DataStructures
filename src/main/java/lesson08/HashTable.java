@@ -7,11 +7,11 @@ public class HashTable {
   public int step;
   public String[] slots;
 
-  public HashTable(int sz, int stp) {
-    size = sz;
-    step = stp;
-    slots = new String[size];
-    for (var i = 0; i < size; i++) slots[i] = null;
+  public HashTable(int size, int step) {
+    this.size = size;
+    this.step = step;
+    slots = new String[this.size];
+    for (var i = 0; i < this.size; i++) slots[i] = null;
   }
 
   /**

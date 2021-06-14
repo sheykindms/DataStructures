@@ -14,7 +14,7 @@ class NativeCacheTest {
 
   @BeforeEach
   void setUp() {
-    cache = new NativeCache<>(3, String.class);
+    cache = NativeCache.withSizeAndClass(3, String.class);
   }
 
   @Test

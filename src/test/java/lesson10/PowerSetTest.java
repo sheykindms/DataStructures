@@ -27,9 +27,9 @@ class PowerSetTest {
 
     PowerSet intersection = set1.intersect(set2);
 
-    assertTrue(intersection.get("test3"));
-    assertFalse(intersection.get("test1"));
-    assertFalse(intersection.get("test5"));
+    assertTrue(intersection.getByValue("test3"));
+    assertFalse(intersection.getByValue("test1"));
+    assertFalse(intersection.getByValue("test5"));
   }
 
   @Test
@@ -44,9 +44,9 @@ class PowerSetTest {
 
     PowerSet union = set1.unite(set2);
     assertEquals(5, union.size());
-    assertTrue(union.get("test3"));
-    assertTrue(union.get("test1"));
-    assertTrue(union.get("test5"));
+    assertTrue(union.getByValue("test3"));
+    assertTrue(union.getByValue("test1"));
+    assertTrue(union.getByValue("test5"));
   }
 
   @Test
@@ -62,11 +62,11 @@ class PowerSetTest {
     set2.put("test5");
 
     PowerSet difference = set1.diff(set2);
-    assertTrue(difference.get("test1"));
-    assertTrue(difference.get("test2"));
-    assertFalse(difference.get("test3"));
-    assertFalse(difference.get("test4"));
-    assertFalse(difference.get("test5"));
+    assertTrue(difference.getByValue("test1"));
+    assertTrue(difference.getByValue("test2"));
+    assertFalse(difference.getByValue("test3"));
+    assertFalse(difference.getByValue("test4"));
+    assertFalse(difference.getByValue("test5"));
   }
 
   @Test

@@ -9,11 +9,15 @@ public class NativeCache<T> {
   public T[] values;
   public int[] hits;
 
-  public NativeCache(int size, Class clazz) {
+  private NativeCache(int size, Class clazz) {
     this.size = size;
     slots = new String[size];
     values = (T[]) Array.newInstance(clazz, size);
     hits = new int[size];
+  }
+
+  public static NativeCache withSizeAndClass(int size, Class clazz) {
+    return new NativeCache(size, clazz);
   }
 
   public int hashFun(String key) {

@@ -19,24 +19,24 @@ public class BidirectionalLinkedListWithDummyNode<E> {
 
   /**
    * Adds given item in the end of List
-   * @param _item to be added
+   * @param item to be added
    */
-  public void addNodeInTail(DNode<E> _item) {
-    dummyTail.prev.next = _item;
-    _item.prev = dummyTail.prev;
-    dummyTail.prev = _item;
-    _item.next = dummyTail;
+  public void addNodeInTail(DNode<E> item) {
+    dummyTail.prev.next = item;
+    item.prev = dummyTail.prev;
+    dummyTail.prev = item;
+    item.next = dummyTail;
   }
 
   /**
    * Finds DNode by its value if exists
-   * @param _value to be found
+   * @param value to be found
    * @return DNode or null if object has not been found
    */
-  public DNode<E> getNodeByValue(E _value) {
+  public DNode<E> getNodeByValue(E value) {
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
-      if (currentNode.value.equals(_value)) {
+      if (currentNode.value.equals(value)) {
         return currentNode;
       }
       currentNode = currentNode.next;
@@ -46,14 +46,14 @@ public class BidirectionalLinkedListWithDummyNode<E> {
 
   /**
    * Finds all the DNodes in List
-   * @param _value to be founnd
+   * @param value to be founnd
    * @return instance of List containing founded objects or empty List otherwise
    */
-  public List<DNode<E>> getAllNodeByValue(E _value) {
+  public List<DNode<E>> getAllNodeByValue(E value) {
     ArrayList<DNode<E>> foundNodes = new ArrayList<>();
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
-      if (currentNode.value.equals(_value)) {
+      if (currentNode.value.equals(value)) {
         foundNodes.add(currentNode);
       }
       currentNode = currentNode.next;
@@ -63,13 +63,13 @@ public class BidirectionalLinkedListWithDummyNode<E> {
 
   /**
    * Removes fist occurrence of DNone with given value
-   * @param _value to be found and deleted
+   * @param value to be found and deleted
    * @return true if element has been found, otherwise returns false
    */
-  public boolean removeNodeByValue(E _value) {
+  public boolean removeNodeByValue(E value) {
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
-      if (currentNode.value.equals(_value)) {
+      if (currentNode.value.equals(value)) {
         currentNode.prev.next = currentNode.next;
         currentNode.next.prev = currentNode.prev;
         return true;
@@ -81,11 +81,11 @@ public class BidirectionalLinkedListWithDummyNode<E> {
 
   /**
    * Removes all occurrences of DNones with given value
-   * @param _value to be found and deleted
+   * @param value to be found and deleted
    */
-  public void removeAllNodesByValue(E _value) {
-    while (getNodeByValue(_value) != null) {
-      removeNodeByValue(_value);
+  public void removeAllNodesByValue(E value) {
+    while (getNodeByValue(value) != null) {
+      removeNodeByValue(value);
     }
   }
 
@@ -113,21 +113,21 @@ public class BidirectionalLinkedListWithDummyNode<E> {
 
   /**
    * Inserts given element after the given Node
-   * @param _nodeAfter
-   * @param _nodeToInsert to be inserted
+   * @param nodeAfter
+   * @param nodeToInsert to be inserted
    */
-  public void insertAfter(DNode<E> _nodeAfter, DNode<E> _nodeToInsert) {
-    if (_nodeAfter == null) {
-      dummyHead.next.prev = _nodeToInsert;
-      _nodeToInsert.next = dummyHead.next;
-      _nodeToInsert.prev = dummyHead;
-      dummyHead.next = _nodeToInsert;
+  public void insertAfter(DNode<E> nodeAfter, DNode<E> nodeToInsert) {
+    if (nodeAfter == null) {
+      dummyHead.next.prev = nodeToInsert;
+      nodeToInsert.next = dummyHead.next;
+      nodeToInsert.prev = dummyHead;
+      dummyHead.next = nodeToInsert;
 
     } else {
-      _nodeAfter.next.prev = _nodeToInsert;
-      _nodeToInsert.next = _nodeAfter.next;
-      _nodeAfter.next = _nodeToInsert;
-      _nodeToInsert.prev = _nodeAfter;
+      nodeAfter.next.prev = nodeToInsert;
+      nodeToInsert.next = nodeAfter.next;
+      nodeAfter.next = nodeToInsert;
+      nodeToInsert.prev = nodeAfter;
     }
   }
 }

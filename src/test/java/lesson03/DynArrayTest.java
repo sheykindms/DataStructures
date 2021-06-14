@@ -11,7 +11,7 @@ class DynArrayTest {
 
   @BeforeEach
   void setUp() {
-    array = new DynArray<>(Integer.class);
+    array = DynArray.ofClass(Integer.class);
   }
 
   private void fillDynArrayWithManyElements() {
