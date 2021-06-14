@@ -7,8 +7,10 @@ public class PowerSet {
 
   private final List<String> set;
 
+  private static final int CAPACITY = 20000;
+
   public PowerSet() {
-    set = new ArrayList<>(20000);
+    set = new ArrayList<>(CAPACITY);
   }
 
   public int size() {

@@ -4,10 +4,12 @@ import java.lang.reflect.Array;
 
 public class NativeCache<T> {
 
-  public int size;
-  public String[] slots;
-  public T[] values;
-  public int[] hits;
+  public final int size;
+  public final String[] slots;
+  public final T[] values;
+  public final int[] hits;
+
+  static final int HASH_FUN_MULTIPLIER = 31;
 
   private NativeCache(int size, Class clazz) {
     this.size = size;
@@ -21,13 +23,12 @@ public class NativeCache<T> {
   }
 
   public int hashFun(String key) {
-    final var multiplier = 31;
     if (key.isEmpty()) {
       return 0;
     }
     var hash = 1;
     for (char c : key.toCharArray()) {
-      hash = hash * multiplier + c;
+      hash = hash * HASH_FUN_MULTIPLIER + c;
     }
     return Math.abs(hash) % size;
   }

@@ -9,6 +9,10 @@ public class DynArray<T> {
   public int capacity;
   Class clazz;
 
+  private static final int MIN_CAPACITY = 16;
+  private static final double INCREASING_MULTIPLIER = 2.0;
+  private static final double DECREASING_MULTIPLIER = 1.5;
+
   private DynArray(Class clz) {
     clazz = clz;
     count = 0;
@@ -21,7 +25,7 @@ public class DynArray<T> {
 
   public void instantiateArrayWithNewCapacity(int newCapacity) {
     if (capacity != 0) {
-      newCapacity = Math.max(newCapacity, 16);
+      newCapacity = Math.max(newCapacity, MIN_CAPACITY);
       T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, newCapacity);
       System.arraycopy(array, 0, augmentedCapacityArray, 0, array.length);
       array = augmentedCapacityArray;
@@ -42,7 +46,7 @@ public class DynArray<T> {
     if (capacity > count) {
       array[count++] = itm;
     } else if (capacity == count) {
-      instantiateArrayWithNewCapacity(capacity * 2);
+      instantiateArrayWithNewCapacity((int) (capacity * INCREASING_MULTIPLIER));
       array[count++] = itm;
     }
   }
@@ -66,10 +70,10 @@ public class DynArray<T> {
   public void removeByIndex(int index) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException();
-    } else if (count - 1 < capacity / 2) {
-      capacity /= 1.5;
-      if (capacity < 16) {
-        capacity = 16;
+    } else if (count - 1 < capacity / INCREASING_MULTIPLIER) {
+      capacity /= DECREASING_MULTIPLIER;
+      if (capacity < MIN_CAPACITY) {
+        capacity = MIN_CAPACITY;
       }
       T[] augmentedCapacityArray = (T[]) Array.newInstance(this.clazz, capacity);
       System.arraycopy(array, 0, augmentedCapacityArray, 0, index);

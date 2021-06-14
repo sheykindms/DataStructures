@@ -7,6 +7,9 @@ public class BloomFilter {
   private final BitSet bits;
   public final int filterLength;
 
+  static final int FIRST_HASH_FUN_MULTIPLIER = 17;
+  static final int SECOND_HASH_FUN_MULTIPLIER = 233;
+
   private BloomFilter(int filterLength) {
     this.filterLength = filterLength;
     bits = new BitSet(this.filterLength);
@@ -17,22 +20,20 @@ public class BloomFilter {
   }
 
   public int firstHashFun(String value) {
-    final var multiplier = 17;
     var hash = 0;
     for (var i = 0; i < value.length(); i++) {
       int currentCharAsciiCode = value.charAt(i);
-      hash = hash * multiplier + currentCharAsciiCode;
+      hash = hash * FIRST_HASH_FUN_MULTIPLIER + currentCharAsciiCode;
     }
     return Math.abs(hash) % filterLength;
   }
 
   public int secondHashFun(String value) {
-    final var multiplier = 233;
     var hash = 0;
     var bitShift = 2;
     for (var i = 0; i < value.length(); i++) {
       int currentCharAsciiCode = value.charAt(i);
-      hash |= (hash * multiplier + currentCharAsciiCode) << bitShift;
+      hash |= (hash * SECOND_HASH_FUN_MULTIPLIER + currentCharAsciiCode) << bitShift;
     }
     return Math.abs(hash) % filterLength;
   }

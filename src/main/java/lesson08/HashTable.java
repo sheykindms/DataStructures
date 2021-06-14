@@ -1,11 +1,12 @@
 package lesson08;
 
 public class HashTable {
-  /** Number of buckets */
-  public int size;
 
+  public int size;
   public int step;
   public String[] slots;
+
+  static final int HASH_FUN_MULTIPLIER = 31;
 
   public HashTable(int size, int step) {
     this.size = size;
@@ -21,13 +22,12 @@ public class HashTable {
    * @return index in array
    */
   public int getIndexAsHashFun(String value) {
-    final var multiplier = 31;
     if (value.isEmpty()) {
       return 0;
     }
     var hash = 1;
     for (char c : value.toCharArray()) {
-      hash = hash * multiplier + c;
+      hash = hash * HASH_FUN_MULTIPLIER + c;
     }
     return Math.abs(hash) % size;
   }

@@ -2,6 +2,8 @@ package lesson04;
 
 public class PostfixExpressionCalculator {
 
+  private static final String NUM_PATTERN_REGEX = "[0-9]";
+
   /**
    * Calculates result of the postfix expression using two Stacks
    * i.e. : "1 2 + 3 *" should be 9
@@ -10,22 +12,22 @@ public class PostfixExpressionCalculator {
    * @return Integer result of calculation
    */
   public int calculate(String expression) {
-    var numPattern = "[0-9]";
     var data = new Stack<String>();
     for (var currentIndexFromEnd = expression.length() - 1; currentIndexFromEnd >= 0; currentIndexFromEnd--) {
       String currentElement = expression.charAt(currentIndexFromEnd) + "";
       String digit = currentElement;
-      if (currentElement.matches(numPattern)) {
-        while(currentIndexFromEnd - 1 >= 0 && (expression.charAt(currentIndexFromEnd - 1) + "").matches(numPattern)) {
+      boolean isOperator = Operators.contains(currentElement);
+      if (currentElement.matches(NUM_PATTERN_REGEX)) {
+        while(currentIndexFromEnd - 1 >= 0 && (expression.charAt(currentIndexFromEnd - 1) + "").matches(NUM_PATTERN_REGEX)) {
           String nextDigitToAppend = expression.charAt(--currentIndexFromEnd) + "";
           digit = nextDigitToAppend + digit;
         }
         data.push(digit);
       }
-      else if(currentElement.equals("+") || currentElement.equals("-") || currentElement.equals("/") || currentElement.equals("*")) {
+      else if(isOperator) {
         data.push(currentElement);
       }
-      else if (!currentElement.equals(" ")) {
+      else if (!currentElement.isBlank()) {
         throw new IllegalArgumentException("Expression is invalid");
       }
     }
