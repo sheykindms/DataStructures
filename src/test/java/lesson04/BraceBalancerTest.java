@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParenthesesBalancerTest {
+class BraceBalancerTest {
 
-  ParenthesesBalancer pb = new ParenthesesBalancer();
+  BraceBalancer pb = new BraceBalancer();
 
   @Test
   void balanceWhenFail() {

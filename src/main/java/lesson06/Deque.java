@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Deque<T> {
 
-  List<T> deque;
+  private final List<T> deque;
 
   public Deque() {
     deque = new ArrayList<>();

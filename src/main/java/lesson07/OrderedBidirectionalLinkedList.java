@@ -3,8 +3,8 @@ package lesson07;
 import java.util.*;
 
 class Node<T> {
-  public T value;
-  public Node<T> next, prev;
+  final T value;
+  Node<T> next, prev;
 
   public Node(T value) {
     this.value = value;
@@ -136,14 +136,14 @@ public class OrderedBidirectionalLinkedList<T> {
   public void removeNodeByValue(T value) {
     var foundNode = getNodeByValue(value);
     if (foundNode != null) {
-      if (this.head.value == this.tail.value && this.head.value.equals(value) && countNodes() == 1) {
+      if (head.value == tail.value && head.value.equals(value) && countNodes() == 1) {
         clearList(isAscending);
-      } else if (this.tail.value == value) {
-        this.tail = this.tail.prev;
-        this.tail.next = null;
-      } else if (this.head.value == value) {
-        this.head = this.head.next;
-        this.head.prev = null;
+      } else if (tail.value == value) {
+        tail = tail.prev;
+        tail.next = null;
+      } else if (head.value == value) {
+        head = head.next;
+        head.prev = null;
       } else {
         foundNode.prev.next = foundNode.next;
         foundNode.next.prev = foundNode.prev;
@@ -182,7 +182,7 @@ public class OrderedBidirectionalLinkedList<T> {
    *
    * @return ArrayList of Node<T> objects
    */
-  ArrayList<Node<T>> getAllNodes() {
+  public List<Node<T>> getAllNodes() {
     ArrayList<Node<T>> foundNodes = new ArrayList<>();
     Node<T> currentNode = head;
     while (currentNode != null) {

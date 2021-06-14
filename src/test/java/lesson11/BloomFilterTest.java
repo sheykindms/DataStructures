@@ -18,12 +18,12 @@ class BloomFilterTest {
     String test1 = "this is";
     String test2 = "simple test";
     String test3 = "example of hash consistency";
-    assertEquals(bf.firstHashFun(test1), bf.firstHashFun(test1));
-    assertEquals(bf.firstHashFun(test2), bf.firstHashFun(test2));
-    assertEquals(bf.firstHashFun(test3), bf.firstHashFun(test3));
-    assertEquals(bf.secondHashFun(test1), bf.secondHashFun(test1));
-    assertEquals(bf.secondHashFun(test2), bf.secondHashFun(test2));
-    assertEquals(bf.secondHashFun(test3), bf.secondHashFun(test3));
+    assertEquals(bf.getFirstIndexAsHashFun(test1), bf.getFirstIndexAsHashFun(test1));
+    assertEquals(bf.getFirstIndexAsHashFun(test2), bf.getFirstIndexAsHashFun(test2));
+    assertEquals(bf.getFirstIndexAsHashFun(test3), bf.getFirstIndexAsHashFun(test3));
+    assertEquals(bf.getSecondIndexAsHashFun(test1), bf.getSecondIndexAsHashFun(test1));
+    assertEquals(bf.getSecondIndexAsHashFun(test2), bf.getSecondIndexAsHashFun(test2));
+    assertEquals(bf.getSecondIndexAsHashFun(test3), bf.getSecondIndexAsHashFun(test3));
   }
 
   @Test

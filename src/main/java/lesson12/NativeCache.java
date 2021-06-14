@@ -19,10 +19,10 @@ public class NativeCache<T> {
   }
 
   public static NativeCache withSizeAndClass(int size, Class clazz) {
-    return new NativeCache(size, clazz);
+    return new NativeCache<>(size, clazz);
   }
 
-  public int hashFun(String key) {
+  public int getIndexAsHashFun(String key) {
     if (key.isEmpty()) {
       return 0;
     }
@@ -35,10 +35,7 @@ public class NativeCache<T> {
 
   public boolean isKey(String key) {
     var foundIndex = seekSlot(key);
-    if (foundIndex == -1) {
-      return false;
-    }
-    return slots[foundIndex] != null;
+    return foundIndex != -1 && slots[foundIndex] != null;
   }
 
   public void put(String key, T value) {
@@ -78,7 +75,7 @@ public class NativeCache<T> {
   }
 
   private int seekSlot(String value) {
-    var expectedIndex = hashFun(value);
+    var expectedIndex = getIndexAsHashFun(value);
     var step = 1;
     var iterations = 0;
     while (slots[expectedIndex] != null) {

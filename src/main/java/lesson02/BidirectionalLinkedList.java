@@ -13,19 +13,19 @@ public class BidirectionalLinkedList {
 
   public void addNodeInTail(Node item) {
     if (head == null) {
-      this.head = item;
-      this.head.next = null;
-      this.head.prev = null;
+      head = item;
+      head.next = null;
+      head.prev = null;
     } else {
-      this.tail.next = item;
+      tail.next = item;
       item.prev = tail;
     }
-    this.tail = item;
+    tail = item;
   }
 
   public Node getNodeByValue(int value) {
-    if (this.head != null) {
-      var currentNode = this.head;
+    if (head != null) {
+      var currentNode = head;
       while (currentNode != null) {
         if (currentNode.value == value) return currentNode;
         currentNode = currentNode.next;
@@ -34,10 +34,10 @@ public class BidirectionalLinkedList {
     return null;
   }
 
-  public ArrayList<Node> getAllNodesByValue(int value) {
-    if (this.head != null) {
+  public List<Node> getAllNodesByValue(int value) {
+    if (head != null) {
       ArrayList<Node> foundNodes = new ArrayList<>();
-      var currentNode = this.head;
+      var currentNode = head;
       while (currentNode != null) {
         if (currentNode.value == value) foundNodes.add(currentNode);
         currentNode = currentNode.next;
@@ -50,14 +50,14 @@ public class BidirectionalLinkedList {
   public boolean removeNodeByValue(int value) {
     var foundNode = getNodeByValue(value);
     if (foundNode != null) {
-      if (this.tail.value == this.head.value && this.head.value == value && countNodes() == 1) {
+      if (tail.value == head.value && head.value == value && countNodes() == 1) {
         clearList();
-      } else if (this.tail.value == value) {
-        this.tail = this.tail.prev;
-        this.tail.next = null;
-      } else if (this.head.value == value) {
-        this.head = this.head.next;
-        this.head.prev = null;
+      } else if (tail.value == value) {
+        tail = tail.prev;
+        tail.next = null;
+      } else if (head.value == value) {
+        head = head.next;
+        head.prev = null;
       } else {
         foundNode.prev.next = foundNode.next;
         foundNode.next.prev = foundNode.prev;
@@ -74,12 +74,12 @@ public class BidirectionalLinkedList {
   }
 
   public void clearList() {
-    this.head = null;
-    this.tail = null;
+    head = null;
+    tail = null;
   }
 
   public int countNodes() {
-    var currentNode = this.head;
+    var currentNode = head;
     var numberOfNodes = 0;
     while (currentNode != null) {
       numberOfNodes++;
@@ -90,14 +90,14 @@ public class BidirectionalLinkedList {
 
   public void insertAfter(Node nodeAfter, Node nodeToInsert) {
     if (nodeAfter == null) {
-      nodeToInsert.next = this.head;
+      nodeToInsert.next = head;
       nodeToInsert.prev = null;
-      this.head = nodeToInsert;
-      if (this.tail == null) {
-        this.tail = nodeToInsert;
+      head = nodeToInsert;
+      if (tail == null) {
+        tail = nodeToInsert;
       }
     } else {
-      if (nodeAfter != this.tail) {
+      if (nodeAfter != tail) {
         nodeToInsert.next = nodeAfter.next;
         nodeAfter.next.prev = nodeToInsert;
         nodeAfter.next = nodeToInsert;
@@ -106,7 +106,7 @@ public class BidirectionalLinkedList {
       } else {
         nodeAfter.next = nodeToInsert;
         nodeToInsert.next = null;
-        this.tail = nodeToInsert;
+        tail = nodeToInsert;
       }
       nodeToInsert.prev = nodeAfter;
     }
@@ -114,9 +114,9 @@ public class BidirectionalLinkedList {
 }
 
 class Node {
-  public int value;
-  public Node next;
-  public Node prev;
+  public final int value;
+  Node next;
+  Node prev;
 
   public Node(int value) {
     this.value = value;

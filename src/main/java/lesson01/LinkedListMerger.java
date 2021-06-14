@@ -2,6 +2,9 @@ package lesson01;
 
 public class LinkedListMerger {
 
+  private LinkedListMerger() {
+  }
+
   public static UnidirectionalLinkedList sumOfLists(UnidirectionalLinkedList firstList, UnidirectionalLinkedList secondList) {
     var result = new UnidirectionalLinkedList();
     if (firstList.countNodes() == secondList.countNodes()) {

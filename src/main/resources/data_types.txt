@@ -1,0 +1,36 @@
+
+boolean outOfBounds = index < 0 || index >= count;
+//Вынесена булева переменная для повышения читаемости в методе getValueByIndex класса DynArray.
+
+boolean found
+//В классе NativeCache, в методах put и get для повышения читаемости вынесена проверка найден эелемент или нет.
+
+private static final String NUM_PATTERN_REGEX = "[0-9]"
+//Вынесена константа регулярного выражения на класс-левел.
+
+private static final String CLOSE_BRACKET = ")";
+//Magic string в классе BraceBalancer вынесен на класс-левел.
+
+private static final String OPEN_BRACKET = "(";
+//Magic string в классе BraceBalancer вынесен на класс-левел.
+
+Math.abs(hash)
+//В функциях вычисления хэша, например, в классе BloomFilter, переполнение стека решается получением абсолютного значения хэша
+
+private static final double INCREASING_MULTIPLIER = 2.0
+private static final double DECREASING_MULTIPLIER = 1.5
+//Константы мульттипликатора размера массива в классе DynArray представлены с двойной точностью
+
+boolean nextCharIsDigit
+//Сложночитаемая проверка на то: является ли следующий элемент цифрой в классе PostfixExpressionCalculator
+//вынесена в отдельный приватный метод
+
+boolean nextCharExists
+//Проверка на существование следующего char'a в цикле вынесена в отдельный приватный метод в классе PostfixExpressionCalculator
+
+boolean isOperand
+//Проверка на то, является ли следующий элемент операндом, вынесена в отдельную переменную в классе PostfixExpressionCalculator
+
+boolean isOperator
+//Проверка на то, является ли следующий элемент оператором, вынесена в отдельную переменную в классе PostfixExpressionCalculator
+

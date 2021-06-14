@@ -18,6 +18,9 @@ PostfixCalculator - PostfixExpressionCalculator
 OrderedList - OrderedBidirectionalLinkedList
 //Чёткое указание на двусвязность и ордеринг элементов.
 
+ParenthesesBalancer - BraceBalancer
+//Лексически более короткое и ясное имя. Совпадает по семантике с константами класс-левела
+
 3.2
 united - unite
 //Имя метода должно быть глаголом. Класс PowerSet.

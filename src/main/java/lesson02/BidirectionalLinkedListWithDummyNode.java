@@ -122,7 +122,6 @@ public class BidirectionalLinkedListWithDummyNode<E> {
       nodeToInsert.next = dummyHead.next;
       nodeToInsert.prev = dummyHead;
       dummyHead.next = nodeToInsert;
-
     } else {
       nodeAfter.next.prev = nodeToInsert;
       nodeToInsert.next = nodeAfter.next;
@@ -133,7 +132,7 @@ public class BidirectionalLinkedListWithDummyNode<E> {
 }
 
 class DNode<E> {
-  E value;
+  final E value;
   DNode<E> next;
   DNode<E> prev;
 

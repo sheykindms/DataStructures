@@ -19,9 +19,9 @@ c - currentElement
 element - elementToRemove
 //Имя переменной, которую мы получаем для удаления в классах Deque и Stack.
 
-num - digit
+num - number
 //Имя переменной в цикле метода calculate, в классе PostfixCalculator. Теперь акцент выставлен на то, что это
-//цифра(разряд) числа.
+//число, полученное результатом конкатенации цифр.
 
 DequePalindromeSolver - DequePalindromeValidator
 //Всё-таки класс предназначен для проверки строки, является она палиндромом или нет, поэтому "validate" - более подходящее слово.

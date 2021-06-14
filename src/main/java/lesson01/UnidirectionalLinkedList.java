@@ -12,13 +12,13 @@ public class UnidirectionalLinkedList {
   }
 
   public void addNodeInTail(Node item) {
-    if (this.head == null) this.head = item;
-    else this.tail.next = item;
-    this.tail = item;
+    if (head == null) head = item;
+    else tail.next = item;
+    tail = item;
   }
 
   public Node getNodeByValue(int value) {
-    var currentNode = this.head;
+    var currentNode = head;
     while (currentNode != null) {
       if (currentNode.value == value) return currentNode;
       currentNode = currentNode.next;
@@ -26,9 +26,9 @@ public class UnidirectionalLinkedList {
     return null;
   }
 
-  public ArrayList<Node> getAllNodesByValue(int value) {
+  public List<Node> getAllNodesByValue(int value) {
     ArrayList<Node> foundNodes = new ArrayList<>();
-    var currentNode = this.head;
+    var currentNode = head;
     while (currentNode != null) {
       if (currentNode.value == value) foundNodes.add(currentNode);
       currentNode = currentNode.next;
@@ -37,12 +37,12 @@ public class UnidirectionalLinkedList {
   }
 
   public boolean removeNodeByValue(int value) {
-    if (this.head != null) {
-      var currentNode = this.head;
+    if (head != null) {
+      var currentNode = head;
       if (currentNode.value == value) {
-        this.head = currentNode.next;
+        head = currentNode.next;
         if (currentNode.next == null) {
-          this.tail = null;
+          tail = null;
         }
         return true;
       } else {
@@ -53,7 +53,7 @@ public class UnidirectionalLinkedList {
               return true;
             } else {
               currentNode.next = null;
-              this.tail = currentNode;
+              tail = currentNode;
             }
             return true;
           }
@@ -65,19 +65,19 @@ public class UnidirectionalLinkedList {
   }
 
   public void removeAllNodesByValue(int value) {
-    ArrayList<Node> foundNodes = getAllNodesByValue(value);
+    List<Node> foundNodes = getAllNodesByValue(value);
     for (Node node : foundNodes) {
       removeNodeByValue(node.value);
     }
   }
 
   public void clearList() {
-    this.head = null;
-    this.tail = null;
+    head = null;
+    tail = null;
   }
 
   public int countNodes() {
-    var currentNode = this.head;
+    var currentNode = head;
     var numberOfNodes = 0;
     while (currentNode != null) {
       numberOfNodes++;
@@ -88,24 +88,24 @@ public class UnidirectionalLinkedList {
 
   public void insertAfter(Node nodeAfter, Node nodeToInsert) {
     if (nodeAfter == null) {
-      nodeToInsert.next = this.head;
-      this.head = nodeToInsert;
-      if (this.head.next == null) {
-        this.tail = nodeToInsert;
+      nodeToInsert.next = head;
+      head = nodeToInsert;
+      if (head.next == null) {
+        tail = nodeToInsert;
       }
     } else if (getNodeByValue(nodeAfter.value) != null) {
       nodeToInsert.next = nodeAfter.next;
       nodeAfter.next = nodeToInsert;
       if (nodeToInsert.next == null) {
-        this.tail = nodeToInsert;
+        tail = nodeToInsert;
       }
     }
   }
 }
 
 class Node {
-  public int value;
-  public Node next;
+  final int value;
+  Node next;
 
   public Node(int value) {
     this.value = value;

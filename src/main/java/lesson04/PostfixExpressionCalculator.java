@@ -13,18 +13,19 @@ public class PostfixExpressionCalculator {
    */
   public int calculate(String expression) {
     var data = new Stack<String>();
-    for (var currentIndexFromEnd = expression.length() - 1; currentIndexFromEnd >= 0; currentIndexFromEnd--) {
-      String currentElement = expression.charAt(currentIndexFromEnd) + "";
-      String digit = currentElement;
+    for (var currentIndex = expression.length() - 1; currentIndex >= 0; currentIndex--) {
+      String currentElement = expression.charAt(currentIndex) + "";
+      String number = currentElement;
       boolean isOperator = Operators.contains(currentElement);
-      if (currentElement.matches(NUM_PATTERN_REGEX)) {
-        while(currentIndexFromEnd - 1 >= 0 && (expression.charAt(currentIndexFromEnd - 1) + "").matches(NUM_PATTERN_REGEX)) {
-          String nextDigitToAppend = expression.charAt(--currentIndexFromEnd) + "";
-          digit = nextDigitToAppend + digit;
+      boolean isOperand = currentElement.matches(NUM_PATTERN_REGEX);
+      if (isOperand) {
+        while(nextCharExists(currentIndex) && nextCharIsDigit(expression, currentIndex)) {
+          String nextDigitToAppend = expression.charAt(--currentIndex) + "";
+          number = nextDigitToAppend + number;
         }
-        data.push(digit);
+        data.push(number);
       }
-      else if(isOperator) {
+      else if (isOperator) {
         data.push(currentElement);
       }
       else if (!currentElement.isBlank()) {
@@ -36,7 +37,7 @@ public class PostfixExpressionCalculator {
     while (data.size() > 0) {
       String poppedElement = data.pop();
       boolean isOperator = Operators.contains(poppedElement);
-      if(isOperator) {
+      if (isOperator) {
         operands.push(processResult(poppedElement.charAt(0), operands.pop(), operands.pop()));
       } else {
         operands.push(Integer.valueOf(poppedElement));
@@ -45,13 +46,14 @@ public class PostfixExpressionCalculator {
     return operands.pop();
   }
 
-  /**
-   *
-   * @param operator to compare and process operation
-   * @param secondOperand second operand
-   * @param firstOperand first operand
-   * @return result of algebraic operation
-   */
+  private boolean nextCharIsDigit(String expression, int index) {
+    return (expression.charAt(index - 1) + "").matches(NUM_PATTERN_REGEX);
+  }
+
+  private boolean nextCharExists(int index) {
+    return index - 1 >= 0;
+  }
+
   private int processResult(Character operator, Integer secondOperand, Integer firstOperand) {
     return switch (operator) {
       case '*' -> firstOperand * secondOperand;
@@ -61,22 +63,23 @@ public class PostfixExpressionCalculator {
       default -> 0;
     };
   }
+
   private enum Operators {
     PLUS("+") , MINUS("-"), DIVIDE("/"), MULTIPLY("*");
 
-    private final String operand;
+    private final String operator;
 
-    Operators(String operand) {
-      this.operand = operand;
+    Operators(String operator) {
+      this.operator = operator;
     }
 
-    public String getOperand() {
-      return operand;
+    public String getOperator() {
+      return operator;
     }
 
     public static boolean contains(String value) {
-      for(Operators o: Operators.values()) {
-        if(o.getOperand().equals(value)) {
+      for (Operators o: Operators.values()) {
+        if (o.getOperator().equals(value)) {
           return true;
         }
       }

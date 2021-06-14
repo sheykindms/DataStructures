@@ -2,7 +2,7 @@ package lesson09;
 
 import java.lang.reflect.Array;
 
-class NativeDictionary<T> {
+public class NativeDictionary<T> {
   public int size;
   public String[] slots;
   public T[] values;

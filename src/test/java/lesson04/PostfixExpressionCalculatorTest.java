@@ -10,6 +10,9 @@ class PostfixExpressionCalculatorTest {
 
   @Test
   void calculate() {
+    String expression4 = "1000 200 / 30 * 15 /";
+    assertEquals(10, pc.calculate(expression4));
+
     String expression1 = "8 2 + 5 * 9 +";
     assertEquals(59, pc.calculate(expression1));
 
@@ -18,9 +21,6 @@ class PostfixExpressionCalculatorTest {
 
     String expression3 = "170  2 / 3 * 2 + 7 - 2 / 25 /";
     assertEquals(5, pc.calculate(expression3));
-
-    String expression4 = "1000 200 / 30 * 15 /";
-    assertEquals(10, pc.calculate(expression4));
   }
 
   @Test
