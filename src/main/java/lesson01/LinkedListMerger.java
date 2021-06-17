@@ -2,11 +2,11 @@ package lesson01;
 
 public class LinkedListMerger {
 
-  private LinkedListMerger() {
-  }
+  private LinkedListMerger() {}
 
-  public static UnidirectionalLinkedList sumOfLists(UnidirectionalLinkedList firstList, UnidirectionalLinkedList secondList) {
-    var result = new UnidirectionalLinkedList();
+  public static UnidirectionalLinkedList sumLists(
+      UnidirectionalLinkedList firstList, UnidirectionalLinkedList secondList) {
+    final var result = new UnidirectionalLinkedList();
     if (firstList.countNodes() == secondList.countNodes()) {
       var firstListNode = firstList.head;
       var secondListNode = secondList.head;
@@ -15,6 +15,8 @@ public class LinkedListMerger {
         firstListNode = firstListNode.next;
         secondListNode = secondListNode.next;
       }
+    } else {
+      throw new IllegalArgumentException("Lists have different lengths");
     }
     return result;
   }

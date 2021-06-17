@@ -36,7 +36,7 @@ public class DynArray<T> {
   }
 
   public T getValueByIndex(int index) {
-    boolean outOfBounds = index < 0 || index >= count;
+    final boolean outOfBounds = index < 0 || index >= count;
     if (outOfBounds) {
       throw new ArrayIndexOutOfBoundsException();
     }
@@ -69,7 +69,7 @@ public class DynArray<T> {
   }
 
   public void removeByIndex(int index) {
-    boolean outOfBounds = index < 0 || index >= count;
+    final boolean outOfBounds = index < 0 || index >= count;
     if (outOfBounds) {
       throw new ArrayIndexOutOfBoundsException();
     } else if (count - 1 < capacity / INCREASING_MULTIPLIER) {

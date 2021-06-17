@@ -27,7 +27,7 @@ public class UnidirectionalLinkedList {
   }
 
   public List<Node> getAllNodesByValue(int value) {
-    ArrayList<Node> foundNodes = new ArrayList<>();
+    final List<Node> foundNodes = new ArrayList<>();
     var currentNode = head;
     while (currentNode != null) {
       if (currentNode.value == value) foundNodes.add(currentNode);
@@ -65,7 +65,7 @@ public class UnidirectionalLinkedList {
   }
 
   public void removeAllNodesByValue(int value) {
-    List<Node> foundNodes = getAllNodesByValue(value);
+    final List<Node> foundNodes = getAllNodesByValue(value);
     for (Node node : foundNodes) {
       removeNodeByValue(node.value);
     }

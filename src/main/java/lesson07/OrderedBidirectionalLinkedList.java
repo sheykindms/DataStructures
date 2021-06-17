@@ -4,7 +4,8 @@ import java.util.*;
 
 class Node<T> {
   final T value;
-  Node<T> next, prev;
+  Node<T> next;
+  Node<T> prev;
 
   public Node(T value) {
     this.value = value;
@@ -14,7 +15,8 @@ class Node<T> {
 }
 
 public class OrderedBidirectionalLinkedList<T> {
-  public Node<T> head, tail;
+  public Node<T> head;
+  public Node<T> tail;
   private boolean isAscending;
 
   public OrderedBidirectionalLinkedList(boolean isAscending) {
@@ -44,7 +46,7 @@ public class OrderedBidirectionalLinkedList<T> {
    * @param value to add according to ordering
    */
   public void addValue(T value) {
-    Node<T> newNode = new Node<>(value);
+    final Node<T> newNode = new Node<>(value);
     if (head == null) {
       head = newNode;
       tail = newNode;
@@ -134,7 +136,7 @@ public class OrderedBidirectionalLinkedList<T> {
    * @param value to be found and deleted
    */
   public void removeNodeByValue(T value) {
-    var foundNode = getNodeByValue(value);
+    final var foundNode = getNodeByValue(value);
     if (foundNode != null) {
       if (head.value == tail.value && head.value.equals(value) && countNodes() == 1) {
         clearList(isAscending);
@@ -183,7 +185,7 @@ public class OrderedBidirectionalLinkedList<T> {
    * @return ArrayList of Node<T> objects
    */
   public List<Node<T>> getAllNodes() {
-    ArrayList<Node<T>> foundNodes = new ArrayList<>();
+    final ArrayList<Node<T>> foundNodes = new ArrayList<>();
     Node<T> currentNode = head;
     while (currentNode != null) {
       foundNodes.add(currentNode);

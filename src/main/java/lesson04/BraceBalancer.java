@@ -13,9 +13,10 @@ public class BraceBalancer {
         || !expression.contains(CLOSE_BRACKET)
         || !expression.contains(OPEN_BRACKET)) return false;
 
-    Stack<String> stack = new Stack<>();
+    final Stack<String> stack = new Stack<>();
+    String currentChar;
     for (var i = 0; i < expression.length(); i++) {
-      var currentChar = expression.substring(i, i + 1);
+      currentChar = expression.substring(i, i + 1);
       if (currentChar.equals(OPEN_BRACKET)) {
         stack.push(currentChar);
       } else if (currentChar.equals(CLOSE_BRACKET)) {

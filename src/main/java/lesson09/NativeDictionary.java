@@ -7,6 +7,8 @@ public class NativeDictionary<T> {
   public String[] slots;
   public T[] values;
 
+  private static final int HASH_FUN_MULTIPLIER = 31;
+
   public NativeDictionary(int size, Class clazz) {
     this.size = size;
     slots = new String[this.size];
@@ -14,20 +16,19 @@ public class NativeDictionary<T> {
   }
 
   public int getIndexAsHashFun(String key) {
-    final var multiplier = 31;
     if (key.isEmpty()) {
       return 0;
     }
     var hash = 1;
     for (char c : key.toCharArray()) {
-      hash = hash * multiplier + c;
+      hash = hash * HASH_FUN_MULTIPLIER + c;
     }
     return Math.abs(hash) % size;
   }
 
   public boolean isKey(String key) {
-    var foundIndex = seekSlot(key);
-    boolean found = foundIndex != -1;
+    final var foundIndex = seekSlot(key);
+    final boolean found = foundIndex != -1;
     if (!found) {
       return false;
     }
@@ -35,8 +36,8 @@ public class NativeDictionary<T> {
   }
 
   public void put(String key, T value) {
-    var foundIndex = seekSlot(key);
-    boolean found = foundIndex != -1;
+    final var foundIndex = seekSlot(key);
+    final boolean found = foundIndex != -1;
     if (!found) {
       return;
     }
@@ -45,8 +46,8 @@ public class NativeDictionary<T> {
   }
 
   public T getValueByKey(String key) {
-    var foundIndex = seekSlot(key);
-    boolean found = foundIndex != -1 && slots[foundIndex] != null;
+    final var foundIndex = seekSlot(key);
+    final boolean found = foundIndex != -1 && slots[foundIndex] != null;
     if (!found) {
       return null;
     }

@@ -1,0 +1,88 @@
+1)
+var result = new UnidirectionalLinkedList() -> final var result = new UnidirectionalLinkedList()
+//LinkedListMerger - метод sumOfLists, лист сделан финальным.
+2)
+List<Node> foundNodes = new ArrayList<>() -> final List<Node> foundNodes = new ArrayList<>()
+//UnidirectionalLinkedList - метод getAllNodesByValue, лист сделан финальным.
+3)
+ArrayList<Node> foundNodes = getAllNodesByValue(value) -> final List<Node> foundNodes = getAllNodesByValue(value)
+//UnidirectionalLinkedList, BidirectionalLinkedList, BidirectionalLinkedListWithDummyNode - метод removeAllNodesByValue
+//лист сделан финальным.
+4)
+int value -> final int value;
+//Node - поле класса, содержащее значение ноды, сделано финальным, т.к. по логике мутировать могут только ссылки на
+//предыдущее и следующее значения.
+5)
+var foundNode = getNodeByValue(value) -> final var foundNode = getNodeByValue(value)
+//BidirectionalLinkedList, OrderedBidirectionalLinkedList - метод removeNodeByValue, полученная нода сделана финальной.
+6)
+boolean outOfBounds = index < 0 || index >= count -> final boolean outOfBounds = index < 0 || index >= count
+//DynArray - метод getValueByIndex, removeByIndex, булево условие сделано иммутабельным.
+7)
+Stack<String> stack = new Stack<>() -> final Stack<String> stack = new Stack<>()
+//BraceBalancer - isBalanced, булево условие сделано иммутабельным.
+8)
+var data = new Stack<String>() -> final var data = new Stack<String>()
+//PostfixExpressionCalculator - метод calculate, хранилище разобранного постфиксного выражения финализирован.
+9)
+-String currentChar
+-String currentElement
+-String number
+-boolean isOperator
+-boolean isOperand
+//PostfixExpressionCalculator - метод calculate, объявления переменных вынесены из тела цикла, непосредственно перед самим циклом.
+10)
+var operands = new Stack<Integer>() -> final var operands = new Stack<Integer>()
+//PostfixExpressionCalculator - метод calculate, ссылка на хранилище операндов финализирована.
+11)
+String poppedElement
+//PostfixExpressionCalculator - метод calculate, объявление переменной вынесено из тела цикла.
+12)
+-var elementToRemove = stack.get(0) -> final var elementToRemove = stack.get(0)
+-var elementToRemove = deque.get(deque.size() - 1) -> final var elementToRemove = deque.get(deque.size() - 1)
+//Stack - метод pop, полученное значение финализировано.
+//Deque - аналогично.
+13)
+var element = queue.get(0) -> final var element = queue.get(0)
+//Queue - метод dequeue, полученное значение финализировано.
+14)
+Deque<Character> deq = new Deque<>() -> final Deque<Character> deq = new Deque<>()
+//DequePalindromeValidator - isPalindrome, ссылка на коллекцию финализирована.
+15)
+Node<T> newNode = new Node<>(value) -> final Node<T> newNode = new Node<>(value)
+//OrderedBidirectionalLinkedList - метод addValue, полученная нода сделана иммутабельной.
+16)
+ArrayList<Node<T>> foundNodes = new ArrayList<>() -> final ArrayList<Node<T>> foundNodes = new ArrayList<>()
+//OrderedBidirectionalLinkedList - getAllNodes
+17)
+int foundIndex = seekSlot(value) -> final int foundIndex = seekSlot(value)
+//HashTable - метод findIndexByValue, put
+//NativeDictionary - метод isKey, getValueByKey
+18)
+boolean found = foundIndex != -1 && slots[foundIndex] != null -> final boolean found = foundIndex != -1 && slots[foundIndex] != null
+//HashTable - метод findIndexByValue булева переменная иммутабельна.
+//NativeDictionary - метод getValueByKey аналогично.
+19)
+boolean found = foundIndex != -1 -> final boolean found = foundIndex != -1
+//NativeDictionary - метод put, булево условие финализировано.
+20)
+-var diffSet = new PowerSet() -> final var diffSet = new PowerSet()
+-var unitedSet = new PowerSet() -> final var unitedSet = new PowerSet()
+-var intersectedSet = new PowerSet() -> final var intersectedSet = new PowerSet()
+//PowerSet - методы intersect, diff, unite: объявления коллекций иммутабельны.
+21)
+int currentCharAsciiCode
+//BloomFilter - метод getFirstIndexAsHashFun, getSecondIndexAsHashFun - вынесено объявление переменной из цикла.
+22)
+-var firstIndexOfBitToSet = getFirstIndexAsHashFun(value) -> final var firstIndexOfBitToSet = getFirstIndexAsHashFun(value)
+-var secondIndexOfBitToSet = getSecondIndexAsHashFun(value) -> final var secondIndexOfBitToSet = getSecondIndexAsHashFun(value)
+//BloomFilter - метод add, isValue, получаемые переменные из хэш-функции финализированы.
+23)
+static final int SECOND_HASH_FUN_BITSHIFT = 2;
+//BloomFilter - метод getSecondIndexAsHashFun, переменная вынесена как константа на класс-левел.
+24)
+throw new IllegalArgumentException("Lists have different lengths")
+//Добавлена обработка случая, когда переданные листы имеют разную длину в методе sumLists, классе LinkedListMerger
+25)
+throw new IllegalArgumentException("Expression is invalid");
+//Обработка некорректного переданного выражения в метод calculate класса PostfixExpressionCalculator.

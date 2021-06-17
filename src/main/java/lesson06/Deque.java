@@ -22,7 +22,7 @@ public class Deque<T> {
     if (deque.isEmpty()) {
       return null;
     }
-    var elementToRemove = deque.get(0);
+    final var elementToRemove = deque.get(0);
     deque.remove(elementToRemove);
     return elementToRemove;
   }
@@ -31,7 +31,7 @@ public class Deque<T> {
     if (deque.isEmpty()) {
       return null;
     }
-    var elementToRemove = deque.get(deque.size() - 1);
+    final var elementToRemove = deque.get(deque.size() - 1);
     deque.remove(elementToRemove);
     return elementToRemove;
   }

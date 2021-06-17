@@ -6,7 +6,7 @@ public class HashTable {
   public int step;
   public String[] slots;
 
-  static final int HASH_FUN_MULTIPLIER = 31;
+  private static final int HASH_FUN_MULTIPLIER = 31;
 
   public HashTable(int size, int step) {
     this.size = size;
@@ -39,7 +39,7 @@ public class HashTable {
    * @return index in array or -1
    */
   public int seekSlot(String value) {
-    int foundIndex = getIndexAsHashFun(value);
+    var foundIndex = getIndexAsHashFun(value);
     var iterations = 0;
     while (slots[foundIndex] != null) {
       if (slots[foundIndex].equals(value)) {
@@ -64,7 +64,7 @@ public class HashTable {
    * @return index of element in array or -1
    */
   public int put(String value) {
-    int foundIndex = seekSlot(value);
+    final var foundIndex = seekSlot(value);
     boolean found = foundIndex != -1;
     if (found) {
       slots[foundIndex] = value;
@@ -79,8 +79,8 @@ public class HashTable {
    * @return index of element or -1
    */
   public int findIndexByValue(String value) {
-    int foundIndex = seekSlot(value);
-    boolean found = foundIndex != -1 && slots[foundIndex] != null;
+    final var foundIndex = seekSlot(value);
+    final boolean found = foundIndex != -1 && slots[foundIndex] != null;
     if (!found) {
       return -1;
     }

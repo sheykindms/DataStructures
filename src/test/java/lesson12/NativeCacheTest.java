@@ -3,9 +3,6 @@ package lesson12;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class NativeCacheTest {
@@ -23,16 +20,16 @@ class NativeCacheTest {
     cache.put("test2", "val2");
     cache.put("test3", "val3");
 
-    assertEquals("val1", cache.get("test1"));
-    assertEquals("val1", cache.get("test1"));
-    assertEquals("val2", cache.get("test2"));
+    assertEquals("val1", cache.getByKey("test1"));
+    assertEquals("val1", cache.getByKey("test1"));
+    assertEquals("val2", cache.getByKey("test2"));
 
     cache.put("new", "element");
-    assertEquals("element", cache.get("new"));
-    assertNull(cache.get("test3"));
+    assertEquals("element", cache.getByKey("new"));
+    assertNull(cache.getByKey("test3"));
 
     cache.put("last", "one");
-    assertEquals("one", cache.get("last"));
-    assertNull(cache.get("test2"));
+    assertEquals("one", cache.getByKey("last"));
+    assertNull(cache.getByKey("test2"));
   }
 }

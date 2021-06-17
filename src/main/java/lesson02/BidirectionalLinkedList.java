@@ -35,20 +35,17 @@ public class BidirectionalLinkedList {
   }
 
   public List<Node> getAllNodesByValue(int value) {
-    if (head != null) {
-      ArrayList<Node> foundNodes = new ArrayList<>();
+      final List<Node> foundNodes = new ArrayList<>();
       var currentNode = head;
       while (currentNode != null) {
         if (currentNode.value == value) foundNodes.add(currentNode);
         currentNode = currentNode.next;
       }
       return foundNodes;
-    }
-    return new ArrayList<>();
   }
 
   public boolean removeNodeByValue(int value) {
-    var foundNode = getNodeByValue(value);
+    final var foundNode = getNodeByValue(value);
     if (foundNode != null) {
       if (tail.value == head.value && head.value == value && countNodes() == 1) {
         clearList();
@@ -114,7 +111,7 @@ public class BidirectionalLinkedList {
 }
 
 class Node {
-  public final int value;
+  final int value;
   Node next;
   Node prev;
 

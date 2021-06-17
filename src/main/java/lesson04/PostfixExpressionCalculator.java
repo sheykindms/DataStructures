@@ -12,12 +12,16 @@ public class PostfixExpressionCalculator {
    * @return Integer result of calculation
    */
   public int calculate(String expression) {
-    var data = new Stack<String>();
+    final var data = new Stack<String>();
+    String currentElement;
+    String number;
+    boolean isOperator;
+    boolean isOperand;
     for (var currentIndex = expression.length() - 1; currentIndex >= 0; currentIndex--) {
-      String currentElement = expression.charAt(currentIndex) + "";
-      String number = currentElement;
-      boolean isOperator = Operators.contains(currentElement);
-      boolean isOperand = currentElement.matches(NUM_PATTERN_REGEX);
+      currentElement = expression.charAt(currentIndex) + "";
+      number = currentElement;
+      isOperator = Operators.contains(currentElement);
+      isOperand = currentElement.matches(NUM_PATTERN_REGEX);
       if (isOperand) {
         while(nextCharExists(currentIndex) && nextCharIsDigit(expression, currentIndex)) {
           String nextDigitToAppend = expression.charAt(--currentIndex) + "";
@@ -33,12 +37,13 @@ public class PostfixExpressionCalculator {
       }
     }
 
-    var operands = new Stack<Integer>();
+    final var operands = new Stack<Integer>();
+    String poppedElement;
     while (data.size() > 0) {
-      String poppedElement = data.pop();
-      boolean isOperator = Operators.contains(poppedElement);
+      poppedElement = data.pop();
+      isOperator = Operators.contains(poppedElement);
       if (isOperator) {
-        operands.push(processResult(poppedElement.charAt(0), operands.pop(), operands.pop()));
+        operands.push(processResult(poppedElement, operands.pop(), operands.pop()));
       } else {
         operands.push(Integer.valueOf(poppedElement));
       }
@@ -54,36 +59,27 @@ public class PostfixExpressionCalculator {
     return index - 1 >= 0;
   }
 
-  private int processResult(Character operator, Integer secondOperand, Integer firstOperand) {
+  private int processResult(String operator, Integer secondOperand, Integer firstOperand) {
     return switch (operator) {
-      case '*' -> firstOperand * secondOperand;
-      case '/' -> firstOperand / secondOperand;
-      case '+' -> firstOperand + secondOperand;
-      case '-' -> firstOperand - secondOperand;
+      case Operators.MULTIPLY -> firstOperand * secondOperand;
+      case Operators.DIVIDE -> firstOperand / secondOperand;
+      case Operators.PLUS -> firstOperand + secondOperand;
+      case Operators.MINUS -> firstOperand - secondOperand;
       default -> 0;
     };
   }
 
-  private enum Operators {
-    PLUS("+") , MINUS("-"), DIVIDE("/"), MULTIPLY("*");
+  private interface Operators {
+    String PLUS ="+";
+    String MINUS = "-";
+    String DIVIDE= "/";
+    String MULTIPLY= "*";
 
-    private final String operator;
-
-    Operators(String operator) {
-      this.operator = operator;
-    }
-
-    public String getOperator() {
-      return operator;
-    }
-
-    public static boolean contains(String value) {
-      for (Operators o: Operators.values()) {
-        if (o.getOperator().equals(value)) {
-          return true;
-        }
-      }
-      return false;
+    static boolean contains(String value) {
+      return value.equals(PLUS)
+              || value.equals(MINUS)
+              || value.equals(DIVIDE)
+              || value.equals(MULTIPLY);
     }
   }
 }

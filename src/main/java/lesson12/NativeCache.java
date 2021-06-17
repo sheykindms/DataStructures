@@ -34,13 +34,13 @@ public class NativeCache<T> {
   }
 
   public boolean isKey(String key) {
-    var foundIndex = seekSlot(key);
+    final var foundIndex = seekSlot(key);
     return foundIndex != -1 && slots[foundIndex] != null;
   }
 
   public void put(String key, T value) {
-    var foundIndex = seekSlot(key);
-    boolean found = foundIndex != -1;
+    final var foundIndex = seekSlot(key);
+    final boolean found = foundIndex != -1;
     if (!found) {
       replaceWithNew(key, value);
     } else {
@@ -50,9 +50,9 @@ public class NativeCache<T> {
     }
   }
 
-  public T get(String key) {
-    var foundIndex = seekSlot(key);
-    boolean found = foundIndex != -1 && slots[foundIndex] != null;
+  public T getByKey(String key) {
+    final var foundIndex = seekSlot(key);
+    final boolean found = foundIndex != -1 && slots[foundIndex] != null;
     if (!found) {
       return null;
     }

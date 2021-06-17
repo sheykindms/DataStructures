@@ -32,7 +32,7 @@ public class PowerSet {
   }
 
   public PowerSet intersect(PowerSet secondSet) {
-    var intersectedSet = new PowerSet();
+    final var intersectedSet = new PowerSet();
     for (String s : set) {
       if (secondSet.getByValue(s)) {
         intersectedSet.put(s);
@@ -42,7 +42,7 @@ public class PowerSet {
   }
 
   public PowerSet unite(PowerSet secondSet) {
-    var unitedSet = new PowerSet();
+    final var unitedSet = new PowerSet();
     for (String s : set) {
       unitedSet.put(s);
     }
@@ -55,7 +55,7 @@ public class PowerSet {
   }
 
   public PowerSet diff(PowerSet secondSet) {
-    var diffSet = new PowerSet();
+    final var diffSet = new PowerSet();
     for (String s : set) {
       if (!secondSet.getByValue(s)) {
         diffSet.put(s);

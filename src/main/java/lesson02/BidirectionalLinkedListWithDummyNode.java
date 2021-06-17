@@ -50,7 +50,7 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @return instance of List containing founded objects or empty List otherwise
    */
   public List<DNode<E>> getAllNodeByValue(E value) {
-    ArrayList<DNode<E>> foundNodes = new ArrayList<>();
+    final List<DNode<E>> foundNodes = new ArrayList<>();
     DNode<E> currentNode = dummyHead.next;
     while (currentNode != dummyTail) {
       if (currentNode.value.equals(value)) {

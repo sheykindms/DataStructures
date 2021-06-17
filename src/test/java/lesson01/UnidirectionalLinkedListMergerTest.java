@@ -40,18 +40,20 @@ class UnidirectionalLinkedListMergerTest {
   @Test
   void sumOfListsWithIncorrectLengths() {
     fillWithIncorrectLengths();
-    assertEquals(0, LinkedListMerger.sumOfLists(firstList, secondList).countNodes());
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> LinkedListMerger.sumLists(firstList, secondList).countNodes());
   }
 
   @Test
   void sumOfListsWhenBothAreEmpty() {
-    assertEquals(0, LinkedListMerger.sumOfLists(firstList, secondList).countNodes());
+    assertEquals(0, LinkedListMerger.sumLists(firstList, secondList).countNodes());
   }
 
   @Test
   void sumOfLists() {
     fillTheLists();
-    UnidirectionalLinkedList result = LinkedListMerger.sumOfLists(secondList, firstList);
+    UnidirectionalLinkedList result = LinkedListMerger.sumLists(secondList, firstList);
     assertEquals(6, result.head.value);
     assertEquals(12, result.tail.value);
   }

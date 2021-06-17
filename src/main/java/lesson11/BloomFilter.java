@@ -9,6 +9,7 @@ public class BloomFilter {
 
   static final int FIRST_HASH_FUN_MULTIPLIER = 17;
   static final int SECOND_HASH_FUN_MULTIPLIER = 233;
+  static final int SECOND_HASH_FUN_BITSHIFT = 2;
 
   private BloomFilter(int filterLength) {
     this.filterLength = filterLength;
@@ -30,24 +31,24 @@ public class BloomFilter {
 
   public int getSecondIndexAsHashFun(String value) {
     var hash = 0;
-    var bitShift = 2;
+    int currentCharAsciiCode;
     for (var i = 0; i < value.length(); i++) {
-      int currentCharAsciiCode = value.charAt(i);
-      hash |= (hash * SECOND_HASH_FUN_MULTIPLIER + currentCharAsciiCode) << bitShift;
+      currentCharAsciiCode = value.charAt(i);
+      hash |= (hash * SECOND_HASH_FUN_MULTIPLIER + currentCharAsciiCode) << SECOND_HASH_FUN_BITSHIFT;
     }
     return Math.abs(hash) % filterLength;
   }
 
   public void add(String value) {
-    int firstIndexOfBitToSet = getFirstIndexAsHashFun(value);
-    int secondIndexOfBitToSet = getSecondIndexAsHashFun(value);
+    final var firstIndexOfBitToSet = getFirstIndexAsHashFun(value);
+    final var secondIndexOfBitToSet = getSecondIndexAsHashFun(value);
     bits.set(firstIndexOfBitToSet);
     bits.set(secondIndexOfBitToSet);
   }
 
   public boolean isValue(String value) {
-    int firstIndexOfBitToCheck = getFirstIndexAsHashFun(value);
-    int secondIndexOfBitToCheck = getSecondIndexAsHashFun(value);
+    final var firstIndexOfBitToCheck = getFirstIndexAsHashFun(value);
+    final var secondIndexOfBitToCheck = getSecondIndexAsHashFun(value);
     return bits.get(firstIndexOfBitToCheck) && bits.get(secondIndexOfBitToCheck);
   }
 }
