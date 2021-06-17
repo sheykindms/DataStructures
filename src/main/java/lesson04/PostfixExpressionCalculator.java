@@ -19,10 +19,10 @@ public class PostfixExpressionCalculator {
     boolean isOperand;
     for (var currentIndex = expression.length() - 1; currentIndex >= 0; currentIndex--) {
       currentElement = expression.charAt(currentIndex) + "";
-      number = currentElement;
       isOperator = Operators.contains(currentElement);
       isOperand = currentElement.matches(NUM_PATTERN_REGEX);
       if (isOperand) {
+        number = currentElement;
         while(nextCharExists(currentIndex) && nextCharIsDigit(expression, currentIndex)) {
           String nextDigitToAppend = expression.charAt(--currentIndex) + "";
           number = nextDigitToAppend + number;

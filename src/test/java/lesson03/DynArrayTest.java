@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DynArrayTest {
 
-  DynArray<Integer> array;
+  private DynArray<Integer> array;
 
   @BeforeEach
   void setUp() {
@@ -31,9 +31,9 @@ class DynArrayTest {
   void getItemWhenOneElement() {
     fillDynArrayWithOneElement();
     assertEquals(100, array.getValueByIndex(0));
-    array.removeByIndex(array.count - 1);
-    assertEquals(0, array.count);
-    assertEquals(16, array.capacity);
+    array.removeByIndex(array.getCount() - 1);
+    assertEquals(0, array.getCount());
+    assertEquals(16, array.getCapacity());
     assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getValueByIndex(16));
   }
 
@@ -50,17 +50,17 @@ class DynArrayTest {
 
   @Test
   void appendWhenEmptyArray() {
-    assertEquals(16, array.capacity);
-    assertEquals(0, array.count);
+    assertEquals(16, array.getCapacity());
+    assertEquals(0, array.getCount());
     array.append(10);
     array.append(20);
     array.append(30);
     array.append(30);
     array.append(40);
     array.append(50);
-    assertEquals(16, array.capacity);
-    assertEquals(array.array.length, array.capacity);
-    assertEquals(6, array.count);
+    assertEquals(16, array.getCapacity());
+    assertEquals(array.getArray().length, array.getCapacity());
+    assertEquals(6, array.getCount());
   }
 
   @Test
@@ -78,16 +78,16 @@ class DynArrayTest {
     while (sixteen != 0) {
       array.insertValueByIndex(sixteen--, 0);
     }
-    assertEquals(16, array.capacity);
+    assertEquals(16, array.getCapacity());
     array.insertValueByIndex(17, 16);
-    assertEquals(32, array.capacity);
+    assertEquals(32, array.getCapacity());
     array.removeByIndex(0);
     array.removeByIndex(0);
-    while (array.count != 0) {
+    while (array.getCount() != 0) {
       array.removeByIndex(0);
     }
-    assertEquals(0, array.count);
-    assertEquals(16, array.capacity);
+    assertEquals(0, array.getCount());
+    assertEquals(16, array.getCapacity());
   }
 
   @Test
@@ -96,15 +96,15 @@ class DynArrayTest {
     while (sixtyFour != 0) {
       array.insertValueByIndex(sixtyFour--, 0);
     }
-    assertEquals(64, array.capacity);
-    assertEquals(64, array.count);
+    assertEquals(64, array.getCapacity());
+    assertEquals(64, array.getCount());
     array.insertValueByIndex(100, 64);
-    assertEquals(65, array.count);
-    assertEquals(128, array.capacity);
+    assertEquals(65, array.getCount());
+    assertEquals(128, array.getCapacity());
     array.removeByIndex(0);
-    assertEquals(128, array.capacity);
+    assertEquals(128, array.getCapacity());
     array.removeByIndex(22);
-    assertEquals(85, array.capacity);
+    assertEquals(85, array.getCapacity());
   }
 
   @Test
@@ -118,34 +118,34 @@ class DynArrayTest {
     fillDynArrayWithOneElement();
     assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.removeByIndex(1));
     array.removeByIndex(0);
-    assertEquals(0, array.count);
-    assertEquals(16, array.capacity);
+    assertEquals(0, array.getCount());
+    assertEquals(16, array.getCapacity());
   }
 
   @Test
   void removeWhenManyElementsInArray() {
     fillDynArrayWithManyElements();
-    assertEquals(6, array.count);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    assertEquals(0, array.count);
-    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.removeByIndex(array.count - 1));
-    assertEquals(0, array.count);
-    assertEquals(16, array.capacity);
+    assertEquals(6, array.getCount());
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    assertEquals(0, array.getCount());
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.removeByIndex(array.getCount() - 1));
+    assertEquals(0, array.getCount());
+    assertEquals(16, array.getCapacity());
   }
 
   @Test
   void appendTwoElementsThenInsertTwoElementsThenRemoveFourElements() {
     array.append(0);
     array.append(1);
-    assertEquals(2, array.count);
+    assertEquals(2, array.getCount());
     array.insertValueByIndex(2, 0);
     array.insertValueByIndex(3, 3);
-    assertEquals(4, array.count);
+    assertEquals(4, array.getCount());
     assertEquals(0, array.getValueByIndex(1));
     assertEquals(1, array.getValueByIndex(2));
     assertEquals(3, array.getValueByIndex(3));
@@ -153,8 +153,8 @@ class DynArrayTest {
     array.removeByIndex(2);
     array.removeByIndex(1);
     array.removeByIndex(0);
-    assertEquals(0, array.count);
-    assertEquals(16, array.capacity);
+    assertEquals(0, array.getCount());
+    assertEquals(16, array.getCapacity());
   }
 
   @Test
@@ -163,13 +163,13 @@ class DynArrayTest {
     while (seventeen != 0) {
       array.append(seventeen--);
     }
-    assertEquals(32, array.capacity);
+    assertEquals(32, array.getCapacity());
     array.removeByIndex(0);
     array.removeByIndex(0);
-    while (array.count != 0) {
+    while (array.getCount() != 0) {
       array.removeByIndex(0);
     }
-    assertEquals(16, array.capacity);
+    assertEquals(16, array.getCapacity());
   }
 
   @Test
@@ -178,31 +178,31 @@ class DynArrayTest {
     while (sixtyFour != 0) {
       array.append(sixtyFour--);
     }
-    assertEquals(64, array.count);
-    assertEquals(64, array.capacity);
+    assertEquals(64, array.getCount());
+    assertEquals(64, array.getCapacity());
     array.insertValueByIndex(0, 0);
-    assertEquals(65, array.count);
-    assertEquals(128, array.capacity);
+    assertEquals(65, array.getCount());
+    assertEquals(128, array.getCapacity());
     assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.removeByIndex(65));
     array.removeByIndex(64);
     array.removeByIndex(63);
-    assertEquals(63, array.count);
-    assertEquals(85, array.capacity);
+    assertEquals(63, array.getCount());
+    assertEquals(85, array.getCapacity());
   }
 
   @Test
   void makeArrayFillWithManyElementsAndRemoveThem() {
     fillDynArrayWithManyElements();
     array.instantiateArrayWithNewCapacity(5);
-    assertEquals(6, array.count);
-    assertEquals(16, array.capacity);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    array.removeByIndex(array.count - 1);
-    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.removeByIndex(array.count - 1));
+    assertEquals(6, array.getCount());
+    assertEquals(16, array.getCapacity());
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    array.removeByIndex(array.getCount() - 1);
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.removeByIndex(array.getCount() - 1));
   }
 
   @Test
@@ -212,13 +212,13 @@ class DynArrayTest {
       array.insertValueByIndex(a--, 0);
       array.append(a--);
     }
-    assertEquals(100, array.count);
-    assertEquals(128, array.capacity);
-    while (array.count != 0) {
-      array.removeByIndex(array.count - 1);
+    assertEquals(100, array.getCount());
+    assertEquals(128, array.getCapacity());
+    while (array.getCount() != 0) {
+      array.removeByIndex(array.getCount() - 1);
     }
     assertThrows(ArrayIndexOutOfBoundsException.class, () -> array.getValueByIndex(0));
-    assertEquals(16, array.capacity);
+    assertEquals(16, array.getCapacity());
   }
 
   @Test
@@ -227,18 +227,18 @@ class DynArrayTest {
     while (sixteen != 0) {
       array.append(sixteen--);
     }
-    assertEquals(16, array.capacity);
-    assertEquals(16, array.count);
-    array.removeByIndex(array.count - 1);
-    assertEquals(16, array.capacity);
-    assertEquals(15, array.count);
-    array.removeByIndex(array.count - 1);
-    assertEquals(16, array.capacity);
-    assertEquals(14, array.count);
-    while (array.count != 0) {
-      array.removeByIndex(array.count - 1);
+    assertEquals(16, array.getCapacity());
+    assertEquals(16, array.getCount());
+    array.removeByIndex(array.getCount() - 1);
+    assertEquals(16, array.getCapacity());
+    assertEquals(15, array.getCount());
+    array.removeByIndex(array.getCount() - 1);
+    assertEquals(16, array.getCapacity());
+    assertEquals(14, array.getCount());
+    while (array.getCount() != 0) {
+      array.removeByIndex(array.getCount() - 1);
     }
-    assertEquals(0, array.count);
-    assertEquals(16, array.capacity);
+    assertEquals(0, array.getCount());
+    assertEquals(16, array.getCapacity());
   }
 }

@@ -4,14 +4,14 @@ import java.lang.reflect.Array;
 
 public class NativeCache<T> {
 
-  public final int size;
-  public final String[] slots;
-  public final T[] values;
-  public final int[] hits;
+  private final int size;
+  private final String[] slots;
+  private final T[] values;
+  private final int[] hits;
 
   static final int HASH_FUN_MULTIPLIER = 31;
 
-  private NativeCache(int size, Class clazz) {
+  private NativeCache(int size, Class<T> clazz) {
     this.size = size;
     slots = new String[size];
     values = (T[]) Array.newInstance(clazz, size);

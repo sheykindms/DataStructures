@@ -4,9 +4,9 @@ import java.lang.reflect.Array;
 
 public class DynArray<T> {
 
-  public T[] array;
-  public int count;
-  public int capacity;
+  private T[] array;
+  private int count;
+  private int capacity;
   private final Class<T> clazz;
 
   private static final int MIN_CAPACITY = 16;
@@ -86,5 +86,17 @@ public class DynArray<T> {
       System.arraycopy(array, index + 1, array, index, count - index - 1);
       array[--count] = null;
     }
+  }
+
+  public T[] getArray() {
+    return array;
+  }
+
+  public int getCount() {
+    return count;
+  }
+
+  public int getCapacity() {
+    return capacity;
   }
 }

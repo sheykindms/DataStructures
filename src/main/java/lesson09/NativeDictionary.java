@@ -3,13 +3,13 @@ package lesson09;
 import java.lang.reflect.Array;
 
 public class NativeDictionary<T> {
-  public int size;
-  public String[] slots;
-  public T[] values;
+  private final int size;
+  private final String[] slots;
+  private final T[] values;
 
   private static final int HASH_FUN_MULTIPLIER = 31;
 
-  public NativeDictionary(int size, Class clazz) {
+  public NativeDictionary(int size, Class<T> clazz) {
     this.size = size;
     slots = new String[this.size];
     values = (T[]) Array.newInstance(clazz, this.size);

@@ -13,8 +13,8 @@ public class BidirectionalLinkedListWithDummyNode<E> {
   public BidirectionalLinkedListWithDummyNode() {
     dummyHead = new DNode<>(null);
     dummyTail = new DNode<>(null);
-    dummyHead.next = dummyTail;
-    dummyTail.prev = dummyHead;
+    dummyHead.setNext(dummyTail);
+    dummyTail.setPrev(dummyHead);
   }
 
   /**
@@ -22,10 +22,10 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @param item to be added
    */
   public void addNodeInTail(DNode<E> item) {
-    dummyTail.prev.next = item;
-    item.prev = dummyTail.prev;
-    dummyTail.prev = item;
-    item.next = dummyTail;
+    dummyTail.getPrev().setNext(item);
+    item.setPrev(dummyTail.getPrev());
+    dummyTail.setPrev(item);
+    item.setNext(dummyTail);
   }
 
   /**
@@ -34,12 +34,12 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @return DNode or null if object has not been found
    */
   public DNode<E> getNodeByValue(E value) {
-    DNode<E> currentNode = dummyHead.next;
+    DNode<E> currentNode = dummyHead.getNext();
     while (currentNode != dummyTail) {
-      if (currentNode.value.equals(value)) {
+      if (currentNode.getValue().equals(value)) {
         return currentNode;
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode.getNext();
     }
     return null;
   }
@@ -51,12 +51,12 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    */
   public List<DNode<E>> getAllNodeByValue(E value) {
     final List<DNode<E>> foundNodes = new ArrayList<>();
-    DNode<E> currentNode = dummyHead.next;
+    DNode<E> currentNode = dummyHead.getNext();
     while (currentNode != dummyTail) {
-      if (currentNode.value.equals(value)) {
+      if (currentNode.getValue().equals(value)) {
         foundNodes.add(currentNode);
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode.getNext();
     }
     return foundNodes;
   }
@@ -67,14 +67,14 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @return true if element has been found, otherwise returns false
    */
   public boolean removeNodeByValue(E value) {
-    DNode<E> currentNode = dummyHead.next;
+    DNode<E> currentNode = dummyHead.getNext();
     while (currentNode != dummyTail) {
-      if (currentNode.value.equals(value)) {
-        currentNode.prev.next = currentNode.next;
-        currentNode.next.prev = currentNode.prev;
+      if (currentNode.getValue().equals(value)) {
+        currentNode.getPrev().setNext(currentNode.getNext());
+        currentNode.getNext().setPrev(currentNode.getPrev());
         return true;
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode.getNext();
     }
     return false;
   }
@@ -93,8 +93,8 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * Clears the List
    */
   public void clearList() {
-    dummyHead.next = dummyTail;
-    dummyTail.prev = dummyHead;
+    dummyHead.setNext(dummyTail);
+    dummyTail.setPrev(dummyHead);
   }
 
   /**
@@ -102,11 +102,11 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    * @return int value
    */
   public int countNodes() {
-    DNode<E> currentNode = dummyHead.next;
+    DNode<E> currentNode = dummyHead.getNext();
     var numberOfNodes = 0;
     while (currentNode != dummyTail) {
       numberOfNodes++;
-      currentNode = currentNode.next;
+      currentNode = currentNode.getNext();
     }
     return numberOfNodes;
   }
@@ -118,25 +118,45 @@ public class BidirectionalLinkedListWithDummyNode<E> {
    */
   public void insertAfter(DNode<E> nodeAfter, DNode<E> nodeToInsert) {
     if (nodeAfter == null) {
-      dummyHead.next.prev = nodeToInsert;
-      nodeToInsert.next = dummyHead.next;
-      nodeToInsert.prev = dummyHead;
-      dummyHead.next = nodeToInsert;
+      dummyHead.getNext().setPrev(nodeToInsert);
+      nodeToInsert.setNext(dummyHead.getNext());
+      nodeToInsert.setPrev(dummyHead);
+      dummyHead.setNext(nodeToInsert);
     } else {
-      nodeAfter.next.prev = nodeToInsert;
-      nodeToInsert.next = nodeAfter.next;
-      nodeAfter.next = nodeToInsert;
-      nodeToInsert.prev = nodeAfter;
+      nodeAfter.getNext().setPrev(nodeToInsert);
+      nodeToInsert.setNext(nodeAfter.getNext());
+      nodeAfter.setNext(nodeToInsert);
+      nodeToInsert.setPrev(nodeAfter);
     }
   }
 }
 
 class DNode<E> {
-  final E value;
-  DNode<E> next;
-  DNode<E> prev;
+  private final E value;
+  private DNode<E> next;
+  private DNode<E> prev;
 
-  public DNode(E value) {
+  DNode(E value) {
     this.value = value;
+  }
+
+  E getValue() {
+    return value;
+  }
+
+  DNode<E> getNext() {
+    return next;
+  }
+
+  DNode<E> getPrev() {
+    return prev;
+  }
+
+  void setNext(DNode<E> next) {
+    this.next = next;
+  }
+
+  void setPrev(DNode<E> prev) {
+    this.prev = prev;
   }
 }

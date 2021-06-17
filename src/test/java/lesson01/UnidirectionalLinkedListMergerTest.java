@@ -54,7 +54,7 @@ class UnidirectionalLinkedListMergerTest {
   void sumOfLists() {
     fillTheLists();
     UnidirectionalLinkedList result = LinkedListMerger.sumLists(secondList, firstList);
-    assertEquals(6, result.head.value);
-    assertEquals(12, result.tail.value);
+    assertEquals(6, result.getHead().getValue());
+    assertEquals(12, result.getTail().getValue());
   }
 }

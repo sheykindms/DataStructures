@@ -8,12 +8,12 @@ public class LinkedListMerger {
       UnidirectionalLinkedList firstList, UnidirectionalLinkedList secondList) {
     final var result = new UnidirectionalLinkedList();
     if (firstList.countNodes() == secondList.countNodes()) {
-      var firstListNode = firstList.head;
-      var secondListNode = secondList.head;
+      var firstListNode = firstList.getHead();
+      var secondListNode = secondList.getHead();
       for (var i = 0; i < firstList.countNodes(); i++) {
-        result.addNodeInTail(new Node(firstListNode.value + secondListNode.value));
-        firstListNode = firstListNode.next;
-        secondListNode = secondListNode.next;
+        result.addNodeInTail(new Node(firstListNode.getValue() + secondListNode.getValue()));
+        firstListNode = firstListNode.getNext();
+        secondListNode = secondListNode.getNext();
       }
     } else {
       throw new IllegalArgumentException("Lists have different lengths");

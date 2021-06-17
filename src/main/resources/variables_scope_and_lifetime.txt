@@ -1,0 +1,56 @@
+
+private Node head;
+private Node tail;
+//Скоуп полей в UnidirectionalLinkedList и BidirectionalLinkedList уменьшен до приватного, добавлены геттеры deault уровня
+//доступа, т.к. прямой доступ к head и tail нужен только в рамках тестов. Отредактированы реализации методов и тесты.
+
+private final int value;
+private Node next;
+//Поля классов Node сужены до приватных, добавлены геттеры и сеттеры для ссылок на предыдущие/следующие эл-ты
+//и геттер для значения ноды. Геттеры и сеттеры объявлены с скоупом default. Изменены реализации методов с учётом
+//отсутствия прямого доступа к полям класса.
+
+private final DNode<E> dummyHead;
+private final DNode<E> dummyTail;
+//Поля в реализации Двусвязного списка с dummy nodes приватные, т.к. доступ к ним вне класса не нужен.
+//Для класса ноды аналогично сделаны приватные поля с геттерами и сеттерами.
+
+private UnidirectionalLinkedList list;
+private BidirectionalLinkedList list;
+//Поля тестов UnidirectionalLinkedListTest и BidirectionalLinkedListTest сделаны приватными.
+
+private T[] array;
+private int count;
+private int capacity;
+private final Class<T> clazz;
+//Поля класса DynArray сделаны приватными, обеспечен доступ через геттеры.
+
+number = currentElement
+//Переменная number "подвинута" ближе к области, где она непосредственно применяется, внутрь if'а.
+//Класс PostfixExpressionCalculator, метод calculate.
+
+private HashTable ht
+//Поле класса HashTableTest выполнено приватным
+
+private int size
+private int step
+private String[] slots
+//Поля класса HashTable сделаны приватными, обеспечены геттеры дефолтного уровня доступа для тестов.
+
+private final int size;
+private final String[] slots;
+private final T[] values;
+//Поля класса NativeDictionary сделаны приватными, финальными, обеспечены геттеры дефолтного уровня доступа для тестов.
+
+private final BitSet bits
+private final int filterLength
+private static final int FIRST_HASH_FUN_MULTIPLIER = 17
+private static final int SECOND_HASH_FUN_MULTIPLIER = 233
+private static final int SECOND_HASH_FUN_BITSHIFT = 2
+//Полям класса BloomFilter установлен приватный скоуп, поля сделаны финальными.
+
+private final int size
+private final String[] slots
+private final T[] values
+private final int[] hits
+//Поля класса NativeCache сделаны финальными, приватными.

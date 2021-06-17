@@ -30,28 +30,28 @@ class BidirectionalUnidirectionalLinkedListWithDummyNodeTest {
   @Test
   void findWhenOneElementInList() {
     fillWithOneElement();
-    assertEquals(10, list.getNodeByValue(10).value);
+    assertEquals(10, list.getNodeByValue(10).getValue());
   }
 
   @Test
   void findWhenManyElementsInList() {
     fillWithManyElements();
-    assertEquals(10, list.getNodeByValue(10).value);
-    assertEquals(30, list.getNodeByValue(30).value);
-    assertEquals(50, list.getNodeByValue(50).value);
+    assertEquals(10, list.getNodeByValue(10).getValue());
+    assertEquals(30, list.getNodeByValue(30).getValue());
+    assertEquals(50, list.getNodeByValue(50).getValue());
   }
 
   @Test
   void findAllWhenOneElementInList() {
     fillWithOneElement();
-    assertEquals(10, list.getAllNodeByValue(10).get(0).value);
+    assertEquals(10, list.getAllNodeByValue(10).get(0).getValue());
     assertEquals(1, list.getAllNodeByValue(10).size());
   }
 
   @Test
   void findAllWhenManyElementsInList() {
     fillWithManyElements();
-    assertEquals(30, list.getAllNodeByValue(30).get(0).value);
+    assertEquals(30, list.getAllNodeByValue(30).get(0).getValue());
     assertEquals(2, list.getAllNodeByValue(30).size());
   }
 
@@ -102,13 +102,13 @@ class BidirectionalUnidirectionalLinkedListWithDummyNodeTest {
     list.insertAfter(node2, node3);
 
     assertEquals(3, list.countNodes());
-    assertEquals(node1, list.getNodeByValue(node1.value));
-    assertEquals(node2, list.getNodeByValue(node2.value));
-    assertEquals(node3, list.getNodeByValue(node3.value));
+    assertEquals(node1, list.getNodeByValue(node1.getValue()));
+    assertEquals(node2, list.getNodeByValue(node2.getValue()));
+    assertEquals(node3, list.getNodeByValue(node3.getValue()));
 
-    assertEquals(node1.next, node2);
-    assertEquals(node2.next, node3);
-    assertEquals(node3.prev, node2);
-    assertEquals(node2.prev, node1);
+    assertEquals(node1.getNext(), node2);
+    assertEquals(node2.getNext(), node3);
+    assertEquals(node3.getPrev(), node2);
+    assertEquals(node2.getPrev(), node1);
   }
 }

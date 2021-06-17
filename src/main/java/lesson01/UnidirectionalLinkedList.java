@@ -3,8 +3,8 @@ package lesson01;
 import java.util.*;
 
 public class UnidirectionalLinkedList {
-  public Node head;
-  public Node tail;
+  private Node head;
+  private Node tail;
 
   public UnidirectionalLinkedList() {
     head = null;
@@ -13,15 +13,15 @@ public class UnidirectionalLinkedList {
 
   public void addNodeInTail(Node item) {
     if (head == null) head = item;
-    else tail.next = item;
+    else tail.setNext(item);
     tail = item;
   }
 
   public Node getNodeByValue(int value) {
     var currentNode = head;
     while (currentNode != null) {
-      if (currentNode.value == value) return currentNode;
-      currentNode = currentNode.next;
+      if (currentNode.getValue() == value) return currentNode;
+      currentNode = currentNode.getNext();
     }
     return null;
   }
@@ -30,8 +30,8 @@ public class UnidirectionalLinkedList {
     final List<Node> foundNodes = new ArrayList<>();
     var currentNode = head;
     while (currentNode != null) {
-      if (currentNode.value == value) foundNodes.add(currentNode);
-      currentNode = currentNode.next;
+      if (currentNode.getValue() == value) foundNodes.add(currentNode);
+      currentNode = currentNode.getNext();
     }
     return foundNodes;
   }
@@ -39,25 +39,25 @@ public class UnidirectionalLinkedList {
   public boolean removeNodeByValue(int value) {
     if (head != null) {
       var currentNode = head;
-      if (currentNode.value == value) {
-        head = currentNode.next;
-        if (currentNode.next == null) {
+      if (currentNode.getValue() == value) {
+        head = currentNode.getNext();
+        if (currentNode.getNext() == null) {
           tail = null;
         }
         return true;
       } else {
         while (currentNode != null) {
-          if (currentNode.next != null && currentNode.next.value == value) {
-            if (currentNode.next.next != null) {
-              currentNode.next = currentNode.next.next;
+          if (currentNode.getNext() != null && currentNode.getNext().getValue() == value) {
+            if (currentNode.getNext().getNext() != null) {
+              currentNode.setNext(currentNode.getNext().getNext());
               return true;
             } else {
-              currentNode.next = null;
+              currentNode.setNext(null);
               tail = currentNode;
             }
             return true;
           }
-          currentNode = currentNode.next;
+          currentNode = currentNode.getNext();
         }
       }
     }
@@ -67,7 +67,7 @@ public class UnidirectionalLinkedList {
   public void removeAllNodesByValue(int value) {
     final List<Node> foundNodes = getAllNodesByValue(value);
     for (Node node : foundNodes) {
-      removeNodeByValue(node.value);
+      removeNodeByValue(node.getValue());
     }
   }
 
@@ -81,34 +81,54 @@ public class UnidirectionalLinkedList {
     var numberOfNodes = 0;
     while (currentNode != null) {
       numberOfNodes++;
-      currentNode = currentNode.next;
+      currentNode = currentNode.getNext();
     }
     return numberOfNodes;
   }
 
   public void insertAfter(Node nodeAfter, Node nodeToInsert) {
     if (nodeAfter == null) {
-      nodeToInsert.next = head;
+      nodeToInsert.setNext(head);
       head = nodeToInsert;
-      if (head.next == null) {
+      if (head.getNext() == null) {
         tail = nodeToInsert;
       }
-    } else if (getNodeByValue(nodeAfter.value) != null) {
-      nodeToInsert.next = nodeAfter.next;
-      nodeAfter.next = nodeToInsert;
-      if (nodeToInsert.next == null) {
+    } else if (getNodeByValue(nodeAfter.getValue()) != null) {
+      nodeToInsert.setNext(nodeAfter.getNext());
+      nodeAfter.setNext(nodeToInsert);
+      if (nodeToInsert.getNext() == null) {
         tail = nodeToInsert;
       }
     }
   }
+
+  Node getHead() {
+    return head;
+  }
+
+  Node getTail() {
+    return tail;
+  }
 }
 
 class Node {
-  final int value;
-  Node next;
+  private final int value;
+  private Node next;
 
-  public Node(int value) {
+  Node(int value) {
     this.value = value;
     next = null;
+  }
+
+  int getValue() {
+    return value;
+  }
+
+  Node getNext() {
+    return next;
+  }
+
+  void setNext(Node next) {
+    this.next = next;
   }
 }

@@ -5,11 +5,11 @@ import java.util.BitSet;
 public class BloomFilter {
 
   private final BitSet bits;
-  public final int filterLength;
+  private final int filterLength;
 
-  static final int FIRST_HASH_FUN_MULTIPLIER = 17;
-  static final int SECOND_HASH_FUN_MULTIPLIER = 233;
-  static final int SECOND_HASH_FUN_BITSHIFT = 2;
+  private static final int FIRST_HASH_FUN_MULTIPLIER = 17;
+  private static final int SECOND_HASH_FUN_MULTIPLIER = 233;
+  private static final int SECOND_HASH_FUN_BITSHIFT = 2;
 
   private BloomFilter(int filterLength) {
     this.filterLength = filterLength;
@@ -34,7 +34,8 @@ public class BloomFilter {
     int currentCharAsciiCode;
     for (var i = 0; i < value.length(); i++) {
       currentCharAsciiCode = value.charAt(i);
-      hash |= (hash * SECOND_HASH_FUN_MULTIPLIER + currentCharAsciiCode) << SECOND_HASH_FUN_BITSHIFT;
+      hash |=
+          (hash * SECOND_HASH_FUN_MULTIPLIER + currentCharAsciiCode) << SECOND_HASH_FUN_BITSHIFT;
     }
     return Math.abs(hash) % filterLength;
   }

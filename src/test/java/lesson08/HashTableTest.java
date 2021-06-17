@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HashTableTest {
 
-  HashTable ht;
+  private HashTable ht;
 
   @BeforeEach
   void setUp() {
@@ -37,7 +37,7 @@ class HashTableTest {
     assertNotEquals(-1, ht.put("test2"));
     assertNotEquals(-1, ht.put("test3"));
     assertNotEquals(-1, ht.put("test4"));
-    assertEquals("test1", ht.slots[ht.findIndexByValue("test1")]);
+    assertEquals("test1", ht.getSlots()[ht.findIndexByValue("test1")]);
     assertEquals(ht.getIndexAsHashFun("test1"), ht.findIndexByValue("test1"));
     assertEquals(-1, ht.findIndexByValue("test5"));
   }
@@ -68,11 +68,11 @@ class HashTableTest {
     assertNotEquals(-1, ht.put("test4"));
     assertNotEquals(-1, ht.put("test5"));
 
-    assertEquals("test1", ht.slots[3]);
-    assertEquals("test2", ht.slots[4]);
-    assertEquals("test3", ht.slots[0]);
-    assertEquals("test4", ht.slots[1]);
-    assertEquals("test5", ht.slots[2]);
+    assertEquals("test1", ht.getSlots()[3]);
+    assertEquals("test2", ht.getSlots()[4]);
+    assertEquals("test3", ht.getSlots()[0]);
+    assertEquals("test4", ht.getSlots()[1]);
+    assertEquals("test5", ht.getSlots()[2]);
 
     assertEquals(3, ht.findIndexByValue("test1"));
     assertEquals(4, ht.findIndexByValue("test2"));
