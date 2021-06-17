@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderedBidirectionalLinkedListTest {
 
-  OrderedBidirectionalLinkedList<Integer> listAsc;
-  OrderedBidirectionalLinkedList<Integer> listDesc;
+  private OrderedBidirectionalLinkedList<Integer> listAsc;
+  private OrderedBidirectionalLinkedList<Integer> listDesc;
 
   @BeforeEach
   void setUp() {
@@ -30,16 +30,16 @@ class OrderedBidirectionalLinkedListTest {
     listAsc.addValue(100);
     listAsc.addValue(10);
 
-    assertEquals(listAsc.head.next, listAsc.getNodeByValue(10));
-    assertEquals(listAsc.tail.prev, listAsc.getNodeByValue(10));
-    assertEquals(listAsc.head, listAsc.getNodeByValue(10).prev);
-    assertEquals(listAsc.tail, listAsc.getNodeByValue(10).next);
+    assertEquals(listAsc.getHead().getNext(), listAsc.getNodeByValue(10));
+    assertEquals(listAsc.getTail().getPrev(), listAsc.getNodeByValue(10));
+    assertEquals(listAsc.getHead(), listAsc.getNodeByValue(10).getPrev());
+    assertEquals(listAsc.getTail(), listAsc.getNodeByValue(10).getNext());
 
-    assertEquals(listAsc.head, listAsc.getNodeByValue(1));
-    assertEquals(listAsc.tail, listAsc.getNodeByValue(100));
+    assertEquals(listAsc.getHead(), listAsc.getNodeByValue(1));
+    assertEquals(listAsc.getTail(), listAsc.getNodeByValue(100));
     assertEquals(3, listAsc.countNodes());
-    assertNull(listAsc.getNodeByValue(1).prev);
-    assertNull(listAsc.getNodeByValue(100).next);
+    assertNull(listAsc.getNodeByValue(1).getPrev());
+    assertNull(listAsc.getNodeByValue(100).getNext());
   }
 
   @Test
@@ -48,16 +48,16 @@ class OrderedBidirectionalLinkedListTest {
     listDesc.addValue(100);
     listDesc.addValue(10);
 
-    assertEquals(listDesc.head.next, listDesc.getNodeByValue(10));
-    assertEquals(listDesc.tail.prev, listDesc.getNodeByValue(10));
-    assertEquals(listDesc.head, listDesc.getNodeByValue(10).prev);
-    assertEquals(listDesc.tail, listDesc.getNodeByValue(10).next);
+    assertEquals(listDesc.getHead().getNext(), listDesc.getNodeByValue(10));
+    assertEquals(listDesc.getTail().getPrev(), listDesc.getNodeByValue(10));
+    assertEquals(listDesc.getHead(), listDesc.getNodeByValue(10).getPrev());
+    assertEquals(listDesc.getTail(), listDesc.getNodeByValue(10).getNext());
 
-    assertEquals(listDesc.head, listDesc.getNodeByValue(100));
-    assertEquals(listDesc.tail, listDesc.getNodeByValue(1));
+    assertEquals(listDesc.getHead(), listDesc.getNodeByValue(100));
+    assertEquals(listDesc.getTail(), listDesc.getNodeByValue(1));
     assertEquals(3, listDesc.countNodes());
-    assertNull(listDesc.getNodeByValue(100).prev);
-    assertNull(listDesc.getNodeByValue(1).next);
+    assertNull(listDesc.getNodeByValue(100).getPrev());
+    assertNull(listDesc.getNodeByValue(1).getNext());
   }
 
   @Test
@@ -72,7 +72,6 @@ class OrderedBidirectionalLinkedListTest {
     listAsc.removeNodeByValue(100);
     listAsc.removeNodeByValue(1000);
     assertEquals(0, listAsc.countNodes());
-
   }
 
   @Test
@@ -81,10 +80,10 @@ class OrderedBidirectionalLinkedListTest {
     listDesc.addValue(100);
     listDesc.addValue(10);
     listDesc.removeNodeByValue(1);
-    assertEquals(10, listDesc.tail.value);
+    assertEquals(10, listDesc.getTail().getValue());
 
     listDesc.removeNodeByValue(100);
-    assertEquals(10, listDesc.head.value);
+    assertEquals(10, listDesc.getHead().getValue());
     assertEquals(1, listDesc.countNodes());
   }
 
@@ -94,8 +93,8 @@ class OrderedBidirectionalLinkedListTest {
     listAsc.addValue(2);
     listAsc.addValue(3);
     listAsc.clearList(true);
-    assertNull(listAsc.head);
-    assertNull(listAsc.tail);
+    assertNull(listAsc.getHead());
+    assertNull(listAsc.getTail());
     assertEquals(0, listAsc.countNodes());
   }
 }
