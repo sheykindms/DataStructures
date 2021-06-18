@@ -2,9 +2,9 @@ package lesson08;
 
 public class HashTable {
 
-  private int size;
-  private int step;
-  private String[] slots;
+  private final int size;
+  private final int step;
+  private final String[] slots;
 
   private static final int HASH_FUN_MULTIPLIER = 31;
 
