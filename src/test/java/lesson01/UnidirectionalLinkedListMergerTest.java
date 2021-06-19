@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UnidirectionalLinkedListMergerTest {
-
   private UnidirectionalLinkedList firstList;
   private UnidirectionalLinkedList secondList;
 
@@ -27,7 +26,7 @@ class UnidirectionalLinkedListMergerTest {
     secondList.addNodeInTail(new Node(8));
   }
 
-  private void fillWithIncorrectLengths() {
+  private void fillWithDifferentLengths() {
     firstList.addNodeInTail(new Node(1));
     firstList.addNodeInTail(new Node(2));
     firstList.addNodeInTail(new Node(3));
@@ -38,8 +37,8 @@ class UnidirectionalLinkedListMergerTest {
   }
 
   @Test
-  void sumOfListsWithIncorrectLengths() {
-    fillWithIncorrectLengths();
+  void sumOfListsWithDifferentLengths() {
+    fillWithDifferentLengths();
     assertThrows(
         IllegalArgumentException.class,
         () -> LinkedListMerger.sumLists(firstList, secondList).countNodes());

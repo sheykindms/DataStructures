@@ -3,7 +3,6 @@ package lesson04;
 import java.util.*;
 
 public class Stack<T> {
-
   private final List<T> stack;
 
   public Stack() {

@@ -4,7 +4,7 @@ concat the current elements into a number as long as the next character exists a
 //Одновременно логика проверки условия в while цикле вынесена в отдельный метод, что делает код более описательным.
 
 //Добавлено javadoc описание 18 публичных методов классов BraceBalancer, NativeCache, BloomFilter, PowerSet, NativeDictionary,
-//HashTable
+//HashTable.
 
 3.2
 Ранее делал только javadoc комментарии, их оставил.

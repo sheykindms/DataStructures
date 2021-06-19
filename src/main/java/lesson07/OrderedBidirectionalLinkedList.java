@@ -2,39 +2,8 @@ package lesson07;
 
 import java.util.*;
 
-class Node<T> {
-  private final T value;
-  private Node<T> next;
-  private Node<T> prev;
-
-  public Node(T value) {
-    this.value = value;
-    next = null;
-    prev = null;
-  }
-
-  public T getValue() {
-    return value;
-  }
-
-  public Node<T> getNext() {
-    return next;
-  }
-
-  public Node<T> getPrev() {
-    return prev;
-  }
-
-  public void setNext(Node<T> next) {
-    this.next = next;
-  }
-
-  public void setPrev(Node<T> prev) {
-    this.prev = prev;
-  }
-}
-
 public class OrderedBidirectionalLinkedList<T> {
+
   private Node<T> head;
   private Node<T> tail;
   private boolean isAscending;
@@ -153,7 +122,7 @@ public class OrderedBidirectionalLinkedList<T> {
   /**
    * Deletes fist occurrence of DNone with given value
    *
-   * @param value to be found and deleted
+   * @param value to find and delete
    */
   public void removeNodeByValue(T value) {
     final var foundNode = getNodeByValue(value);
@@ -178,7 +147,7 @@ public class OrderedBidirectionalLinkedList<T> {
   /**
    * Clears the List
    *
-   * @param isAscending
+   * @param isAscending to assign new order of elements
    */
   public void clearList(boolean isAscending) {
     this.isAscending = isAscending;
@@ -226,5 +195,37 @@ public class OrderedBidirectionalLinkedList<T> {
 
   boolean isAscending() {
     return isAscending;
+  }
+
+}
+class Node<T> {
+  private final T value;
+  private Node<T> next;
+  private Node<T> prev;
+
+  public Node(T value) {
+    this.value = value;
+    next = null;
+    prev = null;
+  }
+
+  public T getValue() {
+    return value;
+  }
+
+  public Node<T> getNext() {
+    return next;
+  }
+
+  public Node<T> getPrev() {
+    return prev;
+  }
+
+  public void setNext(Node<T> next) {
+    this.next = next;
+  }
+
+  public void setPrev(Node<T> prev) {
+    this.prev = prev;
   }
 }

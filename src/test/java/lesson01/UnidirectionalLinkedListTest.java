@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UnidirectionalLinkedListTest {
-
   private UnidirectionalLinkedList list;
 
   @BeforeEach

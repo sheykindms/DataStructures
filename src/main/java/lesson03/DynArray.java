@@ -3,7 +3,6 @@ package lesson03;
 import java.lang.reflect.Array;
 
 public class DynArray<T> {
-
   private T[] array;
   private int count;
   private int capacity;

@@ -1,7 +1,6 @@
 package lesson04;
 
 public class BraceBalancer {
-
   private static final String CLOSE_BRACKET = ")";
   private static final String OPEN_BRACKET = "(";
 

@@ -3,7 +3,6 @@ package lesson06;
 import java.util.*;
 
 public class Deque<T> {
-
   private final List<T> deque;
 
   public Deque() {

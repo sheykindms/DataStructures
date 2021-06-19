@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PowerSetTest {
-
-  PowerSet set1;
-  PowerSet set2;
+  private PowerSet set1;
+  private PowerSet set2;
 
   @BeforeEach
   void setUp() {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PowerSet {
-
   private final List<String> set;
 
   private static final int INIT_CAPACITY = 20000;

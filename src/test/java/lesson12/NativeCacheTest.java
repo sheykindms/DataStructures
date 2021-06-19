@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NativeCacheTest {
-
-  NativeCache<String> cache;
+  private NativeCache<String> cache;
 
   @BeforeEach
   void setUp() {

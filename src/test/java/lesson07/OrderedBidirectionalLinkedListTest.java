@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderedBidirectionalLinkedListTest {
-
   private OrderedBidirectionalLinkedList<Integer> listAsc;
   private OrderedBidirectionalLinkedList<Integer> listDesc;
 

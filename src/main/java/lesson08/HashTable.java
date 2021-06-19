@@ -1,7 +1,6 @@
 package lesson08;
 
 public class HashTable {
-
   private final int size;
   private final int step;
   private final String[] slots;
@@ -48,6 +47,12 @@ public class HashTable {
   private int seekSlot(String value) {
     var foundIndex = getIndexAsHashFun(value);
     var iterations = 0;
+    /*
+    In the loop, we want to either find an already existing value or find a place to add a value.
+    We iterate over the array, adding a value equal to step at each iteration to foundIndex value.
+    When we reach the end of the array, we go back to the beginning and run with the same step until
+    the number of iterations is >= step. This is how we ensure optimal coverage of the entire array.
+    */
     while (slots[foundIndex] != null) {
       if (slots[foundIndex].equals(value)) {
         return foundIndex;

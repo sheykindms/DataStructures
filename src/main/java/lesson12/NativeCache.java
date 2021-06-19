@@ -3,7 +3,6 @@ package lesson12;
 import java.lang.reflect.Array;
 
 public class NativeCache<T> {
-
   private final int size;
   private final String[] slots;
   private final T[] values;
@@ -51,12 +50,12 @@ public class NativeCache<T> {
     final var foundIndex = seekSlot(key);
     final boolean found = foundIndex != -1;
     if (!found) {
-      //
       replaceWithNew(key, value);
+    } else {
+      slots[foundIndex] = key;
+      values[foundIndex] = value;
+      hits[foundIndex]++;
     }
-    slots[foundIndex] = key;
-    values[foundIndex] = value;
-    hits[foundIndex]++;
   }
 
   /**
@@ -104,6 +103,12 @@ public class NativeCache<T> {
     var expectedIndex = getIndexAsHashFun(value);
     var step = 1;
     var iterations = 0;
+    /*
+    In the loop, we want to either find an already existing value or find a place to add a value.
+    We iterate over the array, adding a value equal to step at each iteration to foundIndex value.
+    When we reach the end of the array, we go back to the beginning and run with the same step until
+    he number of iterations is >= step. This is how we ensure optimal coverage of the entire array.
+    */
     while (slots[expectedIndex] != null) {
       if (slots[expectedIndex].equals(value)) {
         return expectedIndex;

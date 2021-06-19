@@ -3,7 +3,6 @@ package lesson05;
 import java.util.*;
 
 public class Queue<T> {
-
   private final List<T> queue;
 
   public Queue() {

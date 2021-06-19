@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class QueueTest {
-
   private Queue<Integer> queue;
 
   @BeforeEach

@@ -2,6 +2,9 @@ package lesson04;
 
 public class PostfixExpressionCalculator {
 
+  private PostfixExpressionCalculator() {
+  }
+
   /**
    * Calculates result of the postfix expression using two Stacks
    * i.e. : "1 2 + 3 *" should be 9
@@ -9,12 +12,13 @@ public class PostfixExpressionCalculator {
    * @param expression to be calculated
    * @return Integer result of calculation
    */
-  public int calculate(String expression) {
+  public static int calculate(String expression) {
     final var data = new Stack<String>();
     String currentElement;
     String number;
     boolean isOperator;
     boolean isOperand;
+    //Parse the string by adding elements to a common stack
     for (var currentIndex = expression.length() - 1; currentIndex >= 0; currentIndex--) {
       currentElement = expression.charAt(currentIndex) + "";
       isOperator = Operators.contains(currentElement);
@@ -41,6 +45,10 @@ public class PostfixExpressionCalculator {
     while (data.size() > 0) {
       poppedElement = data.pop();
       isOperator = Operators.contains(poppedElement);
+      /*
+      If the operand - we put it on the stack for operands, if the operator - we use the "processResult"
+      method for the last two elements in the operand stack and put the result back on the operand stack
+      */
       if (isOperator) {
         operands.push(processResult(poppedElement, operands.pop(), operands.pop()));
       } else {
@@ -50,11 +58,11 @@ public class PostfixExpressionCalculator {
     return operands.pop();
   }
 
-  private boolean isNextCharExistsAndIsDigit(String expression, int currentIndex) {
+  private static boolean isNextCharExistsAndIsDigit(String expression, int currentIndex) {
     return currentIndex - 1 >= 0 && Character.isDigit(expression.charAt(currentIndex - 1));
   }
 
-  private int processResult(String operator, Integer secondOperand, Integer firstOperand) {
+  private static int processResult(String operator, Integer secondOperand, Integer firstOperand) {
     return switch (operator) {
       case Operators.MULTIPLY -> firstOperand * secondOperand;
       case Operators.DIVIDE -> firstOperand / secondOperand;

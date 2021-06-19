@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DequeTest {
-
   private Deque<Integer> deque;
 
   @BeforeEach

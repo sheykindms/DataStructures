@@ -8,8 +8,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NativeDictionaryTest {
-
-  NativeDictionary<Integer> dict;
+  private NativeDictionary<Integer> dict;
 
   @BeforeEach
   void setUp() {

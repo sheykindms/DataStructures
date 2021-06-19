@@ -3,7 +3,6 @@ package lesson11;
 import java.util.BitSet;
 
 public class BloomFilter {
-
   private final BitSet bits;
   private final int filterLength;
 

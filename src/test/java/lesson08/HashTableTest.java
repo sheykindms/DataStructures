@@ -8,13 +8,14 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HashTableTest {
-
   private HashTable ht;
 
   @BeforeEach
   void setUp() {
-    int size = new Random().nextInt(100);
-    int step = new Random().nextInt(100);
+    //+4 because in our tests we need to put four elements into HashTable
+    //so the min capacity of ht should be at least 4
+    int size = new Random().nextInt(100) + 4;
+    int step = new Random().nextInt(100) + 4;
     ht = new HashTable(size, step);
   }
 
@@ -71,19 +72,5 @@ class HashTableTest {
 
     assertEquals(-1, ht.findIndexByValue("test6"));
     assertEquals(-1, ht.findIndexByValue("test7"));
-  }
-
-  private String generateRandomString() {
-    int leftLimit = 48; // numeral '0'
-    int rightLimit = 122; // letter 'z'
-    int targetStringLength = 10;
-    Random random = new Random();
-
-    return random
-            .ints(leftLimit, rightLimit + 1)
-            .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-            .limit(targetStringLength)
-            .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-            .toString();
   }
 }

@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BraceBalancerTest {
-
-  BraceBalancer pb = new BraceBalancer();
+  private final BraceBalancer pb = new BraceBalancer();
 
   @Test
   void balanceWhenFail() {
