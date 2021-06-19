@@ -104,10 +104,10 @@ public class NativeCache<T> {
     var step = 1;
     var iterations = 0;
     /*
-    In the loop, we want to either find an already existing value or find a place to add a value.
-    We iterate over the array, adding a value equal to step at each iteration to foundIndex value.
-    When we reach the end of the array, we go back to the beginning and run with the same step until
-    he number of iterations is >= step. This is how we ensure optimal coverage of the entire array.
+    In the loop, find an existing value, or find a place to add a value.
+    We iterate over the array, adding the step value to the foundIndex value at each iteration.
+    Upon reaching the end of the array, we return to the beginning and perform the same logic until the number of iterations >= step.
+    This ensures optimal coverage of the entire array.
     */
     while (slots[expectedIndex] != null) {
       if (slots[expectedIndex].equals(value)) {

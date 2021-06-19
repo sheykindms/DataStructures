@@ -45,10 +45,6 @@ public class PostfixExpressionCalculator {
     while (data.size() > 0) {
       poppedElement = data.pop();
       isOperator = Operators.contains(poppedElement);
-      /*
-      If the operand - we put it on the stack for operands, if the operator - we use the "processResult"
-      method for the last two elements in the operand stack and put the result back on the operand stack
-      */
       if (isOperator) {
         operands.push(processResult(poppedElement, operands.pop(), operands.pop()));
       } else {
