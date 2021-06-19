@@ -1,0 +1,10 @@
+3.1
+concat the current elements into a number as long as the next character exists and it is a digit
+//Комментарий к логике вложенного цикла в классе PostfixCalculator, который упрощает понимание сложночитаемого блока кода.
+//Одновременно логика проверки условия в while цикле вынесена в отдельный метод, что делает код более описательным.
+
+//Добавлено javadoc описание 18 публичных методов классов BraceBalancer, NativeCache, BloomFilter, PowerSet, NativeDictionary,
+//HashTable
+
+3.2
+Ранее делал только javadoc комментарии, их оставил.

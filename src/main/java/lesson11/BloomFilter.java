@@ -16,11 +16,41 @@ public class BloomFilter {
     bits = new BitSet(this.filterLength);
   }
 
+  /**
+   * Static factory creates an instance of BloomFilter class
+   *
+   * @param filterLength sets the constant length of the structure
+   * @return instance of BloomFilter.class
+   */
   public static BloomFilter withLength(int filterLength) {
     return new BloomFilter(filterLength);
   }
 
-  public int getFirstIndexAsHashFun(String value) {
+  /**
+   * Adds the given value to Bloom Filter
+   *
+   * @param value to be added
+   */
+  public void add(String value) {
+    final var firstIndexOfBitToSet = getFirstIndexAsHashFun(value);
+    final var secondIndexOfBitToSet = getSecondIndexAsHashFun(value);
+    bits.set(firstIndexOfBitToSet);
+    bits.set(secondIndexOfBitToSet);
+  }
+
+  /**
+   * Checks if given string present in Bloom Filter
+   *
+   * @param value to verify
+   * @return true if presented, false otherwise
+   */
+  public boolean isValue(String value) {
+    final var firstIndexOfBitToCheck = getFirstIndexAsHashFun(value);
+    final var secondIndexOfBitToCheck = getSecondIndexAsHashFun(value);
+    return bits.get(firstIndexOfBitToCheck) && bits.get(secondIndexOfBitToCheck);
+  }
+
+  private int getFirstIndexAsHashFun(String value) {
     var hash = 0;
     for (var i = 0; i < value.length(); i++) {
       int currentCharAsciiCode = value.charAt(i);
@@ -29,7 +59,7 @@ public class BloomFilter {
     return Math.abs(hash) % filterLength;
   }
 
-  public int getSecondIndexAsHashFun(String value) {
+  private int getSecondIndexAsHashFun(String value) {
     var hash = 0;
     int currentCharAsciiCode;
     for (var i = 0; i < value.length(); i++) {
@@ -38,18 +68,5 @@ public class BloomFilter {
           (hash * SECOND_HASH_FUN_MULTIPLIER + currentCharAsciiCode) << SECOND_HASH_FUN_BITSHIFT;
     }
     return Math.abs(hash) % filterLength;
-  }
-
-  public void add(String value) {
-    final var firstIndexOfBitToSet = getFirstIndexAsHashFun(value);
-    final var secondIndexOfBitToSet = getSecondIndexAsHashFun(value);
-    bits.set(firstIndexOfBitToSet);
-    bits.set(secondIndexOfBitToSet);
-  }
-
-  public boolean isValue(String value) {
-    final var firstIndexOfBitToCheck = getFirstIndexAsHashFun(value);
-    final var secondIndexOfBitToCheck = getSecondIndexAsHashFun(value);
-    return bits.get(firstIndexOfBitToCheck) && bits.get(secondIndexOfBitToCheck);
   }
 }

@@ -16,29 +16,36 @@ public class HashTable {
   }
 
   /**
-   * Hash function
+   * Puts an element into the HashTable
    *
-   * @param value
-   * @return index in array
+   * @param value to be added
+   * @return the index of the element in array or -1 if no element was found
    */
-  public int getIndexAsHashFun(String value) {
-    if (value.isEmpty()) {
-      return 0;
+  public int put(String value) {
+    final var foundIndex = seekSlot(value);
+    boolean found = foundIndex != -1;
+    if (found) {
+      slots[foundIndex] = value;
     }
-    var hash = 1;
-    for (char c : value.toCharArray()) {
-      hash = hash * HASH_FUN_MULTIPLIER + c;
-    }
-    return Math.abs(hash) % size;
+    return foundIndex;
   }
 
   /**
-   * Finds a slot according to hash value of input string
+   * Finds the index in HashTable by the given value
    *
-   * @param value
-   * @return index in array or -1
+   * @param value to be found
+   * @return the index of element or -1 if no such element was found
    */
-  public int seekSlot(String value) {
+  public int findIndexByValue(String value) {
+    final var foundIndex = seekSlot(value);
+    final boolean found = foundIndex != -1 && slots[foundIndex] != null;
+    if (!found) {
+      return -1;
+    }
+    return foundIndex;
+  }
+
+  private int seekSlot(String value) {
     var foundIndex = getIndexAsHashFun(value);
     var iterations = 0;
     while (slots[foundIndex] != null) {
@@ -57,34 +64,15 @@ public class HashTable {
     return foundIndex;
   }
 
-  /**
-   * Puts an element into HashTable
-   *
-   * @param value
-   * @return index of element in array or -1
-   */
-  public int put(String value) {
-    final var foundIndex = seekSlot(value);
-    boolean found = foundIndex != -1;
-    if (found) {
-      slots[foundIndex] = value;
+  private int getIndexAsHashFun(String value) {
+    if (value.isEmpty()) {
+      return 0;
     }
-    return foundIndex;
-  }
-
-  /**
-   * Finds index in HashTable
-   *
-   * @param value
-   * @return index of element or -1
-   */
-  public int findIndexByValue(String value) {
-    final var foundIndex = seekSlot(value);
-    final boolean found = foundIndex != -1 && slots[foundIndex] != null;
-    if (!found) {
-      return -1;
+    var hash = 1;
+    for (char c : value.toCharArray()) {
+      hash = hash * HASH_FUN_MULTIPLIER + c;
     }
-    return foundIndex;
+    return Math.abs(hash) % size;
   }
 
   int getSize() {

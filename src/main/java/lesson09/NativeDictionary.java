@@ -15,17 +15,12 @@ public class NativeDictionary<T> {
     values = (T[]) Array.newInstance(clazz, this.size);
   }
 
-  public int getIndexAsHashFun(String key) {
-    if (key.isEmpty()) {
-      return 0;
-    }
-    var hash = 1;
-    for (char c : key.toCharArray()) {
-      hash = hash * HASH_FUN_MULTIPLIER + c;
-    }
-    return Math.abs(hash) % size;
-  }
-
+  /**
+   * Checks if the given value is a valid key, stored in NativeDictionary instance
+   *
+   * @param key to check
+   * @return true if key was found, false otherwise
+   */
   public boolean isKey(String key) {
     final var foundIndex = seekSlot(key);
     final boolean found = foundIndex != -1;
@@ -35,6 +30,13 @@ public class NativeDictionary<T> {
     return slots[foundIndex] != null;
   }
 
+  /**
+   * Adds the given key-value pair into the NativeCache. If the key was already stored, replaces its
+   * value with the new one.
+   *
+   * @param key to store
+   * @param value to store
+   */
   public void put(String key, T value) {
     final var foundIndex = seekSlot(key);
     final boolean found = foundIndex != -1;
@@ -45,6 +47,12 @@ public class NativeDictionary<T> {
     values[foundIndex] = value;
   }
 
+  /**
+   * Gets the value from NativeDictionary by its key
+   *
+   * @param key to found the value
+   * @return the value, corresponding to the given key, null if the key wasn't found
+   */
   public T getValueByKey(String key) {
     final var foundIndex = seekSlot(key);
     final boolean found = foundIndex != -1 && slots[foundIndex] != null;
@@ -52,6 +60,17 @@ public class NativeDictionary<T> {
       return null;
     }
     return values[foundIndex];
+  }
+
+  private int getIndexAsHashFun(String key) {
+    if (key.isEmpty()) {
+      return 0;
+    }
+    var hash = 1;
+    for (char c : key.toCharArray()) {
+      hash = hash * HASH_FUN_MULTIPLIER + c;
+    }
+    return Math.abs(hash) % size;
   }
 
   private int seekSlot(String value) {

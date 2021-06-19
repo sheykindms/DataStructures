@@ -19,26 +19,12 @@ class HashTableTest {
   }
 
   @Test
-  void hashFunConsistency() {
-    String test1 = generateRandomString();
-    assertEquals(ht.getIndexAsHashFun(test1), ht.getIndexAsHashFun(test1));
-
-    String test2 = generateRandomString();
-    assertEquals(ht.getIndexAsHashFun(test2), ht.getIndexAsHashFun(test2));
-
-    // Classic
-    assertEquals(ht.getIndexAsHashFun("AaAa"), ht.getIndexAsHashFun("BBBB"));
-    assertEquals(ht.getIndexAsHashFun("AaBB"), ht.getIndexAsHashFun("BBAa"));
-  }
-
-  @Test
   void putFourElementsAndCompareHashFunToIndexInArray() {
     assertNotEquals(-1, ht.put("test1"));
     assertNotEquals(-1, ht.put("test2"));
     assertNotEquals(-1, ht.put("test3"));
     assertNotEquals(-1, ht.put("test4"));
     assertEquals("test1", ht.getSlots()[ht.findIndexByValue("test1")]);
-    assertEquals(ht.getIndexAsHashFun("test1"), ht.findIndexByValue("test1"));
     assertEquals(-1, ht.findIndexByValue("test5"));
   }
 
@@ -85,36 +71,6 @@ class HashTableTest {
 
     assertEquals(-1, ht.findIndexByValue("test6"));
     assertEquals(-1, ht.findIndexByValue("test7"));
-  }
-
-  @Test
-  void seekSlotWhenEmptyHashTable() {
-    assertNotEquals(-1, ht.seekSlot("value1"));
-    assertNotEquals(-1, ht.seekSlot("value2"));
-    assertNotEquals(-1, ht.seekSlot("value3"));
-    assertNotEquals(-1, ht.seekSlot("value4"));
-    assertNotEquals(-1, ht.seekSlot("value5"));
-    assertNotEquals(-1, ht.seekSlot("value6"));
-    assertNotEquals(-1, ht.seekSlot(""));
-  }
-
-  @Test
-  void seekSlotWhenFullHashTable() {
-    HashTable ht = new HashTable(5, 3);
-    ht.put("value1");
-    ht.put("value2");
-    ht.put("value3");
-    ht.put("value4");
-    ht.put("value5");
-
-    String random = generateRandomString();
-    String empty = "";
-
-    assertEquals(-1, ht.seekSlot(random));
-    assertEquals(-1, ht.seekSlot(empty));
-
-    assertNotEquals(-1, ht.seekSlot("value1"));
-    assertNotEquals(-1, ht.seekSlot("value2"));
   }
 
   private String generateRandomString() {

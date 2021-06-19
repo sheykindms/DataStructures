@@ -2,8 +2,6 @@ package lesson04;
 
 public class PostfixExpressionCalculator {
 
-  private static final String NUM_PATTERN_REGEX = "[0-9]";
-
   /**
    * Calculates result of the postfix expression using two Stacks
    * i.e. : "1 2 + 3 *" should be 9
@@ -20,10 +18,11 @@ public class PostfixExpressionCalculator {
     for (var currentIndex = expression.length() - 1; currentIndex >= 0; currentIndex--) {
       currentElement = expression.charAt(currentIndex) + "";
       isOperator = Operators.contains(currentElement);
-      isOperand = currentElement.matches(NUM_PATTERN_REGEX);
+      isOperand = Character.isDigit(currentElement.charAt(0));
       if (isOperand) {
         number = currentElement;
-        while(nextCharExists(currentIndex) && nextCharIsDigit(expression, currentIndex)) {
+        //concat the current elements into a number as long as the next character exists and it is a digit
+        while(isNextCharExistsAndIsDigit(expression, currentIndex)) {
           String nextDigitToAppend = expression.charAt(--currentIndex) + "";
           number = nextDigitToAppend + number;
         }
@@ -51,12 +50,8 @@ public class PostfixExpressionCalculator {
     return operands.pop();
   }
 
-  private boolean nextCharIsDigit(String expression, int index) {
-    return (expression.charAt(index - 1) + "").matches(NUM_PATTERN_REGEX);
-  }
-
-  private boolean nextCharExists(int index) {
-    return index - 1 >= 0;
+  private boolean isNextCharExistsAndIsDigit(String expression, int currentIndex) {
+    return currentIndex - 1 >= 0 && Character.isDigit(expression.charAt(currentIndex - 1));
   }
 
   private int processResult(String operator, Integer secondOperand, Integer firstOperand) {

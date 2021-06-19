@@ -9,7 +9,7 @@ public class NativeCache<T> {
   private final T[] values;
   private final int[] hits;
 
-  static final int HASH_FUN_MULTIPLIER = 31;
+  private static final int HASH_FUN_MULTIPLIER = 31;
 
   private NativeCache(int size, Class<T> clazz) {
     this.size = size;
@@ -18,38 +18,53 @@ public class NativeCache<T> {
     hits = new int[size];
   }
 
+  /**
+   * Static factory creates an instance of Native Cache class
+   *
+   * @param size sets the constant length of the structure
+   * @param clazz sets the reference type of stored data
+   * @return instance of NativeCache.class
+   */
   public static NativeCache withSizeAndClass(int size, Class clazz) {
     return new NativeCache<>(size, clazz);
   }
 
-  public int getIndexAsHashFun(String key) {
-    if (key.isEmpty()) {
-      return 0;
-    }
-    var hash = 1;
-    for (char c : key.toCharArray()) {
-      hash = hash * HASH_FUN_MULTIPLIER + c;
-    }
-    return Math.abs(hash) % size;
-  }
-
+  /**
+   * Checks if the given value is a valid key, stored in NativeCache instance
+   *
+   * @param key to check
+   * @return true if key was found, false otherwise
+   */
   public boolean isKey(String key) {
     final var foundIndex = seekSlot(key);
     return foundIndex != -1 && slots[foundIndex] != null;
   }
 
+  /**
+   * Adds the given key-value pair into the NativeCache and increments the value of the number of
+   * requests for an item. If the key was already stored, replaces its value with the new one.
+   *
+   * @param key to store
+   * @param value to store
+   */
   public void put(String key, T value) {
     final var foundIndex = seekSlot(key);
     final boolean found = foundIndex != -1;
     if (!found) {
+      //
       replaceWithNew(key, value);
-    } else {
-      slots[foundIndex] = key;
-      values[foundIndex] = value;
-      hits[foundIndex]++;
     }
+    slots[foundIndex] = key;
+    values[foundIndex] = value;
+    hits[foundIndex]++;
   }
 
+  /**
+   * Gets the value from NativeCache by its key
+   *
+   * @param key to found the value
+   * @return the value, corresponding to the given key, null if the key wasn't found
+   */
   public T getByKey(String key) {
     final var foundIndex = seekSlot(key);
     final boolean found = foundIndex != -1 && slots[foundIndex] != null;
@@ -72,6 +87,17 @@ public class NativeCache<T> {
     slots[indexOfElementToReplace] = key;
     values[indexOfElementToReplace] = value;
     hits[indexOfElementToReplace] = 1;
+  }
+
+  private int getIndexAsHashFun(String key) {
+    if (key.isEmpty()) {
+      return 0;
+    }
+    var hash = 1;
+    for (char c : key.toCharArray()) {
+      hash = hash * HASH_FUN_MULTIPLIER + c;
+    }
+    return Math.abs(hash) % size;
   }
 
   private int seekSlot(String value) {

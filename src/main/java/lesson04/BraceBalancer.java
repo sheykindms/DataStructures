@@ -5,6 +5,12 @@ public class BraceBalancer {
   private static final String CLOSE_BRACKET = ")";
   private static final String OPEN_BRACKET = "(";
 
+  /**
+   * Checks if opening and closing parentheses are balanced
+   * i.e. "())(" is not balanced, but "(()((())()))" is balanced
+   * @param expression to validate
+   * @return true if braces are balanced, false otherwise
+   */
   public boolean isBalanced(String expression) {
     if (expression == null
         || expression.isBlank()

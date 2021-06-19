@@ -14,19 +14,6 @@ class BloomFilterTest {
   }
 
   @Test
-  void hashIsConsistent() {
-    String test1 = "this is";
-    String test2 = "simple test";
-    String test3 = "example of hash consistency";
-    assertEquals(bf.getFirstIndexAsHashFun(test1), bf.getFirstIndexAsHashFun(test1));
-    assertEquals(bf.getFirstIndexAsHashFun(test2), bf.getFirstIndexAsHashFun(test2));
-    assertEquals(bf.getFirstIndexAsHashFun(test3), bf.getFirstIndexAsHashFun(test3));
-    assertEquals(bf.getSecondIndexAsHashFun(test1), bf.getSecondIndexAsHashFun(test1));
-    assertEquals(bf.getSecondIndexAsHashFun(test2), bf.getSecondIndexAsHashFun(test2));
-    assertEquals(bf.getSecondIndexAsHashFun(test3), bf.getSecondIndexAsHashFun(test3));
-  }
-
-  @Test
   void addThenGet() {
     bf.add("test1");
     bf.add("test2");

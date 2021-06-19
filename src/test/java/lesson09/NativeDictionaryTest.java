@@ -19,19 +19,6 @@ class NativeDictionaryTest {
   }
 
   @Test
-  void hashFun() {
-    String test1 = generateRandomString();
-    assertEquals(dict.getIndexAsHashFun(test1), dict.getIndexAsHashFun(test1));
-
-    String test2 = generateRandomString();
-    assertEquals(dict.getIndexAsHashFun(test2), dict.getIndexAsHashFun(test2));
-
-    // Classic
-    assertEquals(dict.getIndexAsHashFun("AaAa"), dict.getIndexAsHashFun("BBBB"));
-    assertEquals(dict.getIndexAsHashFun("AaBB"), dict.getIndexAsHashFun("BBAa"));
-  }
-
-  @Test
   void isKey() {
     dict.put("test1", 1);
     dict.put("test2", 2);
@@ -73,19 +60,5 @@ class NativeDictionaryTest {
 
     nd.put("test6", "val6");
     assertNull(nd.getValueByKey("test6"));
-  }
-
-  private String generateRandomString() {
-    int leftLimit = 48; // numeral '0'
-    int rightLimit = 122; // letter 'z'
-    int targetStringLength = 10;
-    Random random = new Random();
-
-    return random
-        .ints(leftLimit, rightLimit + 1)
-        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-        .limit(targetStringLength)
-        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-        .toString();
   }
 }
