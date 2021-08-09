@@ -2,124 +2,164 @@ package lesson13;
 
 import java.util.*;
 
-public class SimpleTreeNode<T> {
-    public T NodeValue;
-    public SimpleTreeNode<T> Parent;
-    public List<SimpleTreeNode<T>> Children;
 
-    public SimpleTreeNode(T val, SimpleTreeNode<T> parent) {
-        NodeValue = val;
-        this.Parent = parent;
-        Children = new ArrayList<>();
+public class SimpleTreeNode<T> {
+    public T nodeValue;
+    public SimpleTreeNode<T> parent;
+    public List<SimpleTreeNode<T>> children;
+
+    public SimpleTreeNode(T nodeValue, SimpleTreeNode<T> parent) {
+        this.nodeValue = nodeValue;
+        this.parent = parent;
+        children = new ArrayList<>();
     }
 }
 
+/**
+ * Basic tree implementation
+ */
 class SimpleTree<T> {
-    public SimpleTreeNode<T> Root;
+    public SimpleTreeNode<T> root;
     private int size = 0;
 
     public SimpleTree(SimpleTreeNode<T> root) {
-        this.Root = root;
+        this.root = root;
         if (root != null) {
             size++;
         }
     }
 
-    public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild) {
-        if (ParentNode == null) {
-            this.Root = NewChild;
+    /**
+     * Adds new node to SimpleTree
+     *
+     * @param parentNode to be added as parent to newChild
+     * @param newChild   to be added to SimpleTree
+     */
+    public void addChild(SimpleTreeNode<T> parentNode, SimpleTreeNode<T> newChild) {
+        if (parentNode == null) {
+            this.root = newChild;
         } else {
-            ParentNode.Children.add(NewChild);
-            NewChild.Parent = ParentNode;
+            parentNode.children.add(newChild);
+            newChild.parent = parentNode;
         }
         size++;
     }
 
-    public void DeleteNode(SimpleTreeNode<T> NodeToDelete) {
+    /**
+     * Deletes given node with all it's children
+     *
+     * @param nodeToDelete to be deleted
+     */
+    public void deleteNode(SimpleTreeNode<T> nodeToDelete) {
         List<SimpleTreeNode<T>> nodesToDelete = new ArrayList<>();
-        GetAllNodes(nodesToDelete, NodeToDelete);
+        getAllNodes(nodesToDelete, nodeToDelete);
         for (SimpleTreeNode<T> node : nodesToDelete) {
-            node.Children = new ArrayList<>();
-            if (Root != node) {
-                node.Parent.Children.remove(node);
+            node.children = new ArrayList<>();
+            if (root != node) {
+                node.parent.children.remove(node);
                 node = null;
             } else {
-                Root = null;
+                root = null;
             }
             size--;
         }
     }
 
-    public List<SimpleTreeNode<T>> GetAllNodes() {
+    /**
+     * Collects all the nodes of SimpleTree to the list
+     *
+     * @return list of nodes found
+     */
+    public List<SimpleTreeNode<T>> getAllNodes() {
         List<SimpleTreeNode<T>> nodes = new ArrayList<>();
-        GetAllNodes(nodes, Root);
+        getAllNodes(nodes, root);
         return nodes;
     }
 
-    public List<SimpleTreeNode<T>> FindNodesByValue(T val) {
+    /**
+     * Collects all the nodes with given value to the list
+     *
+     * @param val to be found in SimpleTree
+     * @return list of nodes found
+     */
+    public List<SimpleTreeNode<T>> findNodesByValue(T val) {
         List<SimpleTreeNode<T>> nodes = new ArrayList<>();
-        FindNodesByValue(nodes, Root, val);
+        findNodesByValue(nodes, root, val);
         return nodes;
     }
 
-    public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent) {
-        SimpleTreeNode<T> parent = OriginalNode.Parent;
-        OriginalNode.Parent = NewParent;
-        parent.Children.remove(OriginalNode);
-        NewParent.Children.add(OriginalNode);
+    /**
+     * Moves node with all it's children as another`s node child
+     *
+     * @param originalNode to be moved
+     * @param newParent    to be added as new parent node
+     */
+    public void moveNode(SimpleTreeNode<T> originalNode, SimpleTreeNode<T> newParent) {
+        SimpleTreeNode<T> parent = originalNode.parent;
+        originalNode.parent = newParent;
+        parent.children.remove(originalNode);
+        newParent.children.add(originalNode);
     }
 
-    public int Count() {
+    /**
+     * Counts the size of SimpleTree
+     *
+     * @return int value
+     */
+    public int count() {
         return size;
     }
 
-    public int LeafCount() {
+    /**
+     * Counts the number of leaves in SimpleTree
+     *
+     * @return int value
+     */
+    public int leafCount() {
         List<SimpleTreeNode<T>> nodes = new ArrayList<>();
-        LeafCount(nodes, Root);
+        leafCount(nodes, root);
         return nodes.size();
     }
 
-    private void LeafCount(List<SimpleTreeNode<T>> nodes, SimpleTreeNode<T> root) {
+    private void leafCount(List<SimpleTreeNode<T>> nodes, SimpleTreeNode<T> root) {
         if (root == null)
             return;
-        if (root.Children.isEmpty()) {
+        if (root.children.isEmpty()) {
             nodes.add(root);
         } else {
-            List<SimpleTreeNode<T>> children = root.Children;
+            List<SimpleTreeNode<T>> children = root.children;
             for (SimpleTreeNode<T> node : children) {
-                LeafCount(nodes, node);
+                leafCount(nodes, node);
             }
         }
     }
 
-    private void GetAllNodes(List<SimpleTreeNode<T>> list, SimpleTreeNode<T> root) {
+    private void getAllNodes(List<SimpleTreeNode<T>> list, SimpleTreeNode<T> root) {
         if (root == null) {
             return;
         }
         list.add(root);
-        System.out.println(root);
-        List<SimpleTreeNode<T>> children = root.Children;
+        List<SimpleTreeNode<T>> children = root.children;
         for (SimpleTreeNode<T> node : children) {
-            if (!node.Children.isEmpty()) {
-                GetAllNodes(list, node);
+            if (!node.children.isEmpty()) {
+                getAllNodes(list, node);
             } else {
                 list.add(node);
-                System.out.println(node);
             }
         }
     }
 
-    private void FindNodesByValue(List<SimpleTreeNode<T>> list, SimpleTreeNode<T> root, T valueToFind) {
+    private void findNodesByValue(List<SimpleTreeNode<T>> list, SimpleTreeNode<T> root, T valueToFind) {
         if (root == null)
             return;
-        if (root.NodeValue.equals(valueToFind)) {
+        if (root.nodeValue.equals(valueToFind)) {
             list.add(root);
         }
-        List<SimpleTreeNode<T>> children = root.Children;
+        List<SimpleTreeNode<T>> children = root.children;
         for (SimpleTreeNode<T> node : children) {
-            if (!node.Children.isEmpty()) {
-                FindNodesByValue(list, node, valueToFind);
-            } else if (node.NodeValue.equals(valueToFind)) {
+            if (!node.children.isEmpty()) {
+                findNodesByValue(list, node, valueToFind);
+            } else if (node.nodeValue.equals(valueToFind)) {
                 list.add(node);
             }
         }

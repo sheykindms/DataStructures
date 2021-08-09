@@ -11,76 +11,56 @@ class SimpleTreeTest {
 
     private SimpleTree<Integer> tree;
     private SimpleTreeNode<Integer> initialNode;
+    SimpleTreeNode<Integer> secondNode;
+    SimpleTreeNode<Integer> thirdNode;
+    SimpleTreeNode<Integer> fourthNode;
+    SimpleTreeNode<Integer> fifthNode;
+    SimpleTreeNode<Integer> sixthNode;
 
     @BeforeEach
     void setUp() {
         initialNode = new SimpleTreeNode<>(1, null);
         tree = new SimpleTree<>(initialNode);
+
+        secondNode = new SimpleTreeNode<>(2, initialNode);
+        thirdNode = new SimpleTreeNode<>(3, initialNode);
+        fourthNode = new SimpleTreeNode<>(4, secondNode);
+        fifthNode = new SimpleTreeNode<>(5, secondNode);
+        sixthNode = new SimpleTreeNode<>(6, thirdNode);
+        tree.addChild(initialNode, secondNode);
+        tree.addChild(initialNode, thirdNode);
+        tree.addChild(secondNode, fourthNode);
+        tree.addChild(secondNode, fifthNode);
+        tree.addChild(thirdNode, sixthNode);
     }
 
     @Test
-    void addChildAndCount() {
-        SimpleTreeNode<Integer> secondNode = new SimpleTreeNode<>(2, initialNode);
-        SimpleTreeNode<Integer> thirdNode = new SimpleTreeNode<>(3, initialNode);
-        SimpleTreeNode<Integer> fourthNode = new SimpleTreeNode<>(4, secondNode);
-        SimpleTreeNode<Integer> fifthNode = new SimpleTreeNode<>(5, secondNode);
-        SimpleTreeNode<Integer> sixthNode = new SimpleTreeNode<>(6, thirdNode);
-
-        tree.AddChild(initialNode, secondNode);
-        tree.AddChild(initialNode, thirdNode);
-        tree.AddChild(secondNode, fourthNode);
-        tree.AddChild(secondNode, fifthNode);
-        tree.AddChild(thirdNode, sixthNode);
-
-        assertEquals(tree.Count(), 6);
-        assertEquals(tree.LeafCount(), 3);
+    void addChildrenThenCountNodesAndLeaves() {
+        assertEquals(tree.count(), 6);
+        assertEquals(tree.leafCount(), 3);
     }
 
     @Test
-    void deleteNode() {
-        SimpleTreeNode<Integer> secondNode = new SimpleTreeNode<>(2, initialNode);
-        SimpleTreeNode<Integer> thirdNode = new SimpleTreeNode<>(3, initialNode);
-        SimpleTreeNode<Integer> fourthNode = new SimpleTreeNode<>(4, secondNode);
-        SimpleTreeNode<Integer> fifthNode = new SimpleTreeNode<>(5, secondNode);
-        SimpleTreeNode<Integer> sixthNode = new SimpleTreeNode<>(6, thirdNode);
+    void deleteNodeThenCountNodesAndLeaves() {
+        tree.deleteNode(secondNode);
 
-        tree.AddChild(initialNode, secondNode);
-        tree.AddChild(initialNode, thirdNode);
-        tree.AddChild(secondNode, fourthNode);
-        tree.AddChild(secondNode, fifthNode);
-        tree.AddChild(thirdNode, sixthNode);
+        assertEquals(tree.count(), 3, "There should be 3 nodes left in tree after deleting secondNode");
+        assertEquals(tree.leafCount(), 1, "There should be 0 leaves left after deleting secondNode");
 
-        tree.DeleteNode(secondNode);
+        assertEquals(0, tree.findNodesByValue(2).size(), "Second node should have been removed");
+        assertEquals(0, tree.findNodesByValue(4).size(), "Fourth node should have been removed");
+        assertEquals(0, tree.findNodesByValue(5).size(), "Fifth node should have been removed");
 
-        assertEquals(tree.Count(), 3);
-        assertEquals(tree.LeafCount(), 1);
+        tree.deleteNode(initialNode);
 
-        assertEquals(0, tree.FindNodesByValue(2).size());
-        assertEquals(0, tree.FindNodesByValue(4).size());
-        assertEquals(0, tree.FindNodesByValue(5).size());
-
-        tree.DeleteNode(initialNode);
-
-        assertEquals(tree.Count(), 0);
-        assertEquals(tree.LeafCount(), 0);
+        assertEquals(tree.count(), 0, "There should be 0 nodes left in tree after deleting initial one");
+        assertEquals(tree.leafCount(), 0, "There should be 0 leaves left after deleting initial node");
 
     }
 
     @Test
-    void getAllNodes() {
-        SimpleTreeNode<Integer> secondNode = new SimpleTreeNode<>(2, initialNode);
-        SimpleTreeNode<Integer> thirdNode = new SimpleTreeNode<>(3, initialNode);
-        SimpleTreeNode<Integer> fourthNode = new SimpleTreeNode<>(4, secondNode);
-        SimpleTreeNode<Integer> fifthNode = new SimpleTreeNode<>(5, secondNode);
-        SimpleTreeNode<Integer> sixthNode = new SimpleTreeNode<>(6, thirdNode);
-
-        tree.AddChild(initialNode, secondNode);
-        tree.AddChild(initialNode, thirdNode);
-        tree.AddChild(secondNode, fourthNode);
-        tree.AddChild(secondNode, fifthNode);
-        tree.AddChild(thirdNode, sixthNode);
-
-        List<SimpleTreeNode<Integer>> allNodes = tree.GetAllNodes();
+    void getAllNodesAndCheckTheSizeOfTree() {
+        List<SimpleTreeNode<Integer>> allNodes = tree.getAllNodes();
 
         assertTrue(allNodes.contains(initialNode));
         assertTrue(allNodes.contains(secondNode));
@@ -88,75 +68,50 @@ class SimpleTreeTest {
         assertTrue(allNodes.contains(fourthNode));
         assertTrue(allNodes.contains(fifthNode));
         assertTrue(allNodes.contains(sixthNode));
-        assertEquals(6, allNodes.size());
+        assertEquals(6, allNodes.size(), "Method should return all the 6 nodes");
     }
 
     @Test
-    void findNodesByValue() {
-        SimpleTreeNode<Integer> secondNode = new SimpleTreeNode<>(2, initialNode);
-        SimpleTreeNode<Integer> thirdNode = new SimpleTreeNode<>(3, initialNode);
-        SimpleTreeNode<Integer> fourthNode = new SimpleTreeNode<>(4, secondNode);
-        SimpleTreeNode<Integer> fifthNode = new SimpleTreeNode<>(5, secondNode);
-        SimpleTreeNode<Integer> sixthNode = new SimpleTreeNode<>(6, thirdNode);
+    void addTwoMoreNodesAndFindAllWithGivenValue() {
         SimpleTreeNode<Integer> sixthNode2 = new SimpleTreeNode<>(6, fifthNode);
         SimpleTreeNode<Integer> thirdNode2 = new SimpleTreeNode<>(3, thirdNode);
+        tree.addChild(fifthNode, sixthNode2);
+        tree.addChild(thirdNode, thirdNode2);
 
-        tree.AddChild(initialNode, secondNode);
-        tree.AddChild(initialNode, thirdNode);
-        tree.AddChild(secondNode, fourthNode);
-        tree.AddChild(secondNode, fifthNode);
-        tree.AddChild(thirdNode, sixthNode);
-        tree.AddChild(fifthNode, sixthNode2);
-        tree.AddChild(thirdNode, thirdNode2);
+        List<SimpleTreeNode<Integer>> nodesWithSix = tree.findNodesByValue(6);
 
-        List<SimpleTreeNode<Integer>> nodesWithSix = tree.FindNodesByValue(6);
-        assertEquals(2, nodesWithSix.size());
-        assertTrue(nodesWithSix.contains(sixthNode));
-        assertTrue(nodesWithSix.contains(sixthNode2));
+        assertEquals(2, nodesWithSix.size(), "Tree should contain two nodes with value = 6");
+        assertTrue(nodesWithSix.contains(sixthNode), "Tree should contain exact same sixthNode object");
+        assertTrue(nodesWithSix.contains(sixthNode2), "Tree should contain exact same sixthNode2 object");
 
-        List<SimpleTreeNode<Integer>> nodesWithThree = tree.FindNodesByValue(3);
-        assertEquals(2, nodesWithThree.size());
-        System.out.println(nodesWithThree.get(0) + "\n" + nodesWithThree.get(1));
-        assertTrue(nodesWithThree.contains(thirdNode));
-        assertTrue(nodesWithThree.contains(thirdNode2));
+        List<SimpleTreeNode<Integer>> nodesWithThree = tree.findNodesByValue(3);
+
+        assertEquals(2, nodesWithThree.size(), "Tree should contain two nodes with value = 3");
+        assertTrue(nodesWithThree.contains(thirdNode), "Tree should contain exact same thirdNode object");
+        assertTrue(nodesWithThree.contains(thirdNode2), "Tree should contain exact same thirdNode2 object");
     }
 
     @Test
-    void moveNode() {
-        SimpleTreeNode<Integer> secondNode = new SimpleTreeNode<>(2, initialNode);
-        SimpleTreeNode<Integer> thirdNode = new SimpleTreeNode<>(3, initialNode);
-        SimpleTreeNode<Integer> fourthNode = new SimpleTreeNode<>(4, secondNode);
-        SimpleTreeNode<Integer> fifthNode = new SimpleTreeNode<>(5, secondNode);
-        SimpleTreeNode<Integer> sixthNode = new SimpleTreeNode<>(6, thirdNode);
+    void moveNodeAndValidateFields() {
+        tree.moveNode(thirdNode, secondNode);
 
-        tree.AddChild(initialNode, secondNode);
-        tree.AddChild(initialNode, thirdNode);
-        tree.AddChild(secondNode, fourthNode);
-        tree.AddChild(secondNode, fifthNode);
-        tree.AddChild(thirdNode, sixthNode);
+        assertTrue(secondNode.children.contains(thirdNode), "Second node should have third node in children list");
+        assertEquals(3, secondNode.children.size(), "Second node should have 3 children after moving");
+        assertEquals(3, tree.leafCount(), "Tree should have three leaves after moving node");
+        assertEquals(thirdNode.parent, secondNode, "Third node should have second node as parent");
+        assertTrue(thirdNode.children.contains(sixthNode), "Third node still should have sixth node in children list");
+        assertFalse(initialNode.children.contains(thirdNode), "After moving third node should be excluded from initial node list");
 
-        tree.MoveNode(thirdNode, secondNode);
+        tree.moveNode(sixthNode, fifthNode);
 
-        assertTrue(secondNode.Children.contains(thirdNode));
-        assertEquals(3, secondNode.Children.size());
-        assertEquals(6, tree.Count());
-        assertEquals(3, tree.LeafCount());
-        assertEquals(thirdNode.Parent, secondNode);
-        assertTrue(thirdNode.Children.contains(sixthNode));
-        assertNotEquals(thirdNode.Parent, initialNode);
-        assertFalse(initialNode.Children.contains(thirdNode));
-
-        tree.MoveNode(sixthNode, fifthNode);
-
-        assertEquals(3, tree.LeafCount());
-        assertEquals(0, thirdNode.Children.size());
-        assertTrue(fifthNode.Children.contains(sixthNode));
-        assertEquals(fifthNode, sixthNode.Parent);
+        assertEquals(3, tree.leafCount(), "After moving sixth node there should be 3 leaves left");
+        assertEquals(0, thirdNode.children.size(), "Third node should have 0 elements in children list");
     }
 
 
     @Test
     void countLeavesWhenOneNode() {
-        assertEquals(1, tree.LeafCount());
+        SimpleTree<Integer> oneNodeTree = new SimpleTree<>(new SimpleTreeNode<>(0, null));
+        assertEquals(1, oneNodeTree.leafCount(), "When tree has one node, there should be also one leaf");
     }
 }
