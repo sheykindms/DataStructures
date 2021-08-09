@@ -152,6 +152,11 @@ class SimpleTreeTest {
         assertEquals(0, thirdNode.Children.size());
         assertTrue(fifthNode.Children.contains(sixthNode));
         assertEquals(fifthNode, sixthNode.Parent);
+    }
 
+
+    @Test
+    void countLeavesWhenOneNode() {
+        assertEquals(1, tree.LeafCount());
     }
 }

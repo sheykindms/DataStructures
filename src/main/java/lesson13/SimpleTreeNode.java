@@ -42,6 +42,9 @@ class SimpleTree<T> {
             node.Children = new ArrayList<>();
             if (Root != node) {
                 node.Parent.Children.remove(node);
+                node = null;
+            } else {
+                Root = null;
             }
             size--;
         }
@@ -79,11 +82,11 @@ class SimpleTree<T> {
     private void LeafCount(List<SimpleTreeNode<T>> nodes, SimpleTreeNode<T> root) {
         if (root == null)
             return;
-        List<SimpleTreeNode<T>> children = root.Children;
-        for (SimpleTreeNode<T> node : children) {
-            if (node.Children.isEmpty()) {
-                nodes.add(node);
-            } else {
+        if (root.Children.isEmpty()) {
+            nodes.add(root);
+        } else {
+            List<SimpleTreeNode<T>> children = root.Children;
+            for (SimpleTreeNode<T> node : children) {
                 LeafCount(nodes, node);
             }
         }
