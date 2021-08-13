@@ -8,14 +8,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimpleTreeTest {
-
     private SimpleTree<Integer> tree;
     private SimpleTreeNode<Integer> initialNode;
-    SimpleTreeNode<Integer> secondNode;
-    SimpleTreeNode<Integer> thirdNode;
-    SimpleTreeNode<Integer> fourthNode;
-    SimpleTreeNode<Integer> fifthNode;
-    SimpleTreeNode<Integer> sixthNode;
+    private SimpleTreeNode<Integer> secondNode;
+    private SimpleTreeNode<Integer> thirdNode;
+    private SimpleTreeNode<Integer> fourthNode;
+    private SimpleTreeNode<Integer> fifthNode;
+    private SimpleTreeNode<Integer> sixthNode;
 
     @BeforeEach
     void setUp() {
@@ -107,7 +106,6 @@ class SimpleTreeTest {
         assertEquals(3, tree.leafCount(), "After moving sixth node there should be 3 leaves left");
         assertEquals(0, thirdNode.children.size(), "Third node should have 0 elements in children list");
     }
-
 
     @Test
     void countLeavesWhenOneNode() {
