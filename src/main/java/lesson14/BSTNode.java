@@ -1,5 +1,7 @@
 package lesson14;
 
+import java.util.*;
+
 class BSTNode<T> {
     public int NodeKey;
     public T NodeValue;
@@ -136,4 +138,70 @@ class BST<T> {
         return size;
     }
 
+    public ArrayList<BSTNode<T>> WideAllNodes() {
+        if (Root == null) {
+            return new ArrayList<>();
+        }
+        ArrayList<BSTNode<T>> nodes = new ArrayList<>();
+        Queue<BSTNode<T>> queue = new LinkedList<>();
+        queue.add(Root);
+        while (!queue.isEmpty()) {
+            BSTNode<T> node = queue.poll();
+            nodes.add(node);
+            if (node.LeftChild != null) {
+                queue.add(node.LeftChild);
+            }
+            if (node.RightChild != null) {
+                queue.add(node.RightChild);
+            }
+        }
+        return nodes;
+    }
+
+    public ArrayList<BSTNode<T>> DeepAllNodes(int order) {
+        if (Root == null) {
+            return new ArrayList<>();
+        }
+        ArrayList<BSTNode<T>> nodes = new ArrayList<>();
+        if (order == 0) {
+            inorder(nodes, Root);
+        }
+        if (order == 1) {
+            postorder(nodes, Root);
+        }
+        if (order == 2) {
+            preorder(nodes, Root);
+        }
+        return nodes;
+    }
+
+    private void preorder(ArrayList<BSTNode<T>> nodes, BSTNode<T> node) {
+        nodes.add(node);
+        if (node.LeftChild != null) {
+            preorder(nodes, Root.LeftChild);
+        }
+        if (node.RightChild != null) {
+            preorder(nodes, Root.RightChild);
+        }
+    }
+
+    private void postorder(ArrayList<BSTNode<T>> nodes, BSTNode<T> node) {
+        if (node.LeftChild != null) {
+            postorder(nodes, Root.LeftChild);
+        }
+        if (node.RightChild != null) {
+            postorder(nodes, Root.RightChild);
+        }
+        nodes.add(node);
+    }
+
+    private void inorder(ArrayList<BSTNode<T>> nodes, BSTNode<T> node) {
+        if (node.LeftChild != null) {
+            inorder(nodes, Root.LeftChild);
+        }
+        nodes.add(node);
+        if (node.RightChild != null) {
+            inorder(nodes, Root.RightChild);
+        }
+    }
 }
