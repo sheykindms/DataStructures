@@ -179,30 +179,30 @@ class BST<T> {
     private void preorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
         nodes.add(node);
         if (node.LeftChild != null) {
-            preorder(nodes, Root.LeftChild);
+            preorder(nodes, node.LeftChild);
         }
         if (node.RightChild != null) {
-            preorder(nodes, Root.RightChild);
+            preorder(nodes, node.RightChild);
         }
     }
 
     private void postorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
         if (node.LeftChild != null) {
-            postorder(nodes, Root.LeftChild);
+            postorder(nodes, node.LeftChild);
         }
         if (node.RightChild != null) {
-            postorder(nodes, Root.RightChild);
+            postorder(nodes, node.RightChild);
         }
         nodes.add(node);
     }
 
     private void inorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
         if (node.LeftChild != null) {
-            inorder(nodes, Root.LeftChild);
+            inorder(nodes, node.LeftChild);
         }
         nodes.add(node);
         if (node.RightChild != null) {
-            inorder(nodes, Root.RightChild);
+            inorder(nodes, node.RightChild);
         }
     }
 }
