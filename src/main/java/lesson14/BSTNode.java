@@ -1,5 +1,6 @@
 package lesson14;
 
+import java.io.*;
 import java.util.*;
 
 class BSTNode<T> {
@@ -138,11 +139,11 @@ class BST<T> {
         return size;
     }
 
-    public ArrayList<BSTNode<T>> WideAllNodes() {
+    public ArrayList<BSTNode> WideAllNodes() {
         if (Root == null) {
             return new ArrayList<>();
         }
-        ArrayList<BSTNode<T>> nodes = new ArrayList<>();
+        ArrayList<BSTNode> nodes = new ArrayList<>();
         Queue<BSTNode<T>> queue = new LinkedList<>();
         queue.add(Root);
         while (!queue.isEmpty()) {
@@ -158,11 +159,11 @@ class BST<T> {
         return nodes;
     }
 
-    public ArrayList<BSTNode<T>> DeepAllNodes(int order) {
+    public ArrayList<BSTNode> DeepAllNodes(int order) {
         if (Root == null) {
             return new ArrayList<>();
         }
-        ArrayList<BSTNode<T>> nodes = new ArrayList<>();
+        ArrayList<BSTNode> nodes = new ArrayList<>();
         if (order == 0) {
             inorder(nodes, Root);
         }
@@ -175,7 +176,7 @@ class BST<T> {
         return nodes;
     }
 
-    private void preorder(ArrayList<BSTNode<T>> nodes, BSTNode<T> node) {
+    private void preorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
         nodes.add(node);
         if (node.LeftChild != null) {
             preorder(nodes, Root.LeftChild);
@@ -185,7 +186,7 @@ class BST<T> {
         }
     }
 
-    private void postorder(ArrayList<BSTNode<T>> nodes, BSTNode<T> node) {
+    private void postorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
         if (node.LeftChild != null) {
             postorder(nodes, Root.LeftChild);
         }
@@ -195,7 +196,7 @@ class BST<T> {
         nodes.add(node);
     }
 
-    private void inorder(ArrayList<BSTNode<T>> nodes, BSTNode<T> node) {
+    private void inorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
         if (node.LeftChild != null) {
             inorder(nodes, Root.LeftChild);
         }
