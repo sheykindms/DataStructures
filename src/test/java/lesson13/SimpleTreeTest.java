@@ -94,17 +94,17 @@ class SimpleTreeTest {
     void moveNodeAndValidateFields() {
         tree.moveNode(thirdNode, secondNode);
 
-        assertTrue(secondNode.children.contains(thirdNode), "Second node should have third node in children list");
-        assertEquals(3, secondNode.children.size(), "Second node should have 3 children after moving");
+        assertTrue(secondNode.Children.contains(thirdNode), "Second node should have third node in children list");
+        assertEquals(3, secondNode.Children.size(), "Second node should have 3 children after moving");
         assertEquals(3, tree.leafCount(), "Tree should have three leaves after moving node");
         assertEquals(thirdNode.parent, secondNode, "Third node should have second node as parent");
-        assertTrue(thirdNode.children.contains(sixthNode), "Third node still should have sixth node in children list");
-        assertFalse(initialNode.children.contains(thirdNode), "After moving third node should be excluded from initial node list");
+        assertTrue(thirdNode.Children.contains(sixthNode), "Third node still should have sixth node in children list");
+        assertFalse(initialNode.Children.contains(thirdNode), "After moving third node should be excluded from initial node list");
 
         tree.moveNode(sixthNode, fifthNode);
 
         assertEquals(3, tree.leafCount(), "After moving sixth node there should be 3 leaves left");
-        assertEquals(0, thirdNode.children.size(), "Third node should have 0 elements in children list");
+        assertEquals(0, thirdNode.Children.size(), "Third node should have 0 elements in children list");
     }
 
     @Test
