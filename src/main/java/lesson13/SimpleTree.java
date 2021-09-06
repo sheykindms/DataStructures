@@ -9,6 +9,7 @@ import java.util.*;
 public class SimpleTree<T> {
     public SimpleTreeNode<T> root;
     private int size = 0;
+
     public SimpleTree(SimpleTreeNode<T> root) {
         this.root = root;
         if (root != null) {
@@ -108,6 +109,10 @@ public class SimpleTree<T> {
         return nodes.size();
     }
 
+    private boolean isEvenTree(SimpleTree<T> tree) {
+        return false;
+    }
+
     private void leafCount(List<SimpleTreeNode<T>> nodes, SimpleTreeNode<T> root) {
         if (root == null)
             return;
@@ -152,7 +157,51 @@ public class SimpleTree<T> {
         }
     }
 
+    public ArrayList<T> EvenTrees() {
+        var list = new ArrayList<T>();
+        if (size % 2 != 0 || size == 0) {
+            return list;
+        }
+        var queue = new LinkedList<SimpleTreeNode<T>>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            SimpleTreeNode<T> temp = queue.poll();
+            if (temp.children != null) {
+                for (var node : temp.children) {
+                    if (hasEvenChildren(node)) {
+                        list.add(temp.nodeValue);
+                        list.add(node.nodeValue);
+                        if (node.children != null) {
+                            queue.addAll(node.children);
+                        }
+                    } else {
+                        queue.add(node);
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    private boolean hasEvenChildren(SimpleTreeNode<T> node) {
+        if (node.children == null) {
+            return false;
+        }
+        int child = 0;
+        Queue<SimpleTreeNode<T>> queue = new LinkedList<>();
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            SimpleTreeNode<T> temp = queue.poll();
+            child++;
+            if (temp.children != null) {
+                queue.addAll(temp.children);
+            }
+        }
+        return child % 2 == 0;
+    }
+
 }
+
 class SimpleTreeNode<T> {
     public T nodeValue;
     public SimpleTreeNode<T> parent;
