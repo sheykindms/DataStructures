@@ -5,10 +5,13 @@ import java.util.*;
 class Vertex {
     public int Value;
     public int index;
+    public boolean Hit;
+    
 
     public Vertex(int val, int index) {
         Value = val;
         this.index = index;
+        Hit = false;
     }
 }
 
@@ -16,6 +19,7 @@ class SimpleGraph {
     Vertex[] vertex;
     int[][] m_adjacency;
     int max_vertex;
+    Stack<Vertex> stack;
 
     public SimpleGraph(int size) {
         max_vertex = size;
@@ -53,4 +57,35 @@ class SimpleGraph {
         m_adjacency[v1][v2] = 0;
         m_adjacency[v2][v1] = 0;
     }
+
+    public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {
+        stack = new Stack<>();
+        for (Vertex root : vertex) {
+            root.Hit = false;
+        }
+        dfs(vertex[VFrom], vertex[VTo]);
+        return new ArrayList<>(stack);
+    }
+
+    public void dfs(Vertex VFrom, Vertex Vto) {
+        VFrom.Hit = true;
+        stack.push(VFrom);
+        for (int i = 0; i < max_vertex; i++) {
+            if (m_adjacency[VFrom.index][i] == 1 && vertex[i].Value == Vto.Value) {
+                stack.add(vertex[i]);
+                return;
+            }
+        }
+        for (int i = 0; i < max_vertex; i++) {
+            if (m_adjacency[VFrom.index][i] == 1 && !vertex[i].Hit) {
+                dfs(vertex[i], Vto);
+                return;
+            }
+        }
+        stack.pop();
+        if (!stack.isEmpty()) {
+            dfs(stack.pop(), Vto);
+        }
+    }
+
 }
