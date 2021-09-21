@@ -3,6 +3,7 @@ package package19;
 import java.util.*;
 
 class Vertex {
+    public Vertex parent;
     public int Value;
     public int index;
     public boolean Hit;
@@ -86,6 +87,47 @@ class SimpleGraph {
         if (!stack.isEmpty()) {
             dfs(stack.pop(), Vto);
         }
+    }
+
+    public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
+        var path = new ArrayList<Vertex>();
+        var vertices = new LinkedList<Vertex>();
+        boolean flag = true;
+        vertices.add(vertex[VFrom]);
+        for (var i : vertex) {
+            i.Hit = false;
+            i.parent = null;
+        }
+        while (!vertices.isEmpty() && flag) {
+            var v = vertices.poll();
+            for (var i = 0; i < max_vertex; i++) {
+                if (m_adjacency[v.index][i] == 1 && !vertex[i].Hit) {
+                    Vertex vertex = this.vertex[i];
+                    vertex.parent = v;
+                    if (vertex == this.vertex[VTo]) {
+                        flag = false;
+                        break;
+                    }
+                    vertex.Hit = true;
+                    vertices.add(vertex);
+                }
+            }
+            v.Hit = true;
+        }
+        var p = vertex[VTo].parent;
+        if (p != null) {
+            path.add(vertex[VTo]);
+        }
+        while (p != null) {
+            path.add(p);
+            if (p.parent != null && p.Value == p.parent.Value) {
+                break;
+            }
+            p = p.parent;
+
+        }
+        Collections.reverse(path);
+        return path;
     }
 
 }
