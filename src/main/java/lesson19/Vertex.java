@@ -1,4 +1,4 @@
-package package19;
+package lesson19;
 
 import java.util.*;
 
@@ -7,7 +7,7 @@ class Vertex {
     public int Value;
     public int index;
     public boolean Hit;
-    
+
 
     public Vertex(int val, int index) {
         Value = val;
@@ -128,6 +128,49 @@ class SimpleGraph {
         }
         Collections.reverse(path);
         return path;
+    }
+
+    public ArrayList<Vertex> WeakVertices() {
+        var vertices = new ArrayList<Vertex>();
+        for (Vertex i : vertex) {
+            i.Hit = false;
+        }
+        Vertex one;
+        Vertex two;
+        Vertex temp;
+        for (var i = 0; i < max_vertex; i++) {
+            one = vertex[i];
+            if (!one.Hit) {
+                for (var j = 0; j < max_vertex; j++) {
+                    if (i != j && m_adjacency[i][j] == 1) {
+                        two = vertex[j];
+                        temp = isTriangle(one, two);
+                        if (temp != null) {
+                            one.Hit = true;
+                            two.Hit = true;
+                            temp.Hit = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        for (Vertex v : vertex) {
+            if (!v.Hit) {
+                vertices.add(v);
+            }
+        }
+        return vertices;
+    }
+
+
+    private Vertex isTriangle(Vertex v1, Vertex v2) {
+        for (var i = 0; i < max_vertex; i++) {
+            if (m_adjacency[v1.index][i] == 1 && m_adjacency[v2.index][i] == 1 && m_adjacency[v1.index][v2.index] == 1) {
+                return vertex[i];
+            }
+        }
+        return null;
     }
 
 }
