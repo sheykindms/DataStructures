@@ -1,208 +1,207 @@
 package lesson14;
 
-import java.io.*;
 import java.util.*;
 
 class BSTNode<T> {
-    public int NodeKey;
-    public T NodeValue;
-    public BSTNode<T> Parent;
-    public BSTNode<T> LeftChild;
-    public BSTNode<T> RightChild;
+    public int nodeKey;
+    public T nodeValue;
+    public BSTNode<T> parent;
+    public BSTNode<T> leftChild;
+    public BSTNode<T> rightChild;
 
-    public BSTNode(int key, T val, BSTNode<T> parent) {
-        NodeKey = key;
-        NodeValue = val;
-        Parent = parent;
-        LeftChild = null;
-        RightChild = null;
+    public BSTNode(int nodeKey, T nodeValue, BSTNode<T> parent) {
+        this.nodeKey = nodeKey;
+        this.nodeValue = nodeValue;
+        this.parent = parent;
+        this.leftChild = null;
+        this.rightChild = null;
     }
 }
 
 class BSTFind<T> {
-    public BSTNode<T> Node;
-    public boolean NodeHasKey;
-    public boolean ToLeft;
+    public BSTNode<T> node;
+    public boolean nodeHasKey;
+    public boolean toLeft;
 
     public BSTFind() {
-        Node = null;
+        node = null;
     }
 }
 
 class BST<T> {
-    BSTNode<T> Root;
+    BSTNode<T> root;
     private int size;
 
     public BST(BSTNode<T> node) {
-        Root = node;
+        root = node;
         size++;
     }
 
-    public BSTFind<T> FindNodeByKey(int key) {
+    public BSTFind<T> findNodeByKey(int key) {
         BSTFind<T> desiredNode = new BSTFind<>();
-        BSTNode<T> currentNode = Root;
+        BSTNode<T> currentNode = root;
         BSTNode<T> temp = currentNode;
         while (currentNode != null) {
-            if (currentNode.NodeKey == key) {
-                desiredNode.Node = currentNode;
-                desiredNode.NodeHasKey = true;
+            if (currentNode.nodeKey == key) {
+                desiredNode.node = currentNode;
+                desiredNode.nodeHasKey = true;
                 return desiredNode;
-            } else if (currentNode.NodeKey > key) {
+            } else if (currentNode.nodeKey > key) {
                 temp = currentNode;
-                currentNode = currentNode.LeftChild;
+                currentNode = currentNode.leftChild;
             } else {
                 temp = currentNode;
-                currentNode = currentNode.RightChild;
+                currentNode = currentNode.rightChild;
             }
         }
-        desiredNode.Node = temp;
-        desiredNode.NodeHasKey = false;
-        desiredNode.ToLeft = temp.NodeKey > key;
+        desiredNode.node = temp;
+        desiredNode.nodeHasKey = false;
+        desiredNode.toLeft = temp.nodeKey > key;
         return desiredNode;
     }
 
-    public boolean AddKeyValue(int key, T val) {
+    public boolean addKeyValue(int key, T val) {
         BSTNode<T> bstNode = new BSTNode<>(key, val, null);
-        if (Root == null) {
-            Root = bstNode;
+        if (root == null) {
+            root = bstNode;
             size++;
             return true;
         }
-        BSTFind<T> bstFind = FindNodeByKey(key);
-        if (bstFind.NodeHasKey) {
+        BSTFind<T> bstFind = findNodeByKey(key);
+        if (bstFind.nodeHasKey) {
             return false;
         }
-        bstNode.Parent = bstFind.Node;
-        if (bstFind.ToLeft) {
-            bstFind.Node.LeftChild = bstNode;
+        bstNode.parent = bstFind.node;
+        if (bstFind.toLeft) {
+            bstFind.node.leftChild = bstNode;
         } else {
-            bstFind.Node.RightChild = bstNode;
+            bstFind.node.rightChild = bstNode;
         }
         size++;
         return true;
     }
 
-    public BSTNode<T> FinMinMax(BSTNode<T> FromNode, boolean FindMax) {
+    public BSTNode<T> finMinMax(BSTNode<T> FromNode, boolean FindMax) {
         BSTNode<T> currentNode = FromNode;
         BSTNode<T> desiredNode = currentNode;
         if (FindMax) {
             while (currentNode != null) {
                 desiredNode = currentNode;
-                currentNode = currentNode.RightChild;
+                currentNode = currentNode.rightChild;
             }
         } else {
             while (currentNode != null) {
                 desiredNode = currentNode;
-                currentNode = currentNode.LeftChild;
+                currentNode = currentNode.leftChild;
             }
         }
         return desiredNode;
     }
 
-    public boolean DeleteNodeByKey(int key) {
-        BSTFind<T> bstNodeFound = FindNodeByKey(key);
-        if (!bstNodeFound.NodeHasKey) {
+    public boolean deleteNodeByKey(int key) {
+        BSTFind<T> bstNodeFound = findNodeByKey(key);
+        if (!bstNodeFound.nodeHasKey) {
             return false;
         }
-        BSTNode<T> bstNodeToDelete = bstNodeFound.Node;
-        if (bstNodeToDelete.RightChild == null) {
-            if (bstNodeToDelete.Parent == null) {
-                Root = bstNodeToDelete.LeftChild;
+        BSTNode<T> bstNodeToDelete = bstNodeFound.node;
+        if (bstNodeToDelete.rightChild == null) {
+            if (bstNodeToDelete.parent == null) {
+                root = bstNodeToDelete.leftChild;
             } else {
-                if (bstNodeToDelete.Parent.LeftChild == bstNodeToDelete) {
-                    bstNodeToDelete.Parent.LeftChild = bstNodeToDelete.LeftChild;
+                if (bstNodeToDelete.parent.leftChild == bstNodeToDelete) {
+                    bstNodeToDelete.parent.leftChild = bstNodeToDelete.leftChild;
                 } else {
-                    bstNodeToDelete.Parent.RightChild = bstNodeToDelete.LeftChild;
+                    bstNodeToDelete.parent.rightChild = bstNodeToDelete.leftChild;
                 }
-                if (bstNodeToDelete.LeftChild != null) {
-                    bstNodeToDelete.LeftChild.Parent = bstNodeToDelete.Parent;
+                if (bstNodeToDelete.leftChild != null) {
+                    bstNodeToDelete.leftChild.parent = bstNodeToDelete.parent;
                 }
             }
         } else {
-            BSTNode<T> maxRightCandidate = bstNodeToDelete.RightChild;
-            while (maxRightCandidate.LeftChild != null) {
-                maxRightCandidate = maxRightCandidate.LeftChild;
+            BSTNode<T> maxRightCandidate = bstNodeToDelete.rightChild;
+            while (maxRightCandidate.leftChild != null) {
+                maxRightCandidate = maxRightCandidate.leftChild;
             }
-            if (maxRightCandidate.RightChild != null) {
-                maxRightCandidate.Parent.LeftChild = maxRightCandidate.RightChild;
+            if (maxRightCandidate.rightChild != null) {
+                maxRightCandidate.parent.leftChild = maxRightCandidate.rightChild;
             } else {
-                maxRightCandidate.Parent.LeftChild = null;
+                maxRightCandidate.parent.leftChild = null;
             }
-            bstNodeToDelete.NodeKey = maxRightCandidate.NodeKey;
-            bstNodeToDelete.NodeValue = maxRightCandidate.NodeValue;
+            bstNodeToDelete.nodeKey = maxRightCandidate.nodeKey;
+            bstNodeToDelete.nodeValue = maxRightCandidate.nodeValue;
         }
         size--;
         return true;
     }
 
-    public int Count() {
+    public int count() {
         return size;
     }
 
-    public ArrayList<BSTNode> WideAllNodes() {
-        if (Root == null) {
+    public ArrayList<BSTNode<T>> wideAllNodes() {
+        if (root == null) {
             return new ArrayList<>();
         }
-        ArrayList<BSTNode> nodes = new ArrayList<>();
-        Queue<BSTNode<T>> queue = new LinkedList<>();
-        queue.add(Root);
+        var nodes = new ArrayList<BSTNode<T>>();
+        var queue = new LinkedList<BSTNode<T>>();
+        queue.add(root);
         while (!queue.isEmpty()) {
             BSTNode<T> node = queue.poll();
             nodes.add(node);
-            if (node.LeftChild != null) {
-                queue.add(node.LeftChild);
+            if (node.leftChild != null) {
+                queue.add(node.leftChild);
             }
-            if (node.RightChild != null) {
-                queue.add(node.RightChild);
+            if (node.rightChild != null) {
+                queue.add(node.rightChild);
             }
         }
         return nodes;
     }
 
     public ArrayList<BSTNode> DeepAllNodes(int order) {
-        if (Root == null) {
+        if (root == null) {
             return new ArrayList<>();
         }
         ArrayList<BSTNode> nodes = new ArrayList<>();
         if (order == 0) {
-            inorder(nodes, Root);
+            inorder(nodes, root);
         }
         if (order == 1) {
-            postorder(nodes, Root);
+            postorder(nodes, root);
         }
         if (order == 2) {
-            preorder(nodes, Root);
+            preorder(nodes, root);
         }
         return nodes;
     }
 
     private void preorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
         nodes.add(node);
-        if (node.LeftChild != null) {
-            preorder(nodes, node.LeftChild);
+        if (node.leftChild != null) {
+            preorder(nodes, node.leftChild);
         }
-        if (node.RightChild != null) {
-            preorder(nodes, node.RightChild);
+        if (node.rightChild != null) {
+            preorder(nodes, node.rightChild);
         }
     }
 
     private void postorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
-        if (node.LeftChild != null) {
-            postorder(nodes, node.LeftChild);
+        if (node.leftChild != null) {
+            postorder(nodes, node.leftChild);
         }
-        if (node.RightChild != null) {
-            postorder(nodes, node.RightChild);
+        if (node.rightChild != null) {
+            postorder(nodes, node.rightChild);
         }
         nodes.add(node);
     }
 
     private void inorder(ArrayList<BSTNode> nodes, BSTNode<T> node) {
-        if (node.LeftChild != null) {
-            inorder(nodes, node.LeftChild);
+        if (node.leftChild != null) {
+            inorder(nodes, node.leftChild);
         }
         nodes.add(node);
-        if (node.RightChild != null) {
-            inorder(nodes, node.RightChild);
+        if (node.rightChild != null) {
+            inorder(nodes, node.rightChild);
         }
     }
 }

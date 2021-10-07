@@ -3,17 +3,17 @@ package lesson17;
 import java.util.*;
 
 class BSTNode {
-    public int NodeKey;
-    public BSTNode Parent;
-    public BSTNode LeftChild;
-    public BSTNode RightChild;
+    public int nodeKey;
+    public BSTNode parent;
+    public BSTNode leftChild;
+    public BSTNode rightChild;
     public int Level;
 
-    public BSTNode(int key, BSTNode parent) {
-        NodeKey = key;
-        Parent = parent;
-        LeftChild = null;
-        RightChild = null;
+    public BSTNode(int nodeKey, BSTNode parent) {
+        this.nodeKey = nodeKey;
+        this.parent = parent;
+        this.leftChild = null;
+        this.rightChild = null;
     }
 }
 
@@ -24,7 +24,7 @@ class BalancedBST {
         Root = null;
     }
 
-    public void GenerateTree(int[] a) {
+    public void generateTree(int[] a) {
         Arrays.sort(a);
         Root = generateRecursively(a, null, 0, a.length - 1, -1);
     }
@@ -37,28 +37,28 @@ class BalancedBST {
         BSTNode bstNode = new BSTNode(a[mid], root);
         bstNode.Level = ++level;
 
-        bstNode.LeftChild = generateRecursively(a, bstNode, start, mid - 1, level);
-        bstNode.RightChild = generateRecursively(a, bstNode, mid + 1, end, level);
+        bstNode.leftChild = generateRecursively(a, bstNode, start, mid - 1, level);
+        bstNode.rightChild = generateRecursively(a, bstNode, mid + 1, end, level);
 
         return bstNode;
     }
 
-    public boolean IsBalanced(BSTNode root_node) {
-        if (root_node == null) {
+    public boolean isBalanced(BSTNode rootNode) {
+        if (rootNode == null) {
             return true;
         }
-        int left = height(root_node.LeftChild);
-        int right = height(root_node.RightChild);
+        int left = height(rootNode.leftChild);
+        int right = height(rootNode.rightChild);
         
         return Math.abs(left - right) <= 1
-                && IsBalanced(root_node.LeftChild)
-                && IsBalanced(root_node.RightChild);
+                && isBalanced(rootNode.leftChild)
+                && isBalanced(rootNode.rightChild);
     }
 
     private int height(BSTNode node) {
         if (node == null) {
             return 0;
         }
-        return 1 + Math.max(height(node.LeftChild), height(node.RightChild));
+        return 1 + Math.max(height(node.leftChild), height(node.rightChild));
     }
 }  

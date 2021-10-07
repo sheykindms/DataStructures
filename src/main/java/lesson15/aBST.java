@@ -1,7 +1,5 @@
 package lesson15;
 
-import java.util.*;
-
 class aBST {
     public Integer[] Tree;
     private final int depth;
@@ -15,7 +13,7 @@ class aBST {
         this.depth = depth;
     }
 
-    public Integer FindKeyIndex(int key) {
+    public Integer findKeyIndex(int key) {
         int currentDepth = 0;
         int index = 0;
         while (currentDepth <= depth) {
@@ -34,8 +32,8 @@ class aBST {
         return null;
     }
 
-    public int AddKey(int key) {
-        Integer index = FindKeyIndex(key);
+    public int addKey(int key) {
+        Integer index = findKeyIndex(key);
         if (index == null) {
             return -1;
         }

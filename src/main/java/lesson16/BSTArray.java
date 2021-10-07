@@ -2,9 +2,9 @@ package lesson16;
 
 import java.util.*;
 
-public class AlgorithmsDataStructures2 {
+public class BSTArray {
 
-    public static int[] GenerateBBSTArray(int[] a) {
+    public static int[] generateBSTArray(int[] a) {
         Arrays.sort(a);
         int[] tree = new int[a.length];
         recursive(a, tree, 0, a.length - 1, 0);
