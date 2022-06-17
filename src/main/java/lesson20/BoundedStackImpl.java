@@ -8,17 +8,19 @@ import java.util.*;
  */
 interface BoundedStack<T> {
 
+    int DEFAULT_MAXIMUM_CAPACITY = 128;
+
     int STATUS_POP_NIL = 0; //pop() ещё не вызывалась
-    int STATUS_POP_OK = 1;
-    int STATUS_POP_ERR = 2;
+    int STATUS_POP_OK = 1; //последний вызов отработал ОК
+    int STATUS_POP_ERR = 2; //последний вызов отработал с ошибкой
 
-    int STATUS_PUSH_NIL = 0;
-    int STATUS_PUSH_OK = 1;
-    int STATUS_PUSH_ERR = 2;
+    int STATUS_PUSH_NIL = 0; //push() ещё не вызывалась
+    int STATUS_PUSH_OK = 1; //последний вызов отработал ОК
+    int STATUS_PUSH_ERR = 2; //последний вызов отработал с ошибкой
 
-    int STATUS_PEEK_NIL = 0;
-    int STATUS_PEEK_OK = 1;
-    int STATUS_PEEK_ERR = 2;
+    int STATUS_PEEK_NIL = 0; //peek() ещё не вызывалась
+    int STATUS_PEEK_OK = 1; //последний вызов отработал ОК
+    int STATUS_PEEK_ERR = 2; //последний вызов отработал с ошибкой
 
     //Предусловие: стек не пустой
     //Постусловие: элемент удалён из стека
@@ -48,10 +50,18 @@ public class BoundedStackImpl<T> implements BoundedStack<T> {
     private final List<T> stack;
     private final int maximumCapacity;
 
+    public BoundedStackImpl(List<T> stack, int maximumCapacity) {
+        this.maximumCapacity = DEFAULT_MAXIMUM_CAPACITY;
+        this.stack = new ArrayList<>(maximumCapacity);
+        pushStatus = STATUS_PUSH_NIL;
+        popStatus = STATUS_POP_NIL;
+        peekStatus = STATUS_PEEK_NIL;
+    }
+
     //Проставляем инит статусы по командам и запросам в NIL
     public BoundedStackImpl(int maximumCapacity) {
         this.maximumCapacity = maximumCapacity;
-        stack = new ArrayList<>(maximumCapacity);
+        this.stack = new ArrayList<>(maximumCapacity);
         pushStatus = STATUS_PUSH_NIL;
         popStatus = STATUS_POP_NIL;
         peekStatus = STATUS_PEEK_NIL;
